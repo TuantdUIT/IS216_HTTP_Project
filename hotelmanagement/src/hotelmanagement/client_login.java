@@ -16,12 +16,12 @@ import java.sql.*;
  *
  * @author 84352
  */
-public class client_login extends javax.swing.JFrame {
+public class Client_Login extends javax.swing.JFrame {
 
     /**
      * Creates new form login
      */
-    public client_login() {
+    public Client_Login() {
         initComponents();
         Login_Button.setEnabled(false);
     }
@@ -37,6 +37,7 @@ public class client_login extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -48,7 +49,6 @@ public class client_login extends javax.swing.JFrame {
         Tickcheck_Box = new javax.swing.JCheckBox();
         jLabel6 = new javax.swing.JLabel();
         Register_Button = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 255, 255));
@@ -67,7 +67,13 @@ public class client_login extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, -1, -1));
 
-        jPanel3.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Loading_img.jpg"))); // NOI18N
+        jLabel7.setText("jLabel6");
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, -24, 479, 650));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -76,7 +82,7 @@ public class client_login extends javax.swing.JFrame {
         jLabel2.setText("SIGN IN");
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel3.setText("Username: ");
+        jLabel3.setText("Phone Number:");
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel4.setText("Password:");
@@ -169,29 +175,7 @@ public class client_login extends javax.swing.JFrame {
                 .addContainerGap(145, Short.MAX_VALUE))
         );
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/login_image.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(103, 103, 103)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
+        jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
 
@@ -201,26 +185,26 @@ public class client_login extends javax.swing.JFrame {
     private void Login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login_ButtonActionPerformed
         try {
             Class.forName("oracle.jdbc.OracleDriver");
-            
-            String url = "jdbc:oracle:thin:@localhost:1522:ORCL";
-            String username = "c##QUANLYKHACHSAN";
-            String password = "password";       
+            String url = "jdbc:oracle:thin:@localhost:1521:ORCL";
+            String username = "huyks";
+            String password = "123456";    
             
             Connection con = DriverManager.getConnection(url, username, password);
-            PreparedStatement pst = con.prepareStatement("select * from C##QUANLYKHACHSAN.KHACHHANG where trim(SDT) = trim(?) and trim(password) = trim(?)");
+            PreparedStatement pst = con.prepareStatement("select * from HUYKS.KHACHHANG where trim(SDT) = trim(?) and trim(password) = trim(?)");
             pst.setString(1, TxtUsername_nv.getText());
             pst.setString(2, TxtPassword_nv.getText());
             
             ResultSet rs = pst.executeQuery();
             
             if(rs.next()){
-                JOptionPane.showMessageDialog(this, "Logined!");
+                new Client_Menu().setVisible(true);
+                this.setVisible(false);
                 
             }else{
                 JOptionPane.showMessageDialog(this, "Invalid username or password!");
             }
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(client_login.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Client_Login.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         
@@ -236,7 +220,7 @@ public class client_login extends javax.swing.JFrame {
     }//GEN-LAST:event_Tickcheck_BoxActionPerformed
 
     private void Register_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Register_ButtonActionPerformed
-        new client_signup().setVisible(true);
+        new Client_Signup().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_Register_ButtonActionPerformed
 
@@ -257,21 +241,23 @@ public class client_login extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(client_login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Client_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(client_login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Client_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(client_login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Client_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(client_login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Client_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new client_login().setVisible(true);
+                new Client_Login().setVisible(true);
             }
         });
     }
@@ -282,12 +268,12 @@ public class client_login extends javax.swing.JFrame {
     private javax.swing.JCheckBox Tickcheck_Box;
     private javax.swing.JPasswordField TxtPassword_nv;
     private javax.swing.JTextField TxtUsername_nv;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
