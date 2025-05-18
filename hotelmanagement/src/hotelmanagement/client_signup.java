@@ -19,12 +19,12 @@ import java.text.SimpleDateFormat;
  *
  * @author 84352
  */
-public class client_signup extends javax.swing.JFrame {
+public class Client_Signup extends javax.swing.JFrame {
 
     /**
      * Creates new form client_signup
      */
-    public client_signup() {
+    public Client_Signup() {
         initComponents();
         MaskFormatter date;
         try {
@@ -32,7 +32,7 @@ public class client_signup extends javax.swing.JFrame {
             date.setPlaceholderCharacter('_');
             Date.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(date));            
         } catch (ParseException ex) {
-            Logger.getLogger(client_signup.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Client_Signup.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -73,7 +73,7 @@ public class client_signup extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(46, 121, 130));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -271,7 +271,7 @@ public class client_signup extends javax.swing.JFrame {
     }//GEN-LAST:event_DateActionPerformed
 
     private void Cancel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cancel_buttonActionPerformed
-        new client_login().setVisible(true);
+        new Client_Login().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_Cancel_buttonActionPerformed
 
@@ -326,8 +326,8 @@ public class client_signup extends javax.swing.JFrame {
                 Class.forName("oracle.jdbc.OracleDriver");
                 PreparedStatement pst = null;
                 
-                Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1522:ORCL", "c##QUANLYKHACHSAN","password");
-                pst = con.prepareStatement("Select * from c##QUANLYKHACHSAN.KHACHHANG where SDT = ?");
+                Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:ORCL", "huyks","123456");
+                pst = con.prepareStatement("Select * from HUYKS.KHACHHANG where SDT = ?");
                 pst.setString(1, Sdt_txt.getText());
                 
                 ResultSet rs = pst.executeQuery();
@@ -339,7 +339,7 @@ public class client_signup extends javax.swing.JFrame {
                         java.util.Date parsedDate = sdf.parse(Date.getText());
                         java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
 
-                        pst = con.prepareStatement("Insert into c##QUANLYKHACHSAN.KHACHHANG (HOTEN, PASSWORD, CCCD, SDT, NGAYSINH, GIOITINH, DIACHI, EMAIL) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+                        pst = con.prepareStatement("Insert into HUYKS.KHACHHANG (HOTEN, PASSWORD, CCCD, SDT, NGAYSINH, GIOITINH, DIACHI, EMAIL) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
                         pst.setString(1, Fullname_txt.getText());
                         pst.setString(2, Pass_txt.getText());
                         pst.setString(3, CCCD_txt.getText());
@@ -355,7 +355,7 @@ public class client_signup extends javax.swing.JFrame {
                       
                 }
             } catch (ClassNotFoundException | SQLException | ParseException ex) {
-                Logger.getLogger(client_signup.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Client_Signup.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }
@@ -378,20 +378,21 @@ public class client_signup extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(client_signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Client_Signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(client_signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Client_Signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(client_signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Client_Signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(client_signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Client_Signup.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new client_signup().setVisible(true);
+                new Client_Signup().setVisible(true);
             }
         });
     }

@@ -54,10 +54,10 @@ public class Loading extends javax.swing.JFrame {
                             Logger.getLogger(Loading.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         if(type.equals("client")){
-                            new client_login().setVisible(true);
+                            new Client_Login().setVisible(true);
                             Loading.this.setVisible(false);
                         }else if(type.equals("manager")){
-                            new login().setVisible(true);
+                            new Staff_Login().setVisible(true);
                             Loading.this.setVisible(false);
                         }
                     }                    
