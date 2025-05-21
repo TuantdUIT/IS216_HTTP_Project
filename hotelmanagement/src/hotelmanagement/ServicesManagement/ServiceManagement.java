@@ -172,7 +172,7 @@ public class ServiceManagement extends javax.swing.JFrame {
 
     try {
         Class.forName("oracle.jdbc.driver.OracleDriver");
-        String url = "jdbc:oracle:thin:@localhost:1521:orcltdt"; // Thay đổi theo cấu hình của bạn
+        String url = "jdbc:oracle:th    in:@localhost:1521:orcltdt"; // Thay đổi theo cấu hình của bạn
         String user = "java01";
         String password = "java01";
         Connection con = DriverManager.getConnection(url, user, password);

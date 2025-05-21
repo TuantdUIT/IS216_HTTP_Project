@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat;
 public class Client_Signup extends javax.swing.JFrame {
 
     /**
-     * Creates new form client_signup
+     * Creates new form client_
      */
     public Client_Signup() {
         initComponents();
