@@ -185,12 +185,12 @@ public class Client_Login extends javax.swing.JFrame {
     private void Login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login_ButtonActionPerformed
         try {
             Class.forName("oracle.jdbc.OracleDriver");
-            String url = "jdbc:oracle:thin:@localhost:1521:ORCL";
-            String username = "huyks";
-            String password = "123456";    
+            String url = "jdbc:oracle:thin:@localhost:1521:ORCLTDT";
+            String username = "java01";
+            String password = "java01";    
             
             Connection con = DriverManager.getConnection(url, username, password);
-            PreparedStatement pst = con.prepareStatement("select * from HUYKS.KHACHHANG where trim(SDT) = trim(?) and trim(password) = trim(?)");
+            PreparedStatement pst = con.prepareStatement("select * from javav01.KHACHHANG where trim(SDT) = trim(?) and trim(password) = trim(?)");
             pst.setString(1, TxtUsername_nv.getText());
             pst.setString(2, TxtPassword_nv.getText());
             
@@ -249,6 +249,18 @@ public class Client_Login extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Client_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

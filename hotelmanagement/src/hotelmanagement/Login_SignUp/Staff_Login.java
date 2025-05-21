@@ -175,15 +175,15 @@ public class Staff_Login extends javax.swing.JFrame {
         try {
             
             Class.forName("oracle.jdbc.OracleDriver");
-            String url = "jdbc:oracle:thin:@localhost:1521:ORCL";
-            String username = "huyks";
-            String password = "123456";
+            String url = "jdbc:oracle:thin:@localhost:1521:ORCLTDT";
+            String username = "java01";
+            String password = "java01";
 
             
             Connection con = DriverManager.getConnection(url, username, password);
 
                      
-            PreparedStatement pst = con.prepareStatement("select * from HUYKS.NHANVIEN where trim(SDT) = trim(?) and trim(password) = trim(?)");
+            PreparedStatement pst = con.prepareStatement("select * from java01.NHANVIEN where trim(SDT) = trim(?) and trim(password) = trim(?)");
             pst.setString(1, TxtUsername.getText());
             pst.setString(2, TxtPassword.getText());
             
