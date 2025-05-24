@@ -7,6 +7,7 @@ package hotelmanagement.dashboard_main;
 import hotelmanagement.add.AddRoomForm;
 import hotelmanagement.update.UpdateRoomForm;
 import hotelmanagement.entity.Room;
+import hotelmanagement.entity.dba_connection;
 import javax.swing.*;
 import java.awt.*;
 import java.sql.*;
@@ -172,11 +173,9 @@ public class RoomManagement extends javax.swing.JFrame {
         model.setRowCount(0); // Xóa dữ liệu cũ trong bảng
 
     try {
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        String url = "jdbc:oracle:thin:@localhost:1521:orcltdt"; // Thay đổi theo cấu hình của bạn
-        String user = "java01";
-        String password = "java01";
-        Connection con = DriverManager.getConnection(url, user, password);
+        dba_connection connect = new dba_connection();
+        Class.forName(connect.driver);
+        Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM DVPHONG");
 

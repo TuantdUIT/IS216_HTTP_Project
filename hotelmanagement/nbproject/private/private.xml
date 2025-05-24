@@ -9,6 +9,22 @@
             <file>file:/D:/NAM2/HKII/JAVA/Doan/hotelmanagement_23052025/src/hotelmanagement/add/AddRoomForm.java</file>
             <file>file:/D:/NAM2/HKII/JAVA/Doan/hotelmanagement_23052025/src/hotelmanagement/add/AddServiceForm.java</file>
         </group>
-        <group name="BTTH1"/>
+        <group name="BTTH1">
+            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/DashboardClient.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/add/AddRoomForm.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/entity/dba_connection.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/add/AddInvoiceForm.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/Main_Menu.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/DashboardForm.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/update/UpdateInvoiceForm.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/update/UpdateServiceForm.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/update/UpdateRoomForm.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/add/AddServiceForm.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/Login_Signup/Client_Login.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/Loading.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/RoomManagement.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/ServiceManagement.java</file>
+            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/Login_Signup/Client_Signup.java</file>
+        </group>
     </open-files>
 </project-private>

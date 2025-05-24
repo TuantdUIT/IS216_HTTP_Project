@@ -44,6 +44,7 @@ public class DashboardClient extends javax.swing.JFrame {
         btnBookServices = new javax.swing.JButton();
         panelFeedback = new javax.swing.JPanel();
         btnWriteFeedBacks = new javax.swing.JButton();
+        btnWriteFeedBacks1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         pnlCard = new javax.swing.JPanel();
         CardMyRooms = new javax.swing.JPanel();
@@ -137,10 +138,17 @@ public class DashboardClient extends javax.swing.JFrame {
         panelFeedback.setBackground(new java.awt.Color(46, 121, 130));
         panelFeedback.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
-        btnWriteFeedBacks.setText("Write Feedbacks");
+        btnWriteFeedBacks.setText("Pay & Checkout");
         btnWriteFeedBacks.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnWriteFeedBacksActionPerformed(evt);
+            }
+        });
+
+        btnWriteFeedBacks1.setText("Write Feedbacks");
+        btnWriteFeedBacks1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnWriteFeedBacks1ActionPerformed(evt);
             }
         });
 
@@ -148,17 +156,27 @@ public class DashboardClient extends javax.swing.JFrame {
         panelFeedback.setLayout(panelFeedbackLayout);
         panelFeedbackLayout.setHorizontalGroup(
             panelFeedbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFeedbackLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelFeedbackLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(btnWriteFeedBacks, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelFeedbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelFeedbackLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(btnWriteFeedBacks1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panelFeedbackLayout.setVerticalGroup(
             panelFeedbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFeedbackLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnWriteFeedBacks, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
+            .addGroup(panelFeedbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFeedbackLayout.createSequentialGroup()
+                    .addContainerGap(59, Short.MAX_VALUE)
+                    .addComponent(btnWriteFeedBacks1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -168,25 +186,22 @@ public class DashboardClient extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelMyInfo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panelBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panelFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(36, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(panelFeedback, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelMyInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(35, 35, 35)
                 .addComponent(panelMyInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panelBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -203,7 +218,7 @@ public class DashboardClient extends javax.swing.JFrame {
         CardMyRooms.setLayout(CardMyRoomsLayout);
         CardMyRoomsLayout.setHorizontalGroup(
             CardMyRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 825, Short.MAX_VALUE)
+            .addGap(0, 815, Short.MAX_VALUE)
         );
         CardMyRoomsLayout.setVerticalGroup(
             CardMyRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,7 +263,7 @@ public class DashboardClient extends javax.swing.JFrame {
         CardBookServices.setLayout(CardBookServicesLayout);
         CardBookServicesLayout.setHorizontalGroup(
             CardBookServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 825, Short.MAX_VALUE)
+            .addGap(0, 815, Short.MAX_VALUE)
         );
         CardBookServicesLayout.setVerticalGroup(
             CardBookServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,7 +278,7 @@ public class DashboardClient extends javax.swing.JFrame {
         CardWriteFeedbacks.setLayout(CardWriteFeedbacksLayout);
         CardWriteFeedbacksLayout.setHorizontalGroup(
             CardWriteFeedbacksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 825, Short.MAX_VALUE)
+            .addGap(0, 815, Short.MAX_VALUE)
         );
         CardWriteFeedbacksLayout.setVerticalGroup(
             CardWriteFeedbacksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,6 +342,10 @@ public class DashboardClient extends javax.swing.JFrame {
         layout.show(pnlCard, "WriteFeedbacks");
     }//GEN-LAST:event_btnWriteFeedBacksActionPerformed
 
+    private void btnWriteFeedBacks1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWriteFeedBacks1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnWriteFeedBacks1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -373,6 +392,7 @@ public class DashboardClient extends javax.swing.JFrame {
     private javax.swing.JButton btnMyRooms;
     private javax.swing.JButton btnMyServices;
     private javax.swing.JButton btnWriteFeedBacks;
+    private javax.swing.JButton btnWriteFeedBacks1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;

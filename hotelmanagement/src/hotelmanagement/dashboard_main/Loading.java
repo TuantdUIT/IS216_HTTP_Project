@@ -85,19 +85,20 @@ public class Loading extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(Progress_bar_loading, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 580, 900, 20));
+        getContentPane().add(Progress_bar_loading, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, 900, 30));
 
         Loading_Label.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         Loading_Label.setForeground(new java.awt.Color(255, 255, 255));
         Loading_Label.setText("Loading...");
-        getContentPane().add(Loading_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 550, -1, -1));
+        getContentPane().add(Loading_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 530, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Loading_img.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, 900, 600));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**

@@ -60,8 +60,6 @@ public class Client_Signup extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         Fullname_txt = new javax.swing.JTextField();
-        men_checkbox = new javax.swing.JCheckBox();
-        women_checkbox = new javax.swing.JCheckBox();
         CCCD_txt = new javax.swing.JTextField();
         Sdt_txt = new javax.swing.JTextField();
         Address_txt = new javax.swing.JTextField();
@@ -70,6 +68,7 @@ public class Client_Signup extends javax.swing.JFrame {
         Cancel_button = new javax.swing.JButton();
         Signup_button = new javax.swing.JButton();
         Date = new javax.swing.JFormattedTextField();
+        GenderBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -114,12 +113,6 @@ public class Client_Signup extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(51, 51, 51));
         jLabel9.setText("Password:");
 
-        men_checkbox.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        men_checkbox.setText("Men");
-
-        women_checkbox.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        women_checkbox.setText("Women");
-
         CCCD_txt.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         Sdt_txt.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -152,6 +145,8 @@ public class Client_Signup extends javax.swing.JFrame {
             }
         });
 
+        GenderBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -160,6 +155,12 @@ public class Client_Signup extends javax.swing.JFrame {
                 .addGap(144, 144, 144)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(62, Short.MAX_VALUE)
+                .addComponent(Cancel_button, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addComponent(Signup_button, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 27, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,25 +173,17 @@ public class Client_Signup extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(jLabel9))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Fullname_txt)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(men_checkbox)
-                        .addGap(18, 18, 18)
-                        .addComponent(women_checkbox))
-                    .addComponent(CCCD_txt)
-                    .addComponent(Sdt_txt)
-                    .addComponent(Address_txt)
-                    .addComponent(Email_txt)
-                    .addComponent(Date, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-                    .addComponent(Pass_txt))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(GenderBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(Fullname_txt)
+                        .addComponent(CCCD_txt)
+                        .addComponent(Sdt_txt)
+                        .addComponent(Address_txt)
+                        .addComponent(Email_txt)
+                        .addComponent(Date, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+                        .addComponent(Pass_txt)))
                 .addGap(25, 25, 25))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Cancel_button, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addComponent(Signup_button, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,8 +197,7 @@ public class Client_Signup extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(men_checkbox)
-                    .addComponent(women_checkbox))
+                    .addComponent(GenderBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -234,29 +226,30 @@ public class Client_Signup extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Cancel_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Signup_button, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(240, 240, 240)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(332, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addGap(295, 295, 295))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(15, 15, 15)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 650));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 580));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void DateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DateActionPerformed
@@ -279,10 +272,6 @@ public class Client_Signup extends javax.swing.JFrame {
             if(Fullname_txt.getText().equals("")){
                 JOptionPane.showMessageDialog(this, "All filed value is mandatory");
                 Fullname_txt.requestFocus();
-            }
-            else if(men_checkbox.isSelected() == false && women_checkbox.isSelected() == false){
-                JOptionPane.showMessageDialog(this, "All filed value is mandatory");            
-                men_checkbox.requestFocus();
             }
             else if(Date.getText().equals("")){
                 JOptionPane.showMessageDialog(this, "All filed value is mandatory");
@@ -321,7 +310,7 @@ public class Client_Signup extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "SDT phai tu 10 den 11");
             }
             else{
-                Class.forName("oracle.jdbc.OracleDriver");
+                Class.forName(connect.driver);
                 PreparedStatement pst = null;
 
                 Connection con = DriverManager.getConnection(connect.url, connect.username,connect.password);
@@ -332,47 +321,29 @@ public class Client_Signup extends javax.swing.JFrame {
                 if(rs.next()){
                     JOptionPane.showConfirmDialog(this, "So dien thoai da co tai khoan dang ky roi! Vui long thu so khac");
                 }else{
-                    if(men_checkbox.isSelected()){
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                        java.util.Date parsedDate = sdf.parse(Date.getText());
-                        java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
+                    String gender = (String) GenderBox.getSelectedItem();
+                        
+                    //Dich tieng anh thanh tieng viet de database hieu
+                    gender = gender.equals("Male") ? "Nam" : gender.equals("Female") ? "Nu" : gender;
+                        
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    java.util.Date parsedDate = sdf.parse(Date.getText());
+                    java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
 
-                        pst = con.prepareStatement("Insert into " + connect.username + ".KHACHHANG (HOTEN, PASSWORD, CCCD, SDT, NGAYSINH, GIOITINH, DIACHI, EMAIL) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
-                        pst.setString(1, Fullname_txt.getText());
-                        pst.setString(2, Pass_txt.getText());
-                        pst.setString(3, CCCD_txt.getText());
-                        pst.setString(4, Sdt_txt.getText());
-                        pst.setDate(5, sqlDate); // <-- dùng đúng loại
-                        pst.setString(6, "Nam");
-                        pst.setString(7, Address_txt.getText());
-                        pst.setString(8, Email_txt.getText());
+                    pst = con.prepareStatement("Insert into " + connect.username + ".KHACHHANG (HOTEN, PASSWORD, CCCD, SDT, NGAYSINH, GIOITINH, DIACHI, EMAIL) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+                    pst.setString(1, Fullname_txt.getText());
+                    pst.setString(2, Pass_txt.getText());
+                    pst.setString(3, CCCD_txt.getText());
+                    pst.setString(4, Sdt_txt.getText());
+                    pst.setDate(5, sqlDate); // <-- dùng đúng loại
+                    pst.setString(6, gender);
+                    pst.setString(7, Address_txt.getText());
+                    pst.setString(8, Email_txt.getText());
 
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(this, "Sign up successful!");
-                        new Client_Login().setVisible(true);
-                        Client_Signup.this.setVisible(false);
-                    }
-
-                    else if(women_checkbox.isSelected()){
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                        java.util.Date parsedDate = sdf.parse(Date.getText());
-                        java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
-
-                        pst = con.prepareStatement("Insert into " + connect.username + ".KHACHHANG (HOTEN, PASSWORD, CCCD, SDT, NGAYSINH, GIOITINH, DIACHI, EMAIL) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
-                        pst.setString(1, Fullname_txt.getText());
-                        pst.setString(2, Pass_txt.getText());
-                        pst.setString(3, CCCD_txt.getText());
-                        pst.setString(4, Sdt_txt.getText());
-                        pst.setDate(5, sqlDate); // <-- dùng đúng loại
-                        pst.setString(6, "Nu");
-                        pst.setString(7, Address_txt.getText());
-                        pst.setString(8, Email_txt.getText());
-
-                        pst.executeUpdate();
-                        JOptionPane.showMessageDialog(this, "Sign up successful!");
-                        new Client_Login().setVisible(true);
-                        Client_Signup.this.setVisible(false);                            
-                    }                       
+                    pst.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "Sign up successful!");
+                    new Client_Login().setVisible(true);
+                    Client_Signup.this.setVisible(false);    
                 }
                 }
         }catch (ClassNotFoundException | SQLException | ParseException ex) {
@@ -426,6 +397,7 @@ public class Client_Signup extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField Date;
     private javax.swing.JTextField Email_txt;
     private javax.swing.JTextField Fullname_txt;
+    private javax.swing.JComboBox<String> GenderBox;
     private javax.swing.JPasswordField Pass_txt;
     private javax.swing.JTextField Sdt_txt;
     private javax.swing.JButton Signup_button;
@@ -441,7 +413,5 @@ public class Client_Signup extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JCheckBox men_checkbox;
-    private javax.swing.JCheckBox women_checkbox;
     // End of variables declaration//GEN-END:variables
 }

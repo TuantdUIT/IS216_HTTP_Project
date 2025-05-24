@@ -4,6 +4,7 @@
  */
 package hotelmanagement.add;
 
+import hotelmanagement.entity.dba_connection;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.*;
@@ -193,11 +194,10 @@ public class AddRoomForm extends javax.swing.JFrame {
         String status = (String) cbxStatus.getSelectedItem();
          
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            String url = "jdbc:oracle:thin:@localhost:1521:orcltdt"; // Thay đổi theo cấu hình của bạn
-            String user = "java01";
-            String password = "java01";
-            Connection con = DriverManager.getConnection(url, user, password);
+            dba_connection connect = new dba_connection();
+            Class.forName(connect.driver);
+            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+
             // Chèn dữ liệu vào cơ sở dữ liệu
             String sql = "INSERT INTO DVPHONG(LOAIPHONG, MOTA, DONGIA, TINHTRANG) VALUES (?, ?, ?, ?)";
             PreparedStatement pst = con.prepareStatement(sql);

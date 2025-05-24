@@ -4,7 +4,7 @@
  */
 package hotelmanagement.Login_Signup;
 
-import hotelmanagement.dashboard_main.Client_Menu;
+import hotelmanagement.dashboard_main.DashboardClient;
 import hotelmanagement.entity.dba_connection;
 import java.awt.event.ActionEvent;
 import java.util.logging.Level;
@@ -73,9 +73,11 @@ public class Client_Login extends javax.swing.JFrame {
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Loading_img.jpg"))); // NOI18N
         jLabel7.setText("jLabel6");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, -24, 479, 650));
+        jLabel7.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, -24, 570, 600));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -179,9 +181,10 @@ public class Client_Login extends javax.swing.JFrame {
 
         jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 600));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void Login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login_ButtonActionPerformed
@@ -197,7 +200,7 @@ public class Client_Login extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();
             
             if(rs.next()){
-                new Client_Menu().setVisible(true);
+                new DashboardClient().setVisible(true);
                 this.setVisible(false);
                 
             }else{

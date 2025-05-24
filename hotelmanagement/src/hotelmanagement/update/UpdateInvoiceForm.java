@@ -343,7 +343,7 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
 
         try {
             // Tạo kết nối tới cơ sở dữ liệu
-            Class.forName("oracle.jdbc.OracleDriver");
+            Class.forName(connect.driver);
             Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
 
             // Truy vấn cơ sở dữ liệu để tìm phòng theo Room ID

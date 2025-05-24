@@ -325,10 +325,7 @@ public class AddInvoiceForm extends javax.swing.JFrame {
         int amount = Integer.parseInt(txtAmount.getText());
         
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-//            String url = "jdbc:oracle:thin:@localhost:1521:orcltdt"; // Thay đổi theo cấu hình của bạn
-//            String user = "java01";
-//            String password = "java01";
+            Class.forName(connect.driver);
             Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
             
             

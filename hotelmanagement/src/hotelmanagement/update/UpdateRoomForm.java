@@ -4,6 +4,7 @@
  */
 package hotelmanagement.update;
 
+import hotelmanagement.entity.dba_connection;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.*;
@@ -221,11 +222,9 @@ public class UpdateRoomForm extends javax.swing.JFrame {
         String status = txtStatus.getText();
          
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            String url = "jdbc:oracle:thin:@localhost:1521:orcltdt"; // Thay đổi theo cấu hình của bạn
-            String user = "java01";
-            String password = "java01";
-            Connection con = DriverManager.getConnection(url, user, password);
+            dba_connection connect = new dba_connection();
+            Class.forName(connect.driver);
+            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
             // Chèn dữ liệu vào cơ sở dữ liệu
             String sql = "UPDATE DVPHONG SET LOAIPHONG = ?, MOTA = ?, DONGIA = ?, TINHTRANG = ? WHERE MADVP = ?";
             PreparedStatement pst = con.prepareStatement(sql);
@@ -275,9 +274,10 @@ public class UpdateRoomForm extends javax.swing.JFrame {
 
         try {
             // Tạo kết nối tới cơ sở dữ liệu
-            Class.forName("oracle.jdbc.OracleDriver");
-            Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcltdt", "java01","java01");
-
+            dba_connection connect = new dba_connection();
+            Class.forName(connect.driver);
+            Connection conn = DriverManager.getConnection(connect.url, connect.username, connect.password);
+            
             // Truy vấn cơ sở dữ liệu để tìm phòng theo Room ID
             String query = "SELECT LOAIPHONG, MOTA, DONGIA, TINHTRANG FROM DVPHONG WHERE MADVP = ?";
             PreparedStatement ps = conn.prepareStatement(query);
@@ -293,10 +293,10 @@ public class UpdateRoomForm extends javax.swing.JFrame {
                 double price = rs.getDouble("DONGIA");
                 String rentStatus = rs.getString("TINHTRANG");
 
-                txtType.setText(type);  // Điền vào ô nhập Type
-                txtDescribe.setText(describe);  // Điền vào ô nhập Describe
+                txtType.setText(type.trim());  // Điền vào ô nhập Type
+                txtDescribe.setText(describe.trim());  // Điền vào ô nhập Describe
                 txtPrice.setText(String.valueOf(price));  // Điền vào ô nhập Price
-                txtStatus.setText(rentStatus);  // Điền vào ô nhập Rent Status
+                txtStatus.setText(rentStatus.trim());  // Điền vào ô nhập Rent Status
 
             } else {
                 JOptionPane.showMessageDialog(null, "Room not found.");
