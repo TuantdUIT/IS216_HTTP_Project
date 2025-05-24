@@ -4,6 +4,7 @@
  */
 package hotelmanagement.Login_Signup;
 
+import hotelmanagement.entity.dba_connection;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.*;
@@ -259,15 +260,7 @@ public class Client_Signup extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DateActionPerformed
-        String input = Date.getText();
-        System.out.println(input);
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/mm/yyyy");
-        try{
-            LocalDate date = LocalDate.parse(input, format);
-            JOptionPane.showMessageDialog(this, "Ngay hop le: " + date);
-        }catch(DateTimeParseException e){
-            JOptionPane.showMessageDialog(this, "Ngày không hợp lệ!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        }
+
     }//GEN-LAST:event_DateActionPerformed
 
     private void Cancel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cancel_buttonActionPerformed
@@ -276,60 +269,65 @@ public class Client_Signup extends javax.swing.JFrame {
     }//GEN-LAST:event_Cancel_buttonActionPerformed
 
     private void Signup_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Signup_buttonActionPerformed
-// Xét các ô bắt buộc phải điền
-        if(Fullname_txt.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "All filed value is mandatory");
-            Fullname_txt.requestFocus();
-        }
-        else if(men_checkbox.isSelected() == false && women_checkbox.isSelected() == false){
-            JOptionPane.showMessageDialog(this, "All filed value is mandatory");            
-            men_checkbox.requestFocus();
-        }
-        else if(Date.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "All filed value is mandatory");
-            Date.requestFocus();
-        }
-        else if(CCCD_txt.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "All filed value is mandatory");
-            CCCD_txt.requestFocus();
-        }
-        else if(Sdt_txt.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "All filed value is mandatory");
-            Sdt_txt.requestFocus();
-        }
-        else if(Address_txt.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "All filed value is mandatory");
-            Address_txt.requestFocus();
-        }
-        else if(Pass_txt.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "All filed value is mandatory");
-            Pass_txt.requestFocus();
-        }        
-//CCCD và SDT phải là số
-        else if(!CCCD_txt.getText().matches("\\d+")){
-            JOptionPane.showMessageDialog(this, "CCCD phai la so");
-        }
-        
-        else if(!Sdt_txt.getText().matches("\\d+")){
-            JOptionPane.showMessageDialog(this, "SDT phai la so");
-        }
-// CCCD phải là 12 sô và SDT từ 10 đến 11 số
-        else if(CCCD_txt.getText().length() != 12){
-            JOptionPane.showMessageDialog(this, "CCCD phai 12 so");
-        }     
-        else if(Sdt_txt.getText().length() < 10 || Sdt_txt.getText().length() > 11){           
-            JOptionPane.showMessageDialog(this, "SDT phai tu 10 den 11");
-        }
-        else{
-            System.out.println(Date.getText());
-            try {
+        try {
+            String input = Date.getText();
+            dba_connection connect = new dba_connection();
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate date = LocalDate.parse(input, format);
+    // Xét các ô bắt buộc phải điền
+
+            if(Fullname_txt.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "All filed value is mandatory");
+                Fullname_txt.requestFocus();
+            }
+            else if(men_checkbox.isSelected() == false && women_checkbox.isSelected() == false){
+                JOptionPane.showMessageDialog(this, "All filed value is mandatory");            
+                men_checkbox.requestFocus();
+            }
+            else if(Date.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "All filed value is mandatory");
+                Date.requestFocus();
+            }
+            else if(CCCD_txt.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "All filed value is mandatory");
+                CCCD_txt.requestFocus();
+            }
+            else if(Sdt_txt.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "All filed value is mandatory");
+                Sdt_txt.requestFocus();
+            }
+            else if(Address_txt.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "All filed value is mandatory");
+                Address_txt.requestFocus();
+            }
+            else if(Pass_txt.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "All filed value is mandatory");
+                Pass_txt.requestFocus();
+            }
+
+    //CCCD và SDT phải là số
+            else if(!CCCD_txt.getText().matches("\\d+")){
+                JOptionPane.showMessageDialog(this, "CCCD phai la so");
+            }
+
+            else if(!Sdt_txt.getText().matches("\\d+")){
+                JOptionPane.showMessageDialog(this, "SDT phai la so");
+            }
+    // CCCD phải là 12 sô và SDT từ 10 đến 11 số
+            else if(CCCD_txt.getText().length() != 12){
+                JOptionPane.showMessageDialog(this, "CCCD phai 12 so");
+            }     
+            else if(Sdt_txt.getText().length() < 10 || Sdt_txt.getText().length() > 11){           
+                JOptionPane.showMessageDialog(this, "SDT phai tu 10 den 11");
+            }
+            else{
                 Class.forName("oracle.jdbc.OracleDriver");
                 PreparedStatement pst = null;
-                
-                Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:ORCL", "huyks","123456");
-                pst = con.prepareStatement("Select * from HUYKS.KHACHHANG where SDT = ?");
+
+                Connection con = DriverManager.getConnection(connect.url, connect.username,connect.password);
+                pst = con.prepareStatement("Select * from " + connect.username + ".KHACHHANG where SDT = ?");
                 pst.setString(1, Sdt_txt.getText());
-                
+
                 ResultSet rs = pst.executeQuery();
                 if(rs.next()){
                     JOptionPane.showConfirmDialog(this, "So dien thoai da co tai khoan dang ky roi! Vui long thu so khac");
@@ -339,7 +337,7 @@ public class Client_Signup extends javax.swing.JFrame {
                         java.util.Date parsedDate = sdf.parse(Date.getText());
                         java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
 
-                        pst = con.prepareStatement("Insert into HUYKS.KHACHHANG (HOTEN, PASSWORD, CCCD, SDT, NGAYSINH, GIOITINH, DIACHI, EMAIL) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+                        pst = con.prepareStatement("Insert into " + connect.username + ".KHACHHANG (HOTEN, PASSWORD, CCCD, SDT, NGAYSINH, GIOITINH, DIACHI, EMAIL) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
                         pst.setString(1, Fullname_txt.getText());
                         pst.setString(2, Pass_txt.getText());
                         pst.setString(3, CCCD_txt.getText());
@@ -351,13 +349,37 @@ public class Client_Signup extends javax.swing.JFrame {
 
                         pst.executeUpdate();
                         JOptionPane.showMessageDialog(this, "Sign up successful!");
+                        new Client_Login().setVisible(true);
+                        Client_Signup.this.setVisible(false);
                     }
-                      
+
+                    else if(women_checkbox.isSelected()){
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        java.util.Date parsedDate = sdf.parse(Date.getText());
+                        java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
+
+                        pst = con.prepareStatement("Insert into " + connect.username + ".KHACHHANG (HOTEN, PASSWORD, CCCD, SDT, NGAYSINH, GIOITINH, DIACHI, EMAIL) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+                        pst.setString(1, Fullname_txt.getText());
+                        pst.setString(2, Pass_txt.getText());
+                        pst.setString(3, CCCD_txt.getText());
+                        pst.setString(4, Sdt_txt.getText());
+                        pst.setDate(5, sqlDate); // <-- dùng đúng loại
+                        pst.setString(6, "Nu");
+                        pst.setString(7, Address_txt.getText());
+                        pst.setString(8, Email_txt.getText());
+
+                        pst.executeUpdate();
+                        JOptionPane.showMessageDialog(this, "Sign up successful!");
+                        new Client_Login().setVisible(true);
+                        Client_Signup.this.setVisible(false);                            
+                    }                       
                 }
-            } catch (ClassNotFoundException | SQLException | ParseException ex) {
-                Logger.getLogger(Client_Signup.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
+                }
+        }catch (ClassNotFoundException | SQLException | ParseException ex) {
+            Logger.getLogger(Client_Signup.class.getName()).log(Level.SEVERE, null, ex);               
+        }catch (DateTimeParseException e){
+            JOptionPane.showMessageDialog(this, "Invalid date");
+            Date.requestFocus();
         }
     }//GEN-LAST:event_Signup_buttonActionPerformed
 

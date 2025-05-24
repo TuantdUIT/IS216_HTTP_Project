@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package hotelmanagement.Login_SignUp;
+package hotelmanagement.Login_Signup;
 
+import hotelmanagement.dashboard_main.Client_Menu;
+import hotelmanagement.entity.dba_connection;
 import java.awt.event.ActionEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -185,12 +187,10 @@ public class Client_Login extends javax.swing.JFrame {
     private void Login_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Login_ButtonActionPerformed
         try {
             Class.forName("oracle.jdbc.OracleDriver");
-            String url = "jdbc:oracle:thin:@localhost:1521:ORCLTDT";
-            String username = "java01";
-            String password = "java01";    
+            dba_connection connect = new dba_connection();
             
-            Connection con = DriverManager.getConnection(url, username, password);
-            PreparedStatement pst = con.prepareStatement("select * from javav01.KHACHHANG where trim(SDT) = trim(?) and trim(password) = trim(?)");
+            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+            PreparedStatement pst = con.prepareStatement("select * from " + connect.username + ".KHACHHANG where trim(SDT) = trim(?) and trim(password) = trim(?)");
             pst.setString(1, TxtUsername_nv.getText());
             pst.setString(2, TxtPassword_nv.getText());
             

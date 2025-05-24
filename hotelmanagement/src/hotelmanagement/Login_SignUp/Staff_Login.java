@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package hotelmanagement.Login_SignUp;
+package hotelmanagement.Login_Signup;
 
+import hotelmanagement.entity.dba_connection;
+import hotelmanagement.dashboard_main.DashboardForm;
 import java.sql.*;
 import java.awt.event.ActionEvent;
 import java.util.logging.Level;
@@ -175,15 +177,13 @@ public class Staff_Login extends javax.swing.JFrame {
         try {
             
             Class.forName("oracle.jdbc.OracleDriver");
-            String url = "jdbc:oracle:thin:@localhost:1521:ORCLTDT";
-            String username = "java01";
-            String password = "java01";
+            dba_connection connect = new dba_connection();
 
             
-            Connection con = DriverManager.getConnection(url, username, password);
+            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
 
                      
-            PreparedStatement pst = con.prepareStatement("select * from java01.NHANVIEN where trim(SDT) = trim(?) and trim(password) = trim(?)");
+            PreparedStatement pst = con.prepareStatement("select * from " + connect.username + ".NHANVIEN where trim(SDT) = trim(?) and trim(password) = trim(?)");
             pst.setString(1, TxtUsername.getText());
             pst.setString(2, TxtPassword.getText());
             
@@ -192,6 +192,9 @@ public class Staff_Login extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();
             if(rs.next()){
                 JOptionPane.showMessageDialog(this, "Logined!");
+                DashboardForm dbf = new DashboardForm();
+                dbf.setVisible(true);
+                this.dispose();
             }else{
                 JOptionPane.showMessageDialog(this, "Invalid username or password!");
             }
