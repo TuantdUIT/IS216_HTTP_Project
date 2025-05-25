@@ -5,6 +5,7 @@
 
 package hotelmanagement.update;
 
+import hotelmanagement.entity.dba_connection;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.*;
@@ -53,11 +54,12 @@ public class UpdateServiceForm extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnUpdate = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        btnCheck = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Add new Service");
+        jLabel1.setText("Update new Service");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Name");
@@ -112,17 +114,31 @@ public class UpdateServiceForm extends javax.swing.JFrame {
         });
 
         btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        btnCheck.setText("Check");
+        btnCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addComponent(btnCheck)
+                .addGap(18, 18, 18)
                 .addComponent(btnUpdate)
-                .addGap(46, 46, 46)
+                .addGap(18, 18, 18)
                 .addComponent(btnBack)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +146,8 @@ public class UpdateServiceForm extends javax.swing.JFrame {
                 .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUpdate)
-                    .addComponent(btnBack))
+                    .addComponent(btnBack)
+                    .addComponent(btnCheck))
                 .addContainerGap())
         );
 
@@ -145,9 +162,6 @@ public class UpdateServiceForm extends javax.swing.JFrame {
                         .addComponent(jSeparator2))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(153, 153, 153)
-                                .addComponent(jLabel1))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -172,6 +186,10 @@ public class UpdateServiceForm extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(134, 134, 134))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,7 +250,91 @@ public class UpdateServiceForm extends javax.swing.JFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
+        String serviceID = txtServiceID.getText();
+        String name = txtName.getText();
+        String describe = txtDescribe.getText();
+        String price = txtPrice.getText();
+        String status = txtStatus.getText();
+        
+        try {
+            dba_connection connect = new dba_connection();
+            Class.forName(connect.driver);
+            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+            // Chèn dữ liệu vào cơ sở dữ liệu
+            String sql = "UPDATE DVTIENICH SET TENDVTI = ?, MOTA = ?, DONGIA = ?, TINHTRANG = ? WHERE MADVTI = ?";
+            PreparedStatement pst = con.prepareStatement(sql);
+                pst.setString(1, name);
+                pst.setString(2, describe);
+                pst.setString(3, price);    
+                pst.setString(4, status); 
+                pst.setString(5, serviceID);
+                int rowsUpdated = pst.executeUpdate();
+            if (rowsUpdated > 0) {
+                JOptionPane.showMessageDialog(null, "Cập nhật thông tin thành công!");
+            } 
+            else {
+                JOptionPane.showMessageDialog(null, "Không tìm thấy bản ghi để cập nhật.");
+            }
+
+        // Đóng kết nối
+            con.close();
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Lỗi khi cập nhật dữ liệu: " + ex.getMessage());
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
+        // TODO add your handling code here:
+        String serviceID = txtServiceID.getText();
+        if (serviceID.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please enter a Service ID.");
+            return;  // Dừng nếu không có mã phòng
+        }
+
+        try {
+            // Tạo kết nối tới cơ sở dữ liệu
+            dba_connection connect = new dba_connection();
+            Class.forName(connect.driver);
+            Connection conn = DriverManager.getConnection(connect.url, connect.username, connect.password);
+            
+            // Truy vấn cơ sở dữ liệu để tìm phòng theo Room ID
+            String query = "SELECT TENDVTI, MOTA, DONGIA, TINHTRANG FROM DVTIENICH WHERE MADVTI = ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, serviceID);
+
+            // Thực hiện truy vấn và lấy kết quả
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                // Lấy dữ liệu từ kết quả truy vấn và điền vào các trường thông tin
+                String type = rs.getString("TENDVTI");
+                String describe = rs.getString("MOTA");
+                double price = rs.getDouble("DONGIA");
+                String rentStatus = rs.getString("TINHTRANG");
+
+                txtName.setText(type.trim());  // Điền vào ô nhập Type
+                txtDescribe.setText(describe.trim());  // Điền vào ô nhập Describe
+                txtPrice.setText(String.valueOf(price));  // Điền vào ô nhập Price
+                txtStatus.setText(rentStatus.trim());  // Điền vào ô nhập Rent Status
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Service not found.");
+            }
+
+            // Đóng kết nối cơ sở dữ liệu
+            rs.close();
+            ps.close();
+            conn.close();
+        } catch (SQLException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnCheckActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,69 +362,7 @@ public class UpdateServiceForm extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(UpdateServiceForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -334,6 +374,7 @@ public class UpdateServiceForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnCheck;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

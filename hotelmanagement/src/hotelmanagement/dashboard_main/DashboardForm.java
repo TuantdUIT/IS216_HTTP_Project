@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package hotelmanagement.dashboard_main;
-
+// TranDuongTuan
 import hotelmanagement.add.AddInvoiceForm;
 import hotelmanagement.add.AddRoomForm;
 import hotelmanagement.add.AddServiceForm;
@@ -903,6 +903,59 @@ public class DashboardForm extends javax.swing.JFrame {
 
     private void btnReloadInVoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadInVoiceActionPerformed
         // TODO add your handling code here:
+        invoices.clear(); // Xoá dữ liệu cũ trong danh sách
+        String sql = "SELECT * FROM HOADON";
+        dba_connection connect = new dba_connection();
+       
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Invoice invoice = new Invoice();
+                invoice.setMaHD(rs.getString("MAHD"));
+                invoice.setMaKH(rs.getString("MAKH"));               
+                invoice.setMaDVP(rs.getString("MADVP"));
+                invoice.setMaDVTI(rs.getString("MADVTI"));
+                invoice.setMaFB(rs.getString("MAFB"));
+                invoice.setMaNV(rs.getString("NGUOIXACNHAN"));
+                invoice.setNgayTao(rs.getString("NGAYTAO"));
+                invoice.setNgayBD(rs.getString("NGAYBD"));
+                invoice.setNgayKT(rs.getString("NGAYKT"));
+                invoice.setNgayThanhToan(rs.getString("NGAYTHANHTOAN"));
+                invoice.setTongTien(rs.getInt("TONGTIEN"));
+                invoice.setTinhTrangTT(rs.getString("TINHTRANGTT"));
+                invoice.setSLSD(rs.getInt("SLSD"));
+                invoices.add(invoice);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Lỗi khi load dữ liệu phòng: " + ex.getMessage());
+        }
+
+        // Hiển thị lại dữ liệu lên JTable
+        DefaultTableModel model = (DefaultTableModel) tblInvoices.getModel();
+        model.setRowCount(0); // Xoá hết dữ liệu cũ trên bảng
+
+        for (Invoice in : invoices) {
+            model.addRow(new Object[] {
+                in.getMaHD(),
+                in.getMaKH(),
+                in.getMaDVP(),
+                in.getMaDVTI(),
+                in.getMaFB(),
+                in.getMaNV(),
+                in.getNgayTao(),
+                in.getNgayBD(),
+                in.getNgayKT(),
+                in.getNgayThanhToan(),
+                in.getTongTien(),
+                in.getTinhTrangTT(),
+                in.getSLSD()
+            });
+        }
+        
     }//GEN-LAST:event_btnReloadInVoiceActionPerformed
 
     /**

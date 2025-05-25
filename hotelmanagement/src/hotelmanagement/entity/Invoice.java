@@ -3,147 +3,143 @@ package hotelmanagement.entity;
 
 
 public class Invoice {
-    private String mahd;
-    private String makh;
-    private String madvp;
-    private String madvti;
-    private String mafb;
-    private String nguoixacnhan;
-    private String ngaytao;
-    private String ngaybd;
-    private String ngaykt;
-    private String ngaythanhtoan;
-    private int tongtien;
-    private String tinhtrangtt;
-    private int slsd;
+    private String maHD;
+    private String maKH;
+    private String maDVP;
+    private String maDVTI;
+    private String maFB;
+    private String maNV;
+    private String ngayTao;
+    private String ngayBD;
+    private String ngayKT;
+    private String ngayThanhToan;
+    private int TongTien;
+    private String tinhtrangTT;
+    private int SLSD;
+    
+    public Invoice(){}
 
-    // Constructor mặc định (không tham số)
-    public Invoice() {
+    public Invoice(String maHD, String maKH, String maDVP, String maDVTI, String maFB, String maNV, String ngayTao, String ngayBD, String ngayKT, String ngayThanhToan, int TongTien, String tinhtrangTT, int SLSD) {
+        this.maHD = maHD;
+        this.maKH = maKH;
+        this.maDVP = maDVP;
+        this.maDVTI = maDVTI;
+        this.maFB = maFB;
+        this.maNV = maNV;
+        this.ngayTao = ngayTao;
+        this.ngayBD = ngayBD;
+        this.ngayKT = ngayKT;
+        this.ngayThanhToan = ngayThanhToan;
+        this.TongTien = TongTien;
+        this.tinhtrangTT = tinhtrangTT;
+        this.SLSD = SLSD;
     }
 
-    // Constructor có tham số
-    public Invoice(String mahd, String makh, String madvp, String madvti, String mafb, String nguoixacnhan,
-                   String ngaytao, String ngaybd, String ngaykt, String ngaythanhtoan,
-                   int tongtien, String tinhtrangtt, int slsd) {
-        this.mahd = mahd;
-        this.makh = makh;
-        this.madvp = madvp;
-        this.madvti = madvti;
-        this.mafb = mafb;
-        this.nguoixacnhan = nguoixacnhan;
-        this.ngaytao = ngaytao;
-        this.ngaybd = ngaybd;
-        this.ngaykt = ngaykt;
-        this.ngaythanhtoan = ngaythanhtoan;
-        this.tongtien = tongtien;
-        this.tinhtrangtt = tinhtrangtt;
-        this.slsd = slsd;
+    public String getMaHD() {
+        return maHD;
     }
 
-    public String getMahd() {
-        return mahd;
+    public void setMaHD(String maHD) {
+        this.maHD = maHD;
     }
 
-    public void setMahd(String mahd) {
-        this.mahd = mahd;
+    public String getMaKH() {
+        return maKH;
     }
 
-    public String getMakh() {
-        return makh;
+    public void setMaKH(String maKH) {
+        this.maKH = maKH;
     }
 
-    public void setMakh(String makh) {
-        this.makh = makh;
+    public String getMaDVP() {
+        return maDVP;
     }
 
-    public String getMadvp() {
-        return madvp;
+    public void setMaDVP(String maDVP) {
+        this.maDVP = maDVP;
     }
 
-    public void setMadvp(String madvp) {
-        this.madvp = madvp;
+    public String getMaDVTI() {
+        return maDVTI;
     }
 
-    public String getMadvti() {
-        return madvti;
+    public void setMaDVTI(String maDVTI) {
+        this.maDVTI = maDVTI;
     }
 
-    public void setMadvti(String madvti) {
-        this.madvti = madvti;
+    public String getMaFB() {
+        return maFB;
     }
 
-    public String getMafb() {
-        return mafb;
+    public void setMaFB(String maFB) {
+        this.maFB = maFB;
     }
 
-    public void setMafb(String mafb) {
-        this.mafb = mafb;
+    public String getMaNV() {
+        return maNV;
     }
 
-    public String getNguoixacnhan() {
-        return nguoixacnhan;
+    public void setMaNV(String maNV) {
+        this.maNV = maNV;
     }
 
-    public void setNguoixacnhan(String nguoixacnhan) {
-        this.nguoixacnhan = nguoixacnhan;
+    public String getNgayTao() {
+        return ngayTao;
     }
 
-    public String getNgaytao() {
-        return ngaytao;
+    public void setNgayTao(String ngayTao) {
+        this.ngayTao = ngayTao;
     }
 
-    public void setNgaytao(String ngaytao) {
-        this.ngaytao = ngaytao;
+    public String getNgayBD() {
+        return ngayBD;
     }
 
-    public String getNgaybd() {
-        return ngaybd;
+    public void setNgayBD(String ngayBD) {
+        this.ngayBD = ngayBD;
     }
 
-    public void setNgaybd(String ngaybd) {
-        this.ngaybd = ngaybd;
+    public String getNgayKT() {
+        return ngayKT;
     }
 
-    public String getNgaykt() {
-        return ngaykt;
+    public void setNgayKT(String ngayKT) {
+        this.ngayKT = ngayKT;
     }
 
-    public void setNgaykt(String ngaykt) {
-        this.ngaykt = ngaykt;
+    public String getNgayThanhToan() {
+        return ngayThanhToan;
     }
 
-    public String getNgaythanhtoan() {
-        return ngaythanhtoan;
+    public void setNgayThanhToan(String ngayThanhToan) {
+        this.ngayThanhToan = ngayThanhToan;
     }
 
-    public void setNgaythanhtoan(String ngaythanhtoan) {
-        this.ngaythanhtoan = ngaythanhtoan;
+    public int getTongTien() {
+        return TongTien;
     }
 
-    public int getTongtien() {
-        return tongtien;
+    public void setTongTien(int TongTien) {
+        this.TongTien = TongTien;
     }
 
-    public void setTongtien(int tongtien) {
-        this.tongtien = tongtien;
+    public String getTinhTrangTT() {
+        return tinhtrangTT;
     }
 
-    public String getTinhtrangtt() {
-        return tinhtrangtt;
+    public void setTinhTrangTT(String tinhtrangTT) {
+        this.tinhtrangTT = tinhtrangTT;
     }
 
-    public void setTinhtrangtt(String tinhtrangtt) {
-        this.tinhtrangtt = tinhtrangtt;
+    public int getSLSD() {
+        return SLSD;
     }
 
-    public int getSlsd() {
-        return slsd;
-    }
-
-    public void setSlsd(int slsd) {
-        this.slsd = slsd;
+    public void setSLSD(int SLSD) {
+        this.SLSD = SLSD;
     }
     
     
+
+}   // Constructor mặc định (không tham số)
     
-}

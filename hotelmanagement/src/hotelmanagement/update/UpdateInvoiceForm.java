@@ -6,7 +6,8 @@ package hotelmanagement.update;
 
 import hotelmanagement.entity.dba_connection;
 import java.text.ParseException;
-import java.time.LocalDate;
+import java.sql.Date;
+
 import java.time.format.*;
 import java.util.logging.*;
 import javax.swing.*;
@@ -333,6 +334,7 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
 
     private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
         // TODO add your handling code here
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         dba_connection connect = new dba_connection();
         String invoiceID = txtInvoiceID.getText();  // Thay "roomIdTextField" bằng tên của text field nhập mã phòng
 
@@ -373,10 +375,10 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
                 txtServiceID.setText(madvti);
                 txtFeedbackID.setText(mafb);
                 txtStaffID.setText(nguoiXacNhan);
-                ftxtDayCreated.setText(ngayTao.toString());
-                ftxtDayStarted.setText(ngayBD.toString());
-                ftxtDayEnded.setText(ngayKT.toString());
-                ftxtDayPaid.setText(ngayThanhToan != null ? ngayThanhToan.toString() : "");
+                ftxtDayCreated.setText(ngayTao != null ? sdf.format(ngayTao) : "");
+                ftxtDayStarted.setText(ngayBD != null ? sdf.format(ngayBD) : "");
+                ftxtDayEnded.setText(ngayKT != null ? sdf.format(ngayKT) : "");
+                ftxtDayPaid.setText(ngayThanhToan != null ? sdf.format(ngayThanhToan) : "");
                 txtTotal.setText(String.valueOf(tongTien));
                 txtStatus.setText(tinhTrangTT);
                 txtAmount.setText(String.valueOf(slsd));
@@ -394,49 +396,84 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
+        // Input format from text fields (dd/MM/yyyy)
+        SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
+        // Output format for database (yyyy-MM-dd)
+        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+
         dba_connection connect = new dba_connection();
-        String customerID = txtCustomerID.getText();
-        String roomID = txtRoomID.getText();
-        String serviceID = txtServiceID.getText();
-        String feedbackID = txtFeedbackID.getText();
-        String staffID = txtStaffID.getText();
-        String dayCreated = ftxtDayCreated.getText();
-        String dayStarted = ftxtDayStarted.getText();
-        String dayEnded = ftxtDayEnded.getText();
-        String dayPaid = ftxtDayPaid.getText();
-        int Total = Integer.parseInt(txtTotal.getText());
-        String paymentStatus = txtStatus.getText();
-        int amount = Integer.parseInt(txtAmount.getText());
-        
+        String invoiceID = txtInvoiceID.getText();
+
+        if (invoiceID.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please enter a Room ID.");
+            return;
+        }
+
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            
+            Class.forName("oracle.jdbc.OracleDriver");
             Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
-            // Chèn dữ liệu vào cơ sở dữ liệu
-            String query = "UPDATE HOADON SET MAKH = ?, MADVP = ?, MADVTI = ?, MAFB = ?, NGUOIXACNHAN = ?, NGAYBD = ?, NGAYKT = ?, NGAYTHANHTOAN = ?, TINHTRANGTT = ?, SLSD = ? WHERE MAHD = ?";
+
+            String query = "UPDATE HOADON SET MAKH = ?, MADVP = ?, MADVTI = ?, MAFB = ?, NGUOIXACNHAN = ?, " +
+                          "NGAYTAO = TO_DATE(?, 'YYYY-MM-DD'), NGAYBD = TO_DATE(?, 'YYYY-MM-DD'), " +
+                          "NGAYKT = TO_DATE(?, 'YYYY-MM-DD'), NGAYTHANHTOAN = TO_DATE(?, 'YYYY-MM-DD'), " +
+                          "TONGTIEN = ?, TINHTRANGTT = ?, SLSD = ? WHERE MAHD = ?";
+
             PreparedStatement pst = con.prepareStatement(query);
-                pst.setString(1, "MAKH");
-                pst.setString(2, "MADVP");
-                pst.setString(3, "MADVTI");
-                pst.setString(4, "MAFB");
-                pst.setString(5, "NGUOIXACNHAN");
-                pst.setDate(6, java.sql.Date.valueOf("NGAYBD"));
-                pst.setDate(7, java.sql.Date.valueOf("NGAYKT"));
-                pst.setDate(8, java.sql.Date.valueOf("NGAYTHANHTOAN"));
-                pst.setString(9, "TINHTRANGTT");
-                pst.setInt(10, Integer.parseInt("SLSD"));
-                int rowsUpdated = pst.executeUpdate();
-            if (rowsUpdated > 0) {
-                JOptionPane.showMessageDialog(null, "Cập nhật thông tin thành công!");
-            } 
-            else {
-                JOptionPane.showMessageDialog(null, "Không tìm thấy bản ghi để cập nhật.");
+
+            // Set string parameters
+            pst.setString(1, txtCustomerID.getText());
+            pst.setString(2, txtRoomID.getText());
+            pst.setString(3, txtServiceID.getText());
+            pst.setString(4, txtFeedbackID.getText());
+            pst.setString(5, txtStaffID.getText());
+
+            
+            try {
+                // NGAYTAO
+                String ngayTaoStr = ftxtDayCreated.getText();
+                pst.setString(6, ngayTaoStr.isEmpty() ? null : 
+                    outputFormat.format(inputFormat.parse(ngayTaoStr)));
+
+                // NGAYBD
+                String ngayBDStr = ftxtDayStarted.getText();
+                pst.setString(7, ngayBDStr.isEmpty() ? null : 
+                    outputFormat.format(inputFormat.parse(ngayBDStr)));
+
+                // NGAYKT
+                String ngayKTStr = ftxtDayEnded.getText();
+                pst.setString(8, ngayKTStr.isEmpty() ? null : 
+                    outputFormat.format(inputFormat.parse(ngayKTStr)));
+
+                // NGAYTHANHTOAN
+                String ngayThanhToanStr = ftxtDayPaid.getText();
+                pst.setString(9, ngayThanhToanStr.isEmpty() ? null : 
+                    outputFormat.format(inputFormat.parse(ngayThanhToanStr)));
+            } catch (ParseException e) {
+                JOptionPane.showMessageDialog(null, "Invalid date format. Please use dd/MM/yyyy");
+                return;
             }
 
-        // Đóng kết nối
+            // Set remaining parameters
+            String totalStr = txtTotal.getText();
+            pst.setInt(10, totalStr.isEmpty() ? 0 : Integer.parseInt(totalStr));
+            pst.setString(11, txtStatus.getText());
+            String amountStr = txtAmount.getText();
+            pst.setInt(12, amountStr.isEmpty() ? 0 : Integer.parseInt(amountStr));
+            pst.setString(13, invoiceID);
+
+            int rowsAffected = pst.executeUpdate();
+
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(null, "Invoice updated successfully.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Invoice not found.");
+            }
+
+            pst.close();
             con.close();
-        } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Lỗi khi cập nhật dữ liệu: " + ex.getMessage());
+
+        } catch (SQLException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
     

@@ -265,9 +265,9 @@ public class UpdateRoomForm extends javax.swing.JFrame {
     private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
         // TODO add your handling code here:
         // Lấy thông tin Room ID từ trường nhập liệu
-        String roomId = txtRoomID.getText();  // Thay "roomIdTextField" bằng tên của text field nhập mã phòng
+        String roomID = txtRoomID.getText();  // Thay "roomIdTextField" bằng tên của text field nhập mã phòng
 
-        if (roomId.isEmpty()) {
+        if (roomID.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please enter a Room ID.");
             return;  // Dừng nếu không có mã phòng
         }
@@ -281,7 +281,7 @@ public class UpdateRoomForm extends javax.swing.JFrame {
             // Truy vấn cơ sở dữ liệu để tìm phòng theo Room ID
             String query = "SELECT LOAIPHONG, MOTA, DONGIA, TINHTRANG FROM DVPHONG WHERE MADVP = ?";
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, roomId);
+            ps.setString(1, roomID);
 
             // Thực hiện truy vấn và lấy kết quả
             ResultSet rs = ps.executeQuery();
