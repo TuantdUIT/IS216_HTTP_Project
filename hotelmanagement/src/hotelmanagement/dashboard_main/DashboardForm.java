@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package hotelmanagement.dashboard_main;
-// TranDuongTuan_27052025
+// TranDuongTuan_27052025_Change_5:32
 import hotelmanagement.add.AddInvoiceForm;
 import hotelmanagement.add.AddRoomForm;
 import hotelmanagement.add.AddServiceForm;
@@ -32,7 +32,10 @@ public class DashboardForm extends javax.swing.JFrame {
         
         initComponents();
         setLocationRelativeTo(null);
-        
+        autoReloadRoom();
+        autoReloadService();
+        autoReloadInvoice();
+        autoReloadCustomer();
         
     }
 
@@ -66,6 +69,8 @@ public class DashboardForm extends javax.swing.JFrame {
         btnUpdateCustomer = new javax.swing.JButton();
         btnDeleteCustomer = new javax.swing.JButton();
         btnBackCustomer = new javax.swing.JButton();
+        jSeparator7 = new javax.swing.JSeparator();
+        jSeparator8 = new javax.swing.JSeparator();
         Rooms = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRooms = new javax.swing.JTable();
@@ -236,9 +241,6 @@ public class DashboardForm extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
@@ -257,6 +259,8 @@ public class DashboardForm extends javax.swing.JFrame {
         tblCustomers.getColumnModel().getColumn(7).setPreferredWidth(150);
         tblCustomers.getColumnModel().getColumn(8).setPreferredWidth(120);
         jScrollPane3.getHorizontalScrollBar().setPreferredSize(new java.awt.Dimension(5, 5));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         btnAddCustomer.setText("Add(50-50)");
 
@@ -289,13 +293,13 @@ public class DashboardForm extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddCustomer)
                     .addComponent(btnUpdateCustomer)
                     .addComponent(btnDeleteCustomer)
                     .addComponent(btnBackCustomer))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout CustomersLayout = new javax.swing.GroupLayout(Customers);
@@ -307,32 +311,43 @@ public class DashboardForm extends javax.swing.JFrame {
                 .addGroup(CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CustomersLayout.createSequentialGroup()
                         .addGroup(CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3)
+                            .addGroup(CustomersLayout.createSequentialGroup()
+                                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(CustomersLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel3)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(CustomersLayout.createSequentialGroup()
                                 .addComponent(btnReloadCustomer)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane3))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomersLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addGap(295, 295, 295))))
+                        .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomersLayout.createSequentialGroup()
-                .addContainerGap(135, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addGap(147, 147, 147))
         );
         CustomersLayout.setVerticalGroup(
             CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CustomersLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addContainerGap()
                 .addComponent(jLabel3)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnReloadCustomer)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(85, 85, 85)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(202, Short.MAX_VALUE))
         );
 
         CardLayout_Management.add(Customers, "card5");
@@ -499,7 +514,7 @@ public class DashboardForm extends javax.swing.JFrame {
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(roomBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addContainerGap(195, Short.MAX_VALUE))
         );
 
         CardLayout_Management.add(Rooms, "card2");
@@ -881,7 +896,7 @@ public class DashboardForm extends javax.swing.JFrame {
                 rooms.add(room);
             }
         } catch (SQLException | ClassNotFoundException ex) {
-            ex.printStackTrace();
+            
             JOptionPane.showMessageDialog(null, "Lỗi khi load dữ liệu phòng: " + ex.getMessage());
         }
 
@@ -900,6 +915,49 @@ public class DashboardForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnReloadRoomActionPerformed
 
+    private void autoReloadRoom(){
+        rooms.clear(); // Xoá dữ liệu cũ trong danh sách
+
+        String sql = "SELECT * FROM DVPHONG";
+        dba_connection connect = new dba_connection();
+        try {
+            Class.forName(connect.driver);
+            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Room room = new Room();
+                //room.roomID = rs.getString("MADVP");
+                room.setRoomID(rs.getString("MADVP"));
+                //room.loaiPhong = rs.getString("LOAIPHONG");
+                room.setLoaiPhong(rs.getString("LOAIPHONG"));
+                //room.moTa = rs.getString("MOTA");
+                room.setMoTa(rs.getString("MOTA"));
+                //room.donGia = rs.getInt("DONGIA");
+                room.setDonGia(rs.getInt("DONGIA"));
+                //room.tinhTrang = rs.getString("TINHTRANG");
+                room.setTinhTrang(rs.getString("TINHTRANG"));
+                rooms.add(room);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Lỗi khi load dữ liệu phòng: " + ex.getMessage());
+        }
+
+        // Hiển thị lại dữ liệu lên JTable
+        DefaultTableModel model = (DefaultTableModel) tblRooms.getModel();
+        model.setRowCount(0); // Xoá hết dữ liệu cũ trên bảng
+
+        for (Room r : rooms) {
+            model.addRow(new Object[] {
+                r.getRoomID(),
+                r.getLoaiPhong(),
+                r.getMoTa(),
+                r.getDonGia(),
+                r.getTinhTrang()
+            });
+        }
+    }
     private void btnUpdateRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateRoomActionPerformed
         // TODO add your handling code here:
         UpdateRoomForm updateRoomForm = new UpdateRoomForm();
@@ -984,7 +1042,46 @@ public class DashboardForm extends javax.swing.JFrame {
         dba_connection connect = new dba_connection();
        
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Class.forName(connect.driver);
+            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Service service = new Service();
+                service.setMaDV(rs.getString("MADVTI"));
+                service.setTenDV(rs.getString("TENDVTI"));               
+                service.setMoTa(rs.getString("MOTA"));               
+                service.setDonGia(rs.getInt("DONGIA"));
+                service.setTinhTrang(rs.getString("TINHTRANG"));  
+                services.add(service);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Lỗi khi load dữ liệu phòng: " + ex.getMessage());
+        }
+
+        // Hiển thị lại dữ liệu lên JTable
+        DefaultTableModel model = (DefaultTableModel) tblServices.getModel();
+        model.setRowCount(0); // Xoá hết dữ liệu cũ trên bảng
+
+        for (Service se : services) {
+            model.addRow(new Object[] {
+                se.getMaDV(),
+                se.getTenDV(),
+                se.getMoTa(),
+                se.getDonGia(),
+                se.getTinhTrang()
+            });
+        }
+        
+    }//GEN-LAST:event_btnReloadServiceActionPerformed
+    
+    private void autoReloadService(){
+        //services.clear(); // Xoá dữ liệu cũ trong danh sách
+        String sql = "SELECT * FROM DVTIENICH";
+        dba_connection connect = new dba_connection();
+       
+        try {
+            Class.forName(connect.driver);
             Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -1015,9 +1112,8 @@ public class DashboardForm extends javax.swing.JFrame {
                 se.getTinhTrang()
             });
         }
-        
-    }//GEN-LAST:event_btnReloadServiceActionPerformed
-
+    }
+    
     private void btnAddInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddInvoiceActionPerformed
         // TODO add your handling code here:
         AddInvoiceForm addInvoiceForm = new AddInvoiceForm();
@@ -1063,7 +1159,7 @@ public class DashboardForm extends javax.swing.JFrame {
         dba_connection connect = new dba_connection();
        
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Class.forName(connect.driver);
             Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -1113,6 +1209,61 @@ public class DashboardForm extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnReloadInVoiceActionPerformed
 
+    private void autoReloadInvoice(){
+        //invoices.clear(); // Xoá dữ liệu cũ trong danh sách
+        String sql = "SELECT * FROM HOADON";
+        dba_connection connect = new dba_connection();
+       
+        try {
+            Class.forName(connect.driver);
+            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Invoice invoice = new Invoice();
+                invoice.setMaHD(rs.getString("MAHD"));
+                invoice.setMaKH(rs.getString("MAKH"));               
+                invoice.setMaDVP(rs.getString("MADVP"));
+                invoice.setMaDVTI(rs.getString("MADVTI"));
+                invoice.setMaFB(rs.getString("MAFB"));
+                invoice.setMaNV(rs.getString("NGUOIXACNHAN"));
+                invoice.setNgayTao(rs.getString("NGAYTAO"));
+                invoice.setNgayBD(rs.getString("NGAYBD"));
+                invoice.setNgayKT(rs.getString("NGAYKT"));
+                invoice.setNgayThanhToan(rs.getString("NGAYTHANHTOAN"));
+                invoice.setTongTien(rs.getInt("TONGTIEN"));
+                invoice.setTinhTrangTT(rs.getString("TINHTRANGTT"));
+                invoice.setSLSD(rs.getInt("SLSD"));
+                invoices.add(invoice);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Lỗi khi load dữ liệu phòng: " + ex.getMessage());
+        }
+
+        // Hiển thị lại dữ liệu lên JTable
+        DefaultTableModel model = (DefaultTableModel) tblInvoices.getModel();
+        model.setRowCount(0); // Xoá hết dữ liệu cũ trên bảng
+
+        for (Invoice in : invoices) {
+            model.addRow(new Object[] {
+                in.getMaHD(),
+                in.getMaKH(),
+                in.getMaDVP(),
+                in.getMaDVTI(),
+                in.getMaFB(),
+                in.getMaNV(),
+                in.getNgayTao(),
+                in.getNgayBD(),
+                in.getNgayKT(),
+                in.getNgayThanhToan(),
+                in.getTongTien(),
+                in.getTinhTrangTT(),
+                in.getSLSD()
+            });
+        }
+    }
+    
     private void btnCustomerManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerManagementActionPerformed
         // TODO add your handling code here:
         CardLayout cl = (CardLayout)(CardLayout_Management.getLayout());
@@ -1173,9 +1324,55 @@ public class DashboardForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnUpdateCustomerActionPerformed
 
+    private void autoReloadCustomer(){
+        String sql = "SELECT * FROM KHACHHANG";
+        dba_connection connect = new dba_connection();
+       
+        try {
+            Class.forName(connect.driver);
+            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                Customer customer = new Customer();
+                customer.setCustomerID(rs.getString("MAKH"));
+                customer.setName(rs.getString("HOTEN"));
+                customer.setPassword(rs.getString("PASSWORD"));
+                customer.setCitizenID(rs.getString("CCCD"));
+                customer.setPhoneNumber(rs.getString("SDT"));
+                customer.setDateOfBirth(rs.getDate("NGAYSINH")); // Use getDate for DATE type
+                customer.setGender(rs.getString("GIOITINH"));
+                customer.setAddress(rs.getString("DIACHI"));
+                customer.setEmail(rs.getString("EMAIL"));
+                customers.add(customer);
+            }
+        }
+        catch (SQLException | ClassNotFoundException ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Lỗi khi load dữ liệu phòng: " + ex.getMessage());
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tblCustomers.getModel();
+        model.setRowCount(0); // Xoá hết dữ liệu cũ trên bảng
+
+        for (Customer cus : customers) {
+            model.addRow(new Object[] {
+                cus.getCustomerID(),
+                cus.getCustomerID(),
+                cus.getName(),
+                cus.getPassword(),
+                cus.getCitizenID(),
+                cus.getPhoneNumber(),
+                cus.getDateOfBirth(),
+                cus.getGender(),
+                cus.getAddress(),
+                cus.getEmail()
+            });
+    }
     /**
      * @param args the command line arguments
      */
+}
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1257,6 +1454,8 @@ public class DashboardForm extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel panelBtn;
     private javax.swing.JPanel panelMain;
