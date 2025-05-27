@@ -23,6 +23,7 @@ public class DashboardClient extends javax.swing.JFrame {
         pnlCard.add(CardBookRooms, "BookRooms");
         pnlCard.add(CardBookServices, "BookServices");
         pnlCard.add(CardWriteFeedbacks, "WriteFeedbacks");
+        pnlCard.add(CardPayCheckout, "Pay & Checkout");
     }
 
     /**
@@ -43,10 +44,21 @@ public class DashboardClient extends javax.swing.JFrame {
         btnBookRooms = new javax.swing.JButton();
         btnBookServices = new javax.swing.JButton();
         panelFeedback = new javax.swing.JPanel();
-        btnWriteFeedBacks = new javax.swing.JButton();
+        btnPay = new javax.swing.JButton();
         btnWriteFeedBacks1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         pnlCard = new javax.swing.JPanel();
+        CardPayCheckout = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        sdt_txt = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        thanhtien_txt = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        timkiem_btn = new javax.swing.JButton();
         CardMyRooms = new javax.swing.JPanel();
         CardMyServices = new javax.swing.JPanel();
         CardBookRooms = new javax.swing.JPanel();
@@ -138,10 +150,10 @@ public class DashboardClient extends javax.swing.JFrame {
         panelFeedback.setBackground(new java.awt.Color(46, 121, 130));
         panelFeedback.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
-        btnWriteFeedBacks.setText("Pay & Checkout");
-        btnWriteFeedBacks.addActionListener(new java.awt.event.ActionListener() {
+        btnPay.setText("Pay & Checkout");
+        btnPay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnWriteFeedBacksActionPerformed(evt);
+                btnPayActionPerformed(evt);
             }
         });
 
@@ -158,7 +170,7 @@ public class DashboardClient extends javax.swing.JFrame {
             panelFeedbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFeedbackLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnWriteFeedBacks, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnPay, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(panelFeedbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelFeedbackLayout.createSequentialGroup()
@@ -170,7 +182,7 @@ public class DashboardClient extends javax.swing.JFrame {
             panelFeedbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelFeedbackLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnWriteFeedBacks, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnPay, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(59, Short.MAX_VALUE))
             .addGroup(panelFeedbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFeedbackLayout.createSequentialGroup()
@@ -190,10 +202,9 @@ public class DashboardClient extends javax.swing.JFrame {
                 .addContainerGap(36, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(panelFeedback, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panelMyInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panelBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelMyInfo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelBook, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -212,17 +223,141 @@ public class DashboardClient extends javax.swing.JFrame {
 
         pnlCard.setLayout(new java.awt.CardLayout());
 
+        CardPayCheckout.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel2.setText("PAY & CHECKOUT");
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel3.setText("SDT:");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "MAKH", "MAHD", "MADVP", "MADVTI", "NGAYBATDAU", "NGAYKETTHUC", "GIA"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel4.setText("Thành Tiền: ");
+
+        thanhtien_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                thanhtien_txtActionPerformed(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jButton1.setText("Thanh toán");
+
+        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jButton2.setText("Gia hạn");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        timkiem_btn.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        timkiem_btn.setText("Tìm kiếm");
+        timkiem_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timkiem_btnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout CardPayCheckoutLayout = new javax.swing.GroupLayout(CardPayCheckout);
+        CardPayCheckout.setLayout(CardPayCheckoutLayout);
+        CardPayCheckoutLayout.setHorizontalGroup(
+            CardPayCheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CardPayCheckoutLayout.createSequentialGroup()
+                .addGap(247, 247, 247)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(CardPayCheckoutLayout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addGroup(CardPayCheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CardPayCheckoutLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(thanhtien_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(30, 30, 30)
+                        .addComponent(jButton2))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CardPayCheckoutLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(sdt_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(timkiem_btn)))
+                .addGap(53, 53, 53))
+        );
+        CardPayCheckoutLayout.setVerticalGroup(
+            CardPayCheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CardPayCheckoutLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(CardPayCheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sdt_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(timkiem_btn))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(CardPayCheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(thanhtien_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(50, Short.MAX_VALUE))
+        );
+
+        pnlCard.add(CardPayCheckout, "card7");
+
         CardMyRooms.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout CardMyRoomsLayout = new javax.swing.GroupLayout(CardMyRooms);
         CardMyRooms.setLayout(CardMyRoomsLayout);
         CardMyRoomsLayout.setHorizontalGroup(
             CardMyRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 815, Short.MAX_VALUE)
+            .addGap(0, 837, Short.MAX_VALUE)
         );
         CardMyRoomsLayout.setVerticalGroup(
             CardMyRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 576, Short.MAX_VALUE)
+            .addGap(0, 577, Short.MAX_VALUE)
         );
 
         pnlCard.add(CardMyRooms, "card2");
@@ -233,11 +368,11 @@ public class DashboardClient extends javax.swing.JFrame {
         CardMyServices.setLayout(CardMyServicesLayout);
         CardMyServicesLayout.setHorizontalGroup(
             CardMyServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 837, Short.MAX_VALUE)
         );
         CardMyServicesLayout.setVerticalGroup(
             CardMyServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 577, Short.MAX_VALUE)
         );
 
         pnlCard.add(CardMyServices, "card3");
@@ -252,7 +387,7 @@ public class DashboardClient extends javax.swing.JFrame {
         );
         CardBookRoomsLayout.setVerticalGroup(
             CardBookRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 576, Short.MAX_VALUE)
+            .addGap(0, 577, Short.MAX_VALUE)
         );
 
         pnlCard.add(CardBookRooms, "card4");
@@ -263,11 +398,11 @@ public class DashboardClient extends javax.swing.JFrame {
         CardBookServices.setLayout(CardBookServicesLayout);
         CardBookServicesLayout.setHorizontalGroup(
             CardBookServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 815, Short.MAX_VALUE)
+            .addGap(0, 837, Short.MAX_VALUE)
         );
         CardBookServicesLayout.setVerticalGroup(
             CardBookServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 576, Short.MAX_VALUE)
+            .addGap(0, 577, Short.MAX_VALUE)
         );
 
         pnlCard.add(CardBookServices, "card5");
@@ -278,11 +413,11 @@ public class DashboardClient extends javax.swing.JFrame {
         CardWriteFeedbacks.setLayout(CardWriteFeedbacksLayout);
         CardWriteFeedbacksLayout.setHorizontalGroup(
             CardWriteFeedbacksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 815, Short.MAX_VALUE)
+            .addGap(0, 837, Short.MAX_VALUE)
         );
         CardWriteFeedbacksLayout.setVerticalGroup(
             CardWriteFeedbacksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 576, Short.MAX_VALUE)
+            .addGap(0, 577, Short.MAX_VALUE)
         );
 
         pnlCard.add(CardWriteFeedbacks, "card6");
@@ -337,14 +472,27 @@ public class DashboardClient extends javax.swing.JFrame {
         layout.show(pnlCard, "BookServices");
     }//GEN-LAST:event_btnBookServicesActionPerformed
 
-    private void btnWriteFeedBacksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWriteFeedBacksActionPerformed
+    private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
         CardLayout layout = (CardLayout) pnlCard.getLayout();
-        layout.show(pnlCard, "WriteFeedbacks");
-    }//GEN-LAST:event_btnWriteFeedBacksActionPerformed
+        layout.show(pnlCard, "Pay & Checkout");
+    }//GEN-LAST:event_btnPayActionPerformed
 
     private void btnWriteFeedBacks1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWriteFeedBacks1ActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_btnWriteFeedBacks1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void timkiem_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timkiem_btnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_timkiem_btnActionPerformed
+
+    private void thanhtien_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thanhtien_txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_thanhtien_txtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -386,19 +534,30 @@ public class DashboardClient extends javax.swing.JFrame {
     private javax.swing.JPanel CardBookServices;
     private javax.swing.JPanel CardMyRooms;
     private javax.swing.JPanel CardMyServices;
+    private javax.swing.JPanel CardPayCheckout;
     private javax.swing.JPanel CardWriteFeedbacks;
     private javax.swing.JButton btnBookRooms;
     private javax.swing.JButton btnBookServices;
     private javax.swing.JButton btnMyRooms;
     private javax.swing.JButton btnMyServices;
-    private javax.swing.JButton btnWriteFeedBacks;
+    private javax.swing.JButton btnPay;
     private javax.swing.JButton btnWriteFeedBacks1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JPanel panelBook;
     private javax.swing.JPanel panelFeedback;
     private javax.swing.JPanel panelMyInfo;
     private javax.swing.JPanel pnlCard;
+    private javax.swing.JTextField sdt_txt;
+    private javax.swing.JTextField thanhtien_txt;
+    private javax.swing.JButton timkiem_btn;
     // End of variables declaration//GEN-END:variables
 }

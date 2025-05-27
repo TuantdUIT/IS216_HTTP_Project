@@ -726,7 +726,7 @@ public class DashboardForm extends javax.swing.JFrame {
                 rooms.add(room);
             }
         } catch (SQLException | ClassNotFoundException ex) {
-            ex.printStackTrace();
+            
             JOptionPane.showMessageDialog(null, "Lỗi khi load dữ liệu phòng: " + ex.getMessage());
         }
 

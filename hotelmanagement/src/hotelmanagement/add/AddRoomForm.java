@@ -188,13 +188,14 @@ public class AddRoomForm extends javax.swing.JFrame {
     
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
+        dba_connection connect = new dba_connection();        
         String type = txtType.getText();
         String describe = txtDescribe.getText();
         int price = Integer.parseInt(txtPrice.getText());
         String status = (String) cbxStatus.getSelectedItem();
          
         try {
-            dba_connection connect = new dba_connection();
+            
             Class.forName(connect.driver);
             Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
 
