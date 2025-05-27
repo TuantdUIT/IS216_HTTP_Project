@@ -497,7 +497,7 @@
                     </Component>
                     <Component class="javax.swing.JLabel" name="labCheckoutdate1">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Pick rooms:"/>
+                        <Property name="text" type="java.lang.String" value="Pick available rooms:"/>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Times New Roman" size="18" style="1"/>
                         </Property>

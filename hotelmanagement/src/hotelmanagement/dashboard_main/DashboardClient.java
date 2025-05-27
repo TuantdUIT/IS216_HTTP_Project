@@ -15,6 +15,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -57,12 +59,19 @@ public class DashboardClient extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, "Cannot load user infomation " + ex.getMessage());
         }
-        
         //Hiển thị thông tin vô bảng phòng trống
+        Reload_Table_Rooms();
+        
+        
+    }
+    
+    private void Reload_Table_Rooms()
+    {
+        dba_connection connect = new dba_connection();
         ArrayList<Room> rooms = new ArrayList<>();
         rooms.clear();
         
-        String sql = "SELECT * FROM DVPHONG";
+        String sql = "SELECT * FROM DVPHONG WHERE trim(TINHTRANG) = 'Available'";
         try {
             Class.forName(connect.driver);
             Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
@@ -85,18 +94,13 @@ public class DashboardClient extends javax.swing.JFrame {
         model.setRowCount(0); 
 
         for (Room r : rooms) {
-            if(r.getTinhTrang() != "Occupied")
-            {
-                model.addRow(new Object[] {
-                r.getRoomID(),
-                r.getLoaiPhong(),
-                r.getMoTa(),
-                r.getDonGia()
-                });
-            }
+            model.addRow(new Object[] {
+            r.getRoomID(),
+            r.getLoaiPhong(),
+            r.getMoTa(),
+            r.getDonGia()
+            });
         }
-        
-        
     }
 
     /**
@@ -358,7 +362,7 @@ public class DashboardClient extends javax.swing.JFrame {
         labCheckoutdate.setText("Checkout Date:");
         labCheckoutdate.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
-        labCheckoutdate1.setText("Pick rooms:");
+        labCheckoutdate1.setText("Pick available rooms:");
         labCheckoutdate1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
         tabRooms.setModel(new javax.swing.table.DefaultTableModel(
@@ -686,6 +690,49 @@ public class DashboardClient extends javax.swing.JFrame {
     }//GEN-LAST:event_thanhtien_txtActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(datePickerCheckin.getDate() == null || datePickerCheckout.getDate() == null)
+        {
+            JOptionPane.showMessageDialog(this, "Please enter checkin and checkout date!");
+                datePickerCheckin.requestFocus();
+                datePickerCheckout.requestFocus();
+        }
+        else
+        if(datePickerCheckin.getDate().compareTo(datePickerCheckout.getDate())>=0) {
+            JOptionPane.showMessageDialog(this, "The checkin date must before the checkout date!");
+        }
+        else
+        {
+            dba_connection connect = new dba_connection();
+            Connection con;
+            try {
+                con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+                
+                int selectedRow = tabRooms.getSelectedRow();
+                if (selectedRow != -1) {
+                String sql2 = "UPDATE DVPHONG SET TINHTRANG = ? WHERE MADVP = ?";
+                PreparedStatement pst = con.prepareStatement(sql2);
+                //Lay cot MADVP tu` dong duoc chon trong bang
+                String MaDVP = tabRooms.getValueAt(selectedRow, 0).toString();
+                
+                pst.setString(1, "Occupied");
+                pst.setString(2, MaDVP);
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Your booking was successful!");
+                
+                //Reload lai bang rooms available
+                Reload_Table_Rooms();
+                
+                //Them 1 hoa don moi
+                
+                } 
+                else {
+                JOptionPane.showMessageDialog(null, "Please choose a room to book!");
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Cannot connect to ROOMS database " + ex.getMessage());
+            }
+        }
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
