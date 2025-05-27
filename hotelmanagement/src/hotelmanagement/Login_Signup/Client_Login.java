@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 import java.sql.*;
+import hotelmanagement.entity.Current_User;
 
 
 
@@ -93,6 +94,11 @@ public class Client_Login extends javax.swing.JFrame {
         jLabel4.setText("Password:");
 
         TxtUsername_nv.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        TxtUsername_nv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtUsername_nvActionPerformed(evt);
+            }
+        });
 
         Login_Button.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         Login_Button.setText("Login");
@@ -198,6 +204,8 @@ public class Client_Login extends javax.swing.JFrame {
             pst.setString(1, TxtUsername_nv.getText());
             pst.setString(2, TxtPassword_nv.getText());
             
+            Current_User.phonenumber = TxtUsername_nv.getText();
+            
             ResultSet rs = pst.executeQuery();
             
             if(rs.next()){
@@ -227,6 +235,10 @@ public class Client_Login extends javax.swing.JFrame {
         new Client_Signup().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_Register_ButtonActionPerformed
+
+    private void TxtUsername_nvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtUsername_nvActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtUsername_nvActionPerformed
 
     /**
      * @param args the command line arguments

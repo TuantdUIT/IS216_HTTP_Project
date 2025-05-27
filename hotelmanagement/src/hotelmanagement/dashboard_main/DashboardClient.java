@@ -4,7 +4,19 @@
  */
 package hotelmanagement.dashboard_main;
 
+import hotelmanagement.entity.Room;
+import hotelmanagement.entity.dba_connection;
+import hotelmanagement.entity.Current_User;
+import java.sql.PreparedStatement;
 import java.awt.CardLayout;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,6 +36,67 @@ public class DashboardClient extends javax.swing.JFrame {
         pnlCard.add(CardBookServices, "BookServices");
         pnlCard.add(CardWriteFeedbacks, "WriteFeedbacks");
         pnlCard.add(CardPayCheckout, "Pay & Checkout");
+        
+        //Lấy thông tin khách hàng để hiển thị
+        
+        String sql1 = "SELECT * FROM KHACHHANG WHERE trim(SDT) = trim(?)";
+        dba_connection connect = new dba_connection();
+        try {
+            Class.forName(connect.driver);
+            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+            PreparedStatement pst = con.prepareStatement(sql1);
+            pst.setString(1, Current_User.phonenumber);
+            ResultSet rs = pst.executeQuery();
+            
+            while (rs.next()) {
+                String hoTen = rs.getString("HOTEN");
+                lblHoTen.setText("Hi, " + hoTen + "!");
+            }
+            
+        } catch (SQLException | ClassNotFoundException ex) {
+            
+            JOptionPane.showMessageDialog(null, "Cannot load user infomation " + ex.getMessage());
+        }
+        
+        //Hiển thị thông tin vô bảng phòng trống
+        ArrayList<Room> rooms = new ArrayList<>();
+        rooms.clear();
+        
+        String sql = "SELECT * FROM DVPHONG";
+        try {
+            Class.forName(connect.driver);
+            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Room room = new Room();
+                room.setRoomID(rs.getString("MADVP"));
+                room.setLoaiPhong(rs.getString("LOAIPHONG"));
+                room.setMoTa(rs.getString("MOTA")); 
+                room.setDonGia(rs.getInt("DONGIA"));
+                rooms.add(room);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            
+            JOptionPane.showMessageDialog(null, "Cannot load rooms infomation " + ex.getMessage());
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tabRooms.getModel();
+        model.setRowCount(0); 
+
+        for (Room r : rooms) {
+            if(r.getTinhTrang() != "Occupied")
+            {
+                model.addRow(new Object[] {
+                r.getRoomID(),
+                r.getLoaiPhong(),
+                r.getMoTa(),
+                r.getDonGia()
+                });
+            }
+        }
+        
+        
     }
 
     /**
@@ -47,6 +120,7 @@ public class DashboardClient extends javax.swing.JFrame {
         btnPay = new javax.swing.JButton();
         btnWriteFeedBacks1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        lblHoTen = new javax.swing.JLabel();
         pnlCard = new javax.swing.JPanel();
         CardMyRooms = new javax.swing.JPanel();
         CardMyServices = new javax.swing.JPanel();
@@ -59,7 +133,7 @@ public class DashboardClient extends javax.swing.JFrame {
         datePickerCheckout = new com.github.lgooddatepicker.components.DatePicker();
         labCheckoutdate1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tabRooms = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         CardBookServices = new javax.swing.JPanel();
         CardPayCheckout = new javax.swing.JPanel();
@@ -204,6 +278,10 @@ public class DashboardClient extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/client_icon.png"))); // NOI18N
 
+        lblHoTen.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblHoTen.setForeground(new java.awt.Color(255, 255, 255));
+        lblHoTen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout pnlButtonLayout = new javax.swing.GroupLayout(pnlButton);
         pnlButton.setLayout(pnlButtonLayout);
         pnlButtonLayout.setHorizontalGroup(
@@ -214,7 +292,8 @@ public class DashboardClient extends javax.swing.JFrame {
                     .addComponent(panelFeedback, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelMyInfo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelBook, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panelBook, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblHoTen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlButtonLayout.setVerticalGroup(
@@ -222,7 +301,9 @@ public class DashboardClient extends javax.swing.JFrame {
             .addGroup(pnlButtonLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelMyInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panelBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -280,7 +361,7 @@ public class DashboardClient extends javax.swing.JFrame {
         labCheckoutdate1.setText("Pick rooms:");
         labCheckoutdate1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabRooms.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -299,7 +380,7 @@ public class DashboardClient extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tabRooms);
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setText("Book");
@@ -319,19 +400,23 @@ public class DashboardClient extends javax.swing.JFrame {
                         .addGap(53, 53, 53)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labCheckoutdate1)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(labCheckoutdate)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(datePickerCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(labCheckindate)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(datePickerCheckin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(317, 317, 317)
-                        .addComponent(Title))
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addComponent(labCheckoutdate)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(datePickerCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addComponent(labCheckindate)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(datePickerCheckin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addGap(264, 264, 264)
+                                            .addComponent(Title)))
+                                    .addGap(272, 272, 272))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(385, 385, 385)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -667,16 +752,17 @@ public class DashboardClient extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel labCheckindate;
     private javax.swing.JLabel labCheckoutdate;
     private javax.swing.JLabel labCheckoutdate1;
+    private javax.swing.JLabel lblHoTen;
     private javax.swing.JPanel panelBook;
     private javax.swing.JPanel panelFeedback;
     private javax.swing.JPanel panelMyInfo;
     private javax.swing.JPanel pnlButton;
     private javax.swing.JPanel pnlCard;
     private javax.swing.JTextField sdt_txt;
+    private javax.swing.JTable tabRooms;
     private javax.swing.JTextField thanhtien_txt;
     private javax.swing.JButton timkiem_btn;
     // End of variables declaration//GEN-END:variables
