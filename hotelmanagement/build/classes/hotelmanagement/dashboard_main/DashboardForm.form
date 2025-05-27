@@ -38,7 +38,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="1024" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="1029" max="32767" attributes="0"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Component id="jSplitPane1" alignment="0" max="32767" attributes="0"/>
               </Group>
@@ -46,7 +46,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="656" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="818" max="32767" attributes="0"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Component id="jSplitPane1" alignment="1" max="32767" attributes="0"/>
               </Group>
@@ -97,13 +97,13 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="89" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="jLabel1" min="-2" pref="98" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="panelBtn" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="247" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -132,6 +132,7 @@
                                   <Component id="btnInvoiceManagement" min="-2" pref="124" max="-2" attributes="0"/>
                                   <Component id="btnServiceManagement" min="-2" pref="124" max="-2" attributes="0"/>
                                   <Component id="btnRoomManagement" min="-2" pref="124" max="-2" attributes="0"/>
+                                  <Component id="btnCustomerManagement" min="-2" pref="124" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="13" max="32767" attributes="0"/>
                           </Group>
@@ -144,9 +145,11 @@
                               <Component id="btnRoomManagement" min="-2" pref="35" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                               <Component id="btnServiceManagement" min="-2" pref="35" max="-2" attributes="0"/>
-                              <EmptySpace pref="50" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                               <Component id="btnInvoiceManagement" min="-2" pref="35" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="btnCustomerManagement" min="-2" pref="35" max="-2" attributes="0"/>
+                              <EmptySpace pref="50" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -185,6 +188,17 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInvoiceManagementActionPerformed"/>
                       </Events>
                     </Component>
+                    <Component class="javax.swing.JButton" name="btnCustomerManagement">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="14" style="0"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Customers"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCustomerManagementActionPerformed"/>
+                      </Events>
+                    </Component>
                   </SubComponents>
                 </Container>
                 <Component class="javax.swing.JLabel" name="jLabel1">
@@ -210,7 +224,7 @@
             </Container>
             <Container class="javax.swing.JPanel" name="CardLayout_Management">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="CardLayout_Management.setLayout(new CardLayout());&#xa;&#xa;// Th&#xea;m c&#xe1;c panel v&#xe0;o CardLayout v&#x1edb;i t&#xea;n (key)&#xa;CardLayout_Management.add(Rooms, &quot;Rooms&quot;);&#xa;CardLayout_Management.add(Services, &quot;Services&quot;);&#xa;CardLayout_Management.add(Invoices, &quot;Invoices&quot;);"/>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="CardLayout_Management.setLayout(new CardLayout());&#xa;&#xa;// Th&#xea;m c&#xe1;c panel v&#xe0;o CardLayout v&#x1edb;i t&#xea;n (key)&#xa;CardLayout_Management.add(Rooms, &quot;Rooms&quot;);&#xa;CardLayout_Management.add(Services, &quot;Services&quot;);&#xa;CardLayout_Management.add(Invoices, &quot;Invoices&quot;);&#xa;CardLayout_Management.add(Customers, &quot;Customers&quot;);"/>
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
@@ -220,6 +234,174 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
               <SubComponents>
+                <Container class="javax.swing.JPanel" name="Customers">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="33" green="33" red="ff" type="rgb"/>
+                    </Property>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                      <CardConstraints cardName="card5"/>
+                    </Constraint>
+                  </Constraints>
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Component id="btnReloadCustomer" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          </Group>
+                                          <Component id="jScrollPane3" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="295" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace pref="135" max="32767" attributes="0"/>
+                              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="140" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                              <Component id="btnReloadCustomer" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jScrollPane3" min="-2" pref="397" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="118" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                  <SubComponents>
+                    <Component class="javax.swing.JLabel" name="jLabel3">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Segoe UI" size="18" style="1"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Customer Management"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="btnReloadCustomer">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Reload"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReloadCustomerActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+                      <AuxValues>
+                        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+                      </AuxValues>
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+                      <SubComponents>
+                        <Component class="javax.swing.JTable" name="tblCustomers">
+                          <Properties>
+                            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                              <Table columnCount="9" rowCount="15">
+                                <Column editable="true" title="Customer ID" type="java.lang.Object"/>
+                                <Column editable="true" title="Name" type="java.lang.Object"/>
+                                <Column editable="true" title="Password" type="java.lang.Object"/>
+                                <Column editable="true" title="Citizen ID" type="java.lang.Object"/>
+                                <Column editable="true" title="Phone number" type="java.lang.Object"/>
+                                <Column editable="true" title="Date of Birth" type="java.lang.Object"/>
+                                <Column editable="true" title="Sex" type="java.lang.Object"/>
+                                <Column editable="true" title="Address" type="java.lang.Object"/>
+                                <Column editable="true" title="Email" type="java.lang.Object"/>
+                              </Table>
+                            </Property>
+                          </Properties>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="tblCustomers.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);&#xa;tblCustomers.getColumnModel().getColumn(0).setPreferredWidth(80);&#xa;tblCustomers.getColumnModel().getColumn(1).setPreferredWidth(150);&#xa;tblCustomers.getColumnModel().getColumn(2).setPreferredWidth(120);&#xa;tblCustomers.getColumnModel().getColumn(3).setPreferredWidth(120);&#xa;tblCustomers.getColumnModel().getColumn(4).setPreferredWidth(120);&#xa;tblCustomers.getColumnModel().getColumn(5).setPreferredWidth(120);&#xa;tblCustomers.getColumnModel().getColumn(6).setPreferredWidth(50);&#xa;tblCustomers.getColumnModel().getColumn(7).setPreferredWidth(150);&#xa;tblCustomers.getColumnModel().getColumn(8).setPreferredWidth(120);&#xa;jScrollPane3.getHorizontalScrollBar().setPreferredSize(new java.awt.Dimension(5, 5));"/>
+                          </AuxValues>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                    <Container class="javax.swing.JPanel" name="jPanel2">
+
+                      <Layout>
+                        <DimensionLayout dim="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                                  <Component id="btnAddCustomer" min="-2" pref="88" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                                  <Component id="btnUpdateCustomer" min="-2" pref="88" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                                  <Component id="btnDeleteCustomer" min="-2" pref="88" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                                  <Component id="btnBackCustomer" min="-2" pref="88" max="-2" attributes="0"/>
+                                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                        <DimensionLayout dim="1">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="btnAddCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnUpdateCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnDeleteCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnBackCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="38" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                        </DimensionLayout>
+                      </Layout>
+                      <SubComponents>
+                        <Component class="javax.swing.JButton" name="btnAddCustomer">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Add(50-50)"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnUpdateCustomer">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Update(50-50)"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateCustomerActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnDeleteCustomer">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Delete(50-50)"/>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="btnBackCustomer">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Back"/>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                    </Container>
+                  </SubComponents>
+                </Container>
                 <Container class="javax.swing.JPanel" name="Rooms">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -244,19 +426,22 @@
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Component id="jSeparator1" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jSeparator6" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
                                       <Component id="btnReloadRoom" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane1" alignment="0" pref="775" max="32767" attributes="0"/>
-                                  <Component id="jSeparator6" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                                      <Component id="jScrollPane1" pref="776" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
                               <Component id="roomBtnPanel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="184" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -269,13 +454,13 @@
                               <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnReloadRoom" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" min="-2" pref="418" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane1" min="-2" pref="418" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jSeparator6" min="-2" pref="10" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="roomBtnPanel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="46" max="32767" attributes="0"/>
+                              <EmptySpace pref="202" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -301,7 +486,7 @@
                             </Property>
                           </Properties>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="tblRooms.getColumnModel().getColumn(0).setPreferredWidth(120);&#xa;tblRooms.getColumnModel().getColumn(1).setPreferredWidth(200);&#xa;tblRooms.getColumnModel().getColumn(2).setPreferredWidth(300);&#xa;tblRooms.getColumnModel().getColumn(3).setPreferredWidth(100);&#xa;tblRooms.getColumnModel().getColumn(4).setPreferredWidth(130);"/>
+                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="tblRooms.getColumnModel().getColumn(0).setPreferredWidth(120);&#xa;tblRooms.getColumnModel().getColumn(1).setPreferredWidth(200);&#xa;tblRooms.getColumnModel().getColumn(2).setPreferredWidth(300);&#xa;tblRooms.getColumnModel().getColumn(3).setPreferredWidth(100);&#xa;tblRooms.getColumnModel().getColumn(4).setPreferredWidth(130);&#xa;jScrollPane1.getVerticalScrollBar().setPreferredSize(new java.awt.Dimension(5, 5));"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>
@@ -344,13 +529,13 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace pref="72" max="32767" attributes="0"/>
-                                  <Component id="btnAddRoom" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnAddRoom" min="-2" pref="88" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="btnDeleteRoom" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnDeleteRoom" min="-2" pref="88" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="btnBackRoom" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnBackRoom" min="-2" pref="88" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="btnUpdateRoom" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnUpdateRoom" min="-2" pref="88" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -435,15 +620,15 @@
                                   <Component id="jScrollPane2" alignment="1" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="btnReloadService" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="703" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="serviceBtnPanel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="172" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
+                              <Component id="serviceBtnPanel" min="-2" pref="544" max="-2" attributes="0"/>
+                              <EmptySpace pref="109" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -457,12 +642,12 @@
                               <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                               <Component id="btnReloadService" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jScrollPane2" min="-2" pref="393" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jSeparator5" min="-2" pref="10" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" min="-2" pref="335" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="jSeparator5" min="-2" pref="13" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                               <Component id="serviceBtnPanel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                              <EmptySpace pref="209" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -530,15 +715,15 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
-                                  <Component id="btnAddService" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="69" max="32767" attributes="0"/>
+                                  <Component id="btnAddService" min="-2" pref="88" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="btnUpdateService" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnUpdateService" min="-2" pref="88" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="btnDeleteService" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnDeleteService" min="-2" pref="88" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="btnBackService" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="73" max="32767" attributes="0"/>
+                                  <Component id="btnBackService" min="-2" pref="88" max="-2" attributes="0"/>
+                                  <EmptySpace pref="69" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -624,7 +809,7 @@
                                               <Component id="btnReloadInVoice" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
-                                          <Component id="jScrollPane4" alignment="1" pref="775" max="32767" attributes="0"/>
+                                          <Component id="jScrollPane4" alignment="1" pref="782" max="32767" attributes="0"/>
                                           <Component id="jSeparator4" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -633,7 +818,7 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="invoiceBtnPanel" min="-2" max="-2" attributes="0"/>
+                              <Component id="invoiceBtnPanel" min="-2" pref="488" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -653,7 +838,7 @@
                               <Component id="jSeparator4" min="-2" pref="10" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Component id="invoiceBtnPanel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="40" max="32767" attributes="0"/>
+                              <EmptySpace pref="202" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -687,7 +872,7 @@
                             </Property>
                           </Properties>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="tblInvoices.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);&#xa;tblInvoices.getColumnModel().getColumn(0).setPreferredWidth(120);&#xa;tblInvoices.getColumnModel().getColumn(1).setPreferredWidth(120);&#xa;tblInvoices.getColumnModel().getColumn(2).setPreferredWidth(120);&#xa;tblInvoices.getColumnModel().getColumn(3).setPreferredWidth(120);&#xa;tblInvoices.getColumnModel().getColumn(4).setPreferredWidth(120);&#xa;tblInvoices.getColumnModel().getColumn(5).setPreferredWidth(220);&#xa;tblInvoices.getColumnModel().getColumn(6).setPreferredWidth(220);&#xa;tblInvoices.getColumnModel().getColumn(7).setPreferredWidth(220);&#xa;tblInvoices.getColumnModel().getColumn(8).setPreferredWidth(220);&#xa;tblInvoices.getColumnModel().getColumn(9).setPreferredWidth(150);&#xa;tblInvoices.getColumnModel().getColumn(10).setPreferredWidth(150);&#xa;tblInvoices.getColumnModel().getColumn(11).setPreferredWidth(150);&#xa;tblInvoices.getColumnModel().getColumn(12).setPreferredWidth(150);"/>
+                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="tblInvoices.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);&#xa;tblInvoices.getColumnModel().getColumn(0).setPreferredWidth(80);&#xa;tblInvoices.getColumnModel().getColumn(1).setPreferredWidth(80);&#xa;tblInvoices.getColumnModel().getColumn(2).setPreferredWidth(80);&#xa;tblInvoices.getColumnModel().getColumn(3).setPreferredWidth(80);&#xa;tblInvoices.getColumnModel().getColumn(4).setPreferredWidth(80);&#xa;tblInvoices.getColumnModel().getColumn(5).setPreferredWidth(80);&#xa;tblInvoices.getColumnModel().getColumn(6).setPreferredWidth(150);&#xa;tblInvoices.getColumnModel().getColumn(7).setPreferredWidth(150);&#xa;tblInvoices.getColumnModel().getColumn(8).setPreferredWidth(150);&#xa;tblInvoices.getColumnModel().getColumn(9).setPreferredWidth(150);&#xa;tblInvoices.getColumnModel().getColumn(10).setPreferredWidth(120);&#xa;tblInvoices.getColumnModel().getColumn(11).setPreferredWidth(120);&#xa;tblInvoices.getColumnModel().getColumn(12).setPreferredWidth(120);&#xa;jScrollPane3.getHorizontalScrollBar().setPreferredSize(new java.awt.Dimension(5, 5));"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>
@@ -732,7 +917,7 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                  <EmptySpace pref="37" max="32767" attributes="0"/>
                                   <Component id="btnAddInvoice" min="-2" pref="88" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnDeleteInvoice" min="-2" pref="88" max="-2" attributes="0"/>
@@ -740,7 +925,7 @@
                                   <Component id="btnBackInvoice" min="-2" pref="89" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnUpdateInvoice" min="-2" pref="89" max="-2" attributes="0"/>
-                                  <EmptySpace pref="41" max="32767" attributes="0"/>
+                                  <EmptySpace pref="43" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>

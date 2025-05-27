@@ -3,13 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package hotelmanagement.dashboard_main;
-// TranDuongTuan
+// TranDuongTuan_27052025
 import hotelmanagement.add.AddInvoiceForm;
 import hotelmanagement.add.AddRoomForm;
 import hotelmanagement.add.AddServiceForm;
 import hotelmanagement.entity.Invoice;
 import hotelmanagement.entity.Room;
 import hotelmanagement.entity.Service;
+import hotelmanagement.entity.Customer;
 import hotelmanagement.entity.dba_connection;
 import hotelmanagement.update.UpdateInvoiceForm;
 import hotelmanagement.update.UpdateRoomForm;
@@ -26,8 +27,8 @@ public class DashboardForm extends javax.swing.JFrame {
     ArrayList<Room> rooms = new ArrayList<>();
     ArrayList<Service> services = new ArrayList<>();
     ArrayList<Invoice> invoices = new ArrayList<>();
+    ArrayList<Customer> customers = new ArrayList<>();
     public DashboardForm() {
-        
         
         initComponents();
         setLocationRelativeTo(null);
@@ -51,9 +52,20 @@ public class DashboardForm extends javax.swing.JFrame {
         btnRoomManagement = new javax.swing.JButton();
         btnServiceManagement = new javax.swing.JButton();
         btnInvoiceManagement = new javax.swing.JButton();
+        btnCustomerManagement = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         CardLayout_Management = new javax.swing.JPanel();
+        Customers = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        btnReloadCustomer = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblCustomers = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        btnAddCustomer = new javax.swing.JButton();
+        btnUpdateCustomer = new javax.swing.JButton();
+        btnDeleteCustomer = new javax.swing.JButton();
+        btnBackCustomer = new javax.swing.JButton();
         Rooms = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRooms = new javax.swing.JTable();
@@ -124,6 +136,14 @@ public class DashboardForm extends javax.swing.JFrame {
             }
         });
 
+        btnCustomerManagement.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCustomerManagement.setText("Customers");
+        btnCustomerManagement.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCustomerManagementActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelBtnLayout = new javax.swing.GroupLayout(panelBtn);
         panelBtn.setLayout(panelBtnLayout);
         panelBtnLayout.setHorizontalGroup(
@@ -133,7 +153,8 @@ public class DashboardForm extends javax.swing.JFrame {
                 .addGroup(panelBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnInvoiceManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnServiceManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRoomManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnRoomManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCustomerManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
         panelBtnLayout.setVerticalGroup(
@@ -143,9 +164,11 @@ public class DashboardForm extends javax.swing.JFrame {
                 .addComponent(btnRoomManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(btnServiceManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGap(50, 50, 50)
                 .addComponent(btnInvoiceManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
+                .addGap(50, 50, 50)
+                .addComponent(btnCustomerManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -174,18 +197,145 @@ public class DashboardForm extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(89, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addGap(30, 30, 30)
                 .addComponent(panelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(134, 134, 134))
+                .addGap(247, 247, 247))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
 
         CardLayout_Management.setLayout(new java.awt.CardLayout());
+
+        Customers.setBackground(new java.awt.Color(255, 255, 255));
+        Customers.setForeground(new java.awt.Color(255, 51, 51));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setText("Customer Management");
+
+        btnReloadCustomer.setText("Reload");
+        btnReloadCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReloadCustomerActionPerformed(evt);
+            }
+        });
+
+        tblCustomers.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Customer ID", "Name", "Password", "Citizen ID", "Phone number", "Date of Birth", "Sex", "Address", "Email"
+            }
+        ));
+        jScrollPane3.setViewportView(tblCustomers);
+        tblCustomers.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tblCustomers.getColumnModel().getColumn(0).setPreferredWidth(80);
+        tblCustomers.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tblCustomers.getColumnModel().getColumn(2).setPreferredWidth(120);
+        tblCustomers.getColumnModel().getColumn(3).setPreferredWidth(120);
+        tblCustomers.getColumnModel().getColumn(4).setPreferredWidth(120);
+        tblCustomers.getColumnModel().getColumn(5).setPreferredWidth(120);
+        tblCustomers.getColumnModel().getColumn(6).setPreferredWidth(50);
+        tblCustomers.getColumnModel().getColumn(7).setPreferredWidth(150);
+        tblCustomers.getColumnModel().getColumn(8).setPreferredWidth(120);
+        jScrollPane3.getHorizontalScrollBar().setPreferredSize(new java.awt.Dimension(5, 5));
+
+        btnAddCustomer.setText("Add(50-50)");
+
+        btnUpdateCustomer.setText("Update(50-50)");
+        btnUpdateCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateCustomerActionPerformed(evt);
+            }
+        });
+
+        btnDeleteCustomer.setText("Delete(50-50)");
+
+        btnBackCustomer.setText("Back");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addComponent(btnAddCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(btnUpdateCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(btnDeleteCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(btnBackCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddCustomer)
+                    .addComponent(btnUpdateCustomer)
+                    .addComponent(btnDeleteCustomer)
+                    .addComponent(btnBackCustomer))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout CustomersLayout = new javax.swing.GroupLayout(Customers);
+        Customers.setLayout(CustomersLayout);
+        CustomersLayout.setHorizontalGroup(
+            CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CustomersLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CustomersLayout.createSequentialGroup()
+                        .addGroup(CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(CustomersLayout.createSequentialGroup()
+                                .addComponent(btnReloadCustomer)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane3))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomersLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addGap(295, 295, 295))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomersLayout.createSequentialGroup()
+                .addContainerGap(135, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(140, Short.MAX_VALUE))
+        );
+        CustomersLayout.setVerticalGroup(
+            CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CustomersLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel3)
+                .addGap(28, 28, 28)
+                .addComponent(btnReloadCustomer)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(85, 85, 85)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(118, Short.MAX_VALUE))
+        );
+
+        CardLayout_Management.add(Customers, "card5");
 
         Rooms.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -240,6 +390,7 @@ public class DashboardForm extends javax.swing.JFrame {
         tblRooms.getColumnModel().getColumn(2).setPreferredWidth(300);
         tblRooms.getColumnModel().getColumn(3).setPreferredWidth(100);
         tblRooms.getColumnModel().getColumn(4).setPreferredWidth(130);
+        jScrollPane1.getVerticalScrollBar().setPreferredSize(new java.awt.Dimension(5, 5));
 
         LbRoomManage.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         LbRoomManage.setText("Room Management");
@@ -287,13 +438,13 @@ public class DashboardForm extends javax.swing.JFrame {
             roomBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roomBtnPanelLayout.createSequentialGroup()
                 .addContainerGap(72, Short.MAX_VALUE)
-                .addComponent(btnAddRoom)
+                .addComponent(btnAddRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnDeleteRoom)
+                .addComponent(btnDeleteRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnBackRoom)
+                .addComponent(btnBackRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnUpdateRoom)
+                .addComponent(btnUpdateRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70))
         );
         roomBtnPanelLayout.setVerticalGroup(
@@ -320,16 +471,18 @@ public class DashboardForm extends javax.swing.JFrame {
                         .addComponent(LbRoomManage)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jSeparator1)
+                    .addComponent(jSeparator6)
                     .addGroup(RoomsLayout.createSequentialGroup()
                         .addComponent(btnReloadRoom)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
-                    .addComponent(jSeparator6))
+                    .addGroup(RoomsLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RoomsLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(RoomsLayout.createSequentialGroup()
+                .addGap(97, 97, 97)
                 .addComponent(roomBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(184, 184, 184))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         RoomsLayout.setVerticalGroup(
             RoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -340,13 +493,13 @@ public class DashboardForm extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnReloadRoom)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(roomBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(202, Short.MAX_VALUE))
         );
 
         CardLayout_Management.add(Rooms, "card2");
@@ -425,15 +578,15 @@ public class DashboardForm extends javax.swing.JFrame {
         serviceBtnPanelLayout.setHorizontalGroup(
             serviceBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(serviceBtnPanelLayout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(btnAddService)
+                .addContainerGap(69, Short.MAX_VALUE)
+                .addComponent(btnAddService, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnUpdateService)
+                .addComponent(btnUpdateService, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnDeleteService)
+                .addComponent(btnDeleteService, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnBackService)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addComponent(btnBackService, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         serviceBtnPanelLayout.setVerticalGroup(
             serviceBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -463,12 +616,12 @@ public class DashboardForm extends javax.swing.JFrame {
                     .addComponent(jScrollPane2)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ServicesLayout.createSequentialGroup()
                         .addComponent(btnReloadService)
-                        .addGap(0, 703, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ServicesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(serviceBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(172, 172, 172))
+            .addGroup(ServicesLayout.createSequentialGroup()
+                .addGap(141, 141, 141)
+                .addComponent(serviceBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(109, Short.MAX_VALUE))
         );
         ServicesLayout.setVerticalGroup(
             ServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -480,12 +633,12 @@ public class DashboardForm extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addComponent(btnReloadService)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
                 .addComponent(serviceBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
+                .addContainerGap(209, Short.MAX_VALUE))
         );
 
         CardLayout_Management.add(Services, "card3");
@@ -513,19 +666,20 @@ public class DashboardForm extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(tblInvoices);
         tblInvoices.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        tblInvoices.getColumnModel().getColumn(0).setPreferredWidth(120);
-        tblInvoices.getColumnModel().getColumn(1).setPreferredWidth(120);
-        tblInvoices.getColumnModel().getColumn(2).setPreferredWidth(120);
-        tblInvoices.getColumnModel().getColumn(3).setPreferredWidth(120);
-        tblInvoices.getColumnModel().getColumn(4).setPreferredWidth(120);
-        tblInvoices.getColumnModel().getColumn(5).setPreferredWidth(220);
-        tblInvoices.getColumnModel().getColumn(6).setPreferredWidth(220);
-        tblInvoices.getColumnModel().getColumn(7).setPreferredWidth(220);
-        tblInvoices.getColumnModel().getColumn(8).setPreferredWidth(220);
+        tblInvoices.getColumnModel().getColumn(0).setPreferredWidth(80);
+        tblInvoices.getColumnModel().getColumn(1).setPreferredWidth(80);
+        tblInvoices.getColumnModel().getColumn(2).setPreferredWidth(80);
+        tblInvoices.getColumnModel().getColumn(3).setPreferredWidth(80);
+        tblInvoices.getColumnModel().getColumn(4).setPreferredWidth(80);
+        tblInvoices.getColumnModel().getColumn(5).setPreferredWidth(80);
+        tblInvoices.getColumnModel().getColumn(6).setPreferredWidth(150);
+        tblInvoices.getColumnModel().getColumn(7).setPreferredWidth(150);
+        tblInvoices.getColumnModel().getColumn(8).setPreferredWidth(150);
         tblInvoices.getColumnModel().getColumn(9).setPreferredWidth(150);
-        tblInvoices.getColumnModel().getColumn(10).setPreferredWidth(150);
-        tblInvoices.getColumnModel().getColumn(11).setPreferredWidth(150);
-        tblInvoices.getColumnModel().getColumn(12).setPreferredWidth(150);
+        tblInvoices.getColumnModel().getColumn(10).setPreferredWidth(120);
+        tblInvoices.getColumnModel().getColumn(11).setPreferredWidth(120);
+        tblInvoices.getColumnModel().getColumn(12).setPreferredWidth(120);
+        jScrollPane3.getHorizontalScrollBar().setPreferredSize(new java.awt.Dimension(5, 5));
 
         LbRoomManage2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         LbRoomManage2.setText("Invoice Management");
@@ -574,7 +728,7 @@ public class DashboardForm extends javax.swing.JFrame {
         invoiceBtnPanelLayout.setHorizontalGroup(
             invoiceBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(invoiceBtnPanelLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addContainerGap(37, Short.MAX_VALUE)
                 .addComponent(btnAddInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnDeleteInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -582,7 +736,7 @@ public class DashboardForm extends javax.swing.JFrame {
                 .addComponent(btnBackInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnUpdateInvoice, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         invoiceBtnPanelLayout.setVerticalGroup(
             invoiceBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -613,12 +767,12 @@ public class DashboardForm extends javax.swing.JFrame {
                             .addGroup(InvoicesLayout.createSequentialGroup()
                                 .addComponent(btnReloadInVoice)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 782, Short.MAX_VALUE)
                             .addComponent(jSeparator4))
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InvoicesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(invoiceBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(invoiceBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(176, 176, 176))
         );
         InvoicesLayout.setVerticalGroup(
@@ -636,7 +790,7 @@ public class DashboardForm extends javax.swing.JFrame {
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(invoiceBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(202, Short.MAX_VALUE))
         );
 
         jScrollPane4.getHorizontalScrollBar().setPreferredSize(new java.awt.Dimension(0, 5)); // 5 là chiều cao mới
@@ -650,18 +804,19 @@ public class DashboardForm extends javax.swing.JFrame {
         CardLayout_Management.add(Rooms, "Rooms");
         CardLayout_Management.add(Services, "Services");
         CardLayout_Management.add(Invoices, "Invoices");
+        CardLayout_Management.add(Customers, "Customers");
 
         javax.swing.GroupLayout panelMainLayout = new javax.swing.GroupLayout(panelMain);
         panelMain.setLayout(panelMainLayout);
         panelMainLayout.setHorizontalGroup(
             panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1024, Short.MAX_VALUE)
+            .addGap(0, 1029, Short.MAX_VALUE)
             .addGroup(panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jSplitPane1))
         );
         panelMainLayout.setVerticalGroup(
             panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 656, Short.MAX_VALUE)
+            .addGap(0, 818, Short.MAX_VALUE)
             .addGroup(panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING))
         );
@@ -958,6 +1113,66 @@ public class DashboardForm extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnReloadInVoiceActionPerformed
 
+    private void btnCustomerManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerManagementActionPerformed
+        // TODO add your handling code here:
+        CardLayout cl = (CardLayout)(CardLayout_Management.getLayout());
+        cl.show(CardLayout_Management, "Customers");
+    }//GEN-LAST:event_btnCustomerManagementActionPerformed
+
+    private void btnReloadCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadCustomerActionPerformed
+        // TODO add your handling code here:
+        customers.clear();
+        String sql = "SELECT * FROM KHACHHANG";
+        dba_connection connect = new dba_connection();
+       
+        try {
+            Class.forName(connect.driver);
+            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                Customer customer = new Customer();
+                customer.setCustomerID(rs.getString("MAKH"));
+                customer.setName(rs.getString("HOTEN"));
+                customer.setPassword(rs.getString("PASSWORD"));
+                customer.setCitizenID(rs.getString("CCCD"));
+                customer.setPhoneNumber(rs.getString("SDT"));
+                customer.setDateOfBirth(rs.getDate("NGAYSINH")); // Use getDate for DATE type
+                customer.setGender(rs.getString("GIOITINH"));
+                customer.setAddress(rs.getString("DIACHI"));
+                customer.setEmail(rs.getString("EMAIL"));
+                customers.add(customer);
+            }
+        }
+        catch (SQLException | ClassNotFoundException ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Lỗi khi load dữ liệu phòng: " + ex.getMessage());
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tblCustomers.getModel();
+        model.setRowCount(0); // Xoá hết dữ liệu cũ trên bảng
+
+        for (Customer cus : customers) {
+            model.addRow(new Object[] {
+                cus.getCustomerID(),
+                cus.getCustomerID(),
+                cus.getName(),
+                cus.getPassword(),
+                cus.getCitizenID(),
+                cus.getPhoneNumber(),
+                cus.getDateOfBirth(),
+                cus.getGender(),
+                cus.getAddress(),
+                cus.getEmail()
+            });
+        }
+        
+    }//GEN-LAST:event_btnReloadCustomerActionPerformed
+
+    private void btnUpdateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCustomerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateCustomerActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -995,36 +1210,46 @@ public class DashboardForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CardLayout_Management;
+    private javax.swing.JPanel Customers;
     private javax.swing.JPanel Invoices;
     private javax.swing.JLabel LbRoomManage;
     private javax.swing.JLabel LbRoomManage1;
     private javax.swing.JLabel LbRoomManage2;
     private javax.swing.JPanel Rooms;
     private javax.swing.JPanel Services;
+    private javax.swing.JButton btnAddCustomer;
     private javax.swing.JButton btnAddInvoice;
     private javax.swing.JButton btnAddRoom;
     private javax.swing.JButton btnAddService;
+    private javax.swing.JButton btnBackCustomer;
     private javax.swing.JButton btnBackInvoice;
     private javax.swing.JButton btnBackRoom;
     private javax.swing.JButton btnBackService;
+    private javax.swing.JButton btnCustomerManagement;
+    private javax.swing.JButton btnDeleteCustomer;
     private javax.swing.JButton btnDeleteInvoice;
     private javax.swing.JButton btnDeleteRoom;
     private javax.swing.JButton btnDeleteService;
     private javax.swing.JButton btnInvoiceManagement;
+    private javax.swing.JButton btnReloadCustomer;
     private javax.swing.JButton btnReloadInVoice;
     private javax.swing.JButton btnReloadRoom;
     private javax.swing.JButton btnReloadService;
     private javax.swing.JButton btnRoomManagement;
     private javax.swing.JButton btnServiceManagement;
+    private javax.swing.JButton btnUpdateCustomer;
     private javax.swing.JButton btnUpdateInvoice;
     private javax.swing.JButton btnUpdateRoom;
     private javax.swing.JButton btnUpdateService;
     private javax.swing.JPanel invoiceBtnPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -1037,6 +1262,7 @@ public class DashboardForm extends javax.swing.JFrame {
     private javax.swing.JPanel panelMain;
     private javax.swing.JPanel roomBtnPanel;
     private javax.swing.JPanel serviceBtnPanel;
+    private javax.swing.JTable tblCustomers;
     private javax.swing.JTable tblInvoices;
     private javax.swing.JTable tblRooms;
     private javax.swing.JTable tblServices;
