@@ -26,6 +26,7 @@ public class Client_Login extends javax.swing.JFrame {
     public Client_Login() {
         initComponents();
         Login_Button.setEnabled(false);
+        
     }
 
     /**
