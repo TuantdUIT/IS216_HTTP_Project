@@ -274,6 +274,11 @@ public class DashboardForm extends javax.swing.JFrame {
         btnDeleteCustomer.setText("Delete(50-50)");
 
         btnBackCustomer.setText("Back");
+        btnBackCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackCustomerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -309,24 +314,21 @@ public class DashboardForm extends javax.swing.JFrame {
             .addGroup(CustomersLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3)
                     .addGroup(CustomersLayout.createSequentialGroup()
-                        .addGroup(CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3)
-                            .addGroup(CustomersLayout.createSequentialGroup()
-                                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(CustomersLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel3)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(CustomersLayout.createSequentialGroup()
-                                .addComponent(btnReloadCustomer)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
+                        .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(CustomersLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(CustomersLayout.createSequentialGroup()
+                        .addComponent(btnReloadCustomer)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomersLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomersLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1306,7 +1308,6 @@ public class DashboardForm extends javax.swing.JFrame {
         for (Customer cus : customers) {
             model.addRow(new Object[] {
                 cus.getCustomerID(),
-                cus.getCustomerID(),
                 cus.getName(),
                 cus.getPassword(),
                 cus.getCitizenID(),
@@ -1323,6 +1324,11 @@ public class DashboardForm extends javax.swing.JFrame {
     private void btnUpdateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCustomerActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnUpdateCustomerActionPerformed
+
+    private void btnBackCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackCustomerActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnBackCustomerActionPerformed
 
     private void autoReloadCustomer(){
         String sql = "SELECT * FROM KHACHHANG";
@@ -1357,7 +1363,6 @@ public class DashboardForm extends javax.swing.JFrame {
 
         for (Customer cus : customers) {
             model.addRow(new Object[] {
-                cus.getCustomerID(),
                 cus.getCustomerID(),
                 cus.getName(),
                 cus.getPassword(),

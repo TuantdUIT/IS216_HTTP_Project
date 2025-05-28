@@ -26,17 +26,17 @@ public class AddInvoiceForm extends javax.swing.JFrame {
         setVisible(true);
         initComponents();
         setLocationRelativeTo(null);
-        MaskFormatter date;
-        try {
-            date = new MaskFormatter ("##/##/####");
-            date.setPlaceholderCharacter('_');
-            //ftxtDayCreated.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(date)); 
-            ftxtDayStarted.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(date));
-            ftxtDayEnded.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(date));
-            ftxtDayPaid.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(date));
-        } catch (ParseException ex) {
-            ex.printStackTrace();
-        }
+//        MaskFormatter date;
+//        try {
+//            date = new MaskFormatter ("##/##/####");
+//            date.setPlaceholderCharacter('_');
+//            //ftxtDayCreated.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(date)); 
+//            ftxtDayStarted.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(date));
+//            ftxtDayEnded.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(date));
+//            ftxtDayPaid.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(date));
+//        } catch (ParseException ex) {
+//            ex.printStackTrace();
+//        }
     }
 
     /**
@@ -68,10 +68,10 @@ public class AddInvoiceForm extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         txtServiceID = new javax.swing.JTextField();
-        ftxtDayStarted = new javax.swing.JFormattedTextField();
-        ftxtDayEnded = new javax.swing.JFormattedTextField();
-        ftxtDayPaid = new javax.swing.JFormattedTextField();
         cbxStatus = new javax.swing.JComboBox<>();
+        dpStart = new com.github.lgooddatepicker.components.DatePicker();
+        dpEnd = new com.github.lgooddatepicker.components.DatePicker();
+        dpPaid = new com.github.lgooddatepicker.components.DatePicker();
         jSeparator3 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         btnCreate = new javax.swing.JButton();
@@ -112,12 +112,6 @@ public class AddInvoiceForm extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel13.setText("Service ID");
 
-        ftxtDayStarted.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ftxtDayStartedActionPerformed(evt);
-            }
-        });
-
         cbxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Paid", "Unpaid" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -144,10 +138,10 @@ public class AddInvoiceForm extends javax.swing.JFrame {
                     .addComponent(txtStaffID, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addComponent(txtAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addComponent(txtServiceID, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                    .addComponent(ftxtDayStarted)
-                    .addComponent(ftxtDayEnded)
-                    .addComponent(ftxtDayPaid)
-                    .addComponent(cbxStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cbxStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dpStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dpEnd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dpPaid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -176,16 +170,16 @@ public class AddInvoiceForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(ftxtDayStarted, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dpStart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(ftxtDayEnded, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dpEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(ftxtDayPaid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dpPaid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 14, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(cbxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -280,10 +274,6 @@ public class AddInvoiceForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void ftxtDayStartedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftxtDayStartedActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ftxtDayStartedActionPerformed
     public boolean isValidDate(String dateStr) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         sdf.setLenient(false); // không cho phép ngày sai như 32/01/2024 hoặc 22/22/2222
@@ -304,21 +294,18 @@ public class AddInvoiceForm extends javax.swing.JFrame {
         String serviceID = txtServiceID.getText();
         String feedbackID = txtFeedbackID.getText();
         String staffID = txtStaffID.getText();
+        LocalDate dayStarted = dpStart.getDate();
+        LocalDate dayEnded = dpEnd.getDate();
+        LocalDate dayPaid = dpPaid.getDate();
+        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        if (dayStarted == null || dayEnded == null || dayPaid == null){
+            JOptionPane.showMessageDialog(this, "Please enter checkin and checkout date!");
+        }
         
-        if (!isValidDate(ftxtDayStarted.getText())) {
-            JOptionPane.showMessageDialog(this, "Day invalid. Please check it again");
-            return; // thoát hàm không xử lý tiếp
-        }
-        if (!isValidDate(ftxtDayEnded.getText())) {
-            JOptionPane.showMessageDialog(this, "Day invalid. Please check it again");
-            return; // thoát hàm không xử lý tiếp
-        }
-        if (!isValidDate(ftxtDayPaid.getText())) {
-            JOptionPane.showMessageDialog(this, "Day invalid. Please check it again");
-            return; // thoát hàm không xử lý tiếp
-        }
+        if (dayStarted.compareTo(dayEnded) >= 0){
+            JOptionPane.showMessageDialog(this, "The checkin date must before the checkout date!");
+        }   
             
         //int total = Integer.parseInt(txtTotal.getText());
         String paymentStatus = (String) cbxStatus.getSelectedItem();
@@ -335,14 +322,12 @@ public class AddInvoiceForm extends javax.swing.JFrame {
              "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             
             //java.util.Date dayCreated = sdf.parse(ftxtDayCreated.getText());
-            java.util.Date dayStarted = sdf.parse(ftxtDayStarted.getText());
-            java.util.Date dayEnded = sdf.parse(ftxtDayEnded.getText());
-            java.util.Date dayPaid = sdf.parse(ftxtDayPaid.getText());
+            
             
             //java.sql.Date sqlDate1 = new java.sql.Date(dayCreated.getTime());
-            java.sql.Date sqlDate2 = new java.sql.Date(dayStarted.getTime());
-            java.sql.Date sqlDate3 = new java.sql.Date(dayEnded.getTime());
-            java.sql.Date sqlDate4 = new java.sql.Date(dayPaid.getTime());
+            java.sql.Date sqlDate2 = dayStarted != null ? Date.valueOf(dayStarted) : null;
+            java.sql.Date sqlDate3 = dayEnded != null ? Date.valueOf(dayEnded) : null;
+            java.sql.Date sqlDate4 = dayPaid != null ? Date.valueOf(dayPaid) : null;
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, customerID); // MAKH
             pst.setString(2, roomID);     // MADVP
@@ -361,7 +346,7 @@ public class AddInvoiceForm extends javax.swing.JFrame {
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Add invoice sucessfully!");
             
-        } catch (SQLException | ClassNotFoundException | ParseException ex){
+        } catch (SQLException | ClassNotFoundException ex){
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
         }catch (DateTimeParseException e){
             JOptionPane.showMessageDialog(this, "Invalid date");
@@ -413,9 +398,9 @@ public class AddInvoiceForm extends javax.swing.JFrame {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreate;
     private javax.swing.JComboBox<String> cbxStatus;
-    private javax.swing.JFormattedTextField ftxtDayEnded;
-    private javax.swing.JFormattedTextField ftxtDayPaid;
-    private javax.swing.JFormattedTextField ftxtDayStarted;
+    private com.github.lgooddatepicker.components.DatePicker dpEnd;
+    private com.github.lgooddatepicker.components.DatePicker dpPaid;
+    private com.github.lgooddatepicker.components.DatePicker dpStart;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

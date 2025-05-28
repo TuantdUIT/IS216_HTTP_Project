@@ -116,10 +116,10 @@
                       <Component id="txtStaffID" pref="250" max="32767" attributes="0"/>
                       <Component id="txtAmount" pref="250" max="32767" attributes="0"/>
                       <Component id="txtServiceID" pref="250" max="32767" attributes="0"/>
-                      <Component id="ftxtDayStarted" max="32767" attributes="0"/>
-                      <Component id="ftxtDayEnded" max="32767" attributes="0"/>
-                      <Component id="ftxtDayPaid" max="32767" attributes="0"/>
                       <Component id="cbxStatus" max="32767" attributes="0"/>
+                      <Component id="dpStart" max="32767" attributes="0"/>
+                      <Component id="dpEnd" max="32767" attributes="0"/>
+                      <Component id="dpPaid" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="61" max="32767" attributes="0"/>
               </Group>
@@ -156,19 +156,19 @@
                   <EmptySpace type="unrelated" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="ftxtDayStarted" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="dpStart" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="ftxtDayEnded" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="dpEnd" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="ftxtDayPaid" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="dpPaid" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" pref="14" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cbxStatus" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -276,15 +276,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtServiceID">
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="ftxtDayStarted">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ftxtDayStartedActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JFormattedTextField" name="ftxtDayEnded">
-        </Component>
-        <Component class="javax.swing.JFormattedTextField" name="ftxtDayPaid">
-        </Component>
         <Component class="javax.swing.JComboBox" name="cbxStatus">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -297,6 +288,12 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="com.github.lgooddatepicker.components.DatePicker" name="dpStart">
+        </Component>
+        <Component class="com.github.lgooddatepicker.components.DatePicker" name="dpEnd">
+        </Component>
+        <Component class="com.github.lgooddatepicker.components.DatePicker" name="dpPaid">
         </Component>
       </SubComponents>
     </Container>
