@@ -4,6 +4,8 @@
  */
 package hotelmanagement.dashboard_main;
 
+import hotelmanagement.entity.UserService;
+import hotelmanagement.entity.UserRoom;
 import hotelmanagement.entity.Room;
 import hotelmanagement.entity.Service;
 import hotelmanagement.entity.dba_connection;
@@ -145,6 +147,104 @@ public class DashboardClient extends javax.swing.JFrame {
             });
         }
     }
+    
+    private void Load_Table_UserRooms()
+    {
+        dba_connection connect = new dba_connection();
+        ArrayList<UserRoom> UserRooms = new ArrayList<>();
+        UserRooms.clear();
+        
+        String sql = "select P.MADVP, P.LOAIPHONG, P.MOTA, HD.NGAYBD, HD.NGAYKT, P.DONGIA, HD.TONGTIEN "
+                    + "from DVPHONG P join HOADON HD on P.MADVP = HD.MADVP "
+                    + "join KHACHHANG KH on KH.MAKH = HD.MAKH "
+                    + "where (HD.TINHTRANGTT = N'Chưa thanh toán' or HD.NGAYKT > SYSDATE) and KH.SDT = " + Current_User.phonenumber;
+        
+        Connection con;
+        try{
+            Class.forName(connect.driver);
+            con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                UserRoom ur = new UserRoom();
+                ur.setMADVP(rs.getString("MADVP"));
+                ur.setLoaiPhong(rs.getString("LOAIPHONG"));
+                ur.setMoTa(rs.getString("MOTA"));
+                ur.setNgayBDSD(rs.getString("NGAYBD"));
+                ur.setNgayKTSD(rs.getString("NGAYKT"));
+                ur.setDonGia(rs.getString("DONGIA"));
+                ur.setTongTien(rs.getString("TONGTIEN"));
+                UserRooms.add(ur);
+            }
+        }
+        catch(SQLException ex){} catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Cannot load rooms infomation " + ex.getMessage());
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tabUserRooms.getModel();
+        model.setRowCount(0); 
+
+        for (UserRoom ur : UserRooms) {
+            model.addRow(new Object[] {
+                ur.getMADVP(),
+                ur.getLoaiPhong(),
+                ur.getMoTa(),
+                ur.getNgayBDSD(),
+                ur.getNgayKTSD(),
+                ur.getDonGia(),
+                ur.getTongTien()
+            });
+        }
+    }
+
+    private void Load_Table_UserServices()
+    {
+        dba_connection connect = new dba_connection();
+        ArrayList<UserService> UserServices = new ArrayList<>();
+        UserServices.clear();
+        
+        String sql = "select TI.MADVTI, TI.TENDVTI, TI.MOTA, HD.NGAYBD, HD.NGAYKT, TI.DONGIA, HD.TONGTIEN "
+                    + "from DVTIENICH TI join HOADON HD on TI.MADVTI = HD.MADVTI "
+                    + "join KHACHHANG KH on KH.MAKH = HD.MAKH "
+                    + "where (HD.TINHTRANGTT = N'Chưa thanh toán' or HD.NGAYKT > SYSDATE) and KH.SDT = " + Current_User.phonenumber;
+        
+        Connection con;
+        try{
+            Class.forName(connect.driver);
+            con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                UserService us = new UserService();
+                us.setMADVTI(rs.getString("MADVTI"));
+                us.setTenDVTI(rs.getString("TENDVTI"));
+                us.setMoTa(rs.getString("MOTA"));
+                us.setNgayBDSD(rs.getString("NGAYBD"));
+                us.setNgayKTSD(rs.getString("NGAYKT"));
+                us.setDonGia(rs.getString("DONGIA"));
+                us.setTongTien(rs.getString("TONGTIEN"));
+                UserServices.add(us);
+            }
+        }
+        catch(SQLException ex){} catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Cannot load services infomation " + ex.getMessage());
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tabUserServices.getModel();
+        model.setRowCount(0); 
+
+        for (UserService us : UserServices) {
+            model.addRow(new Object[] {
+                us.getMADVTI(),
+                us.getTenDVTI(),
+                us.getMoTa(),
+                us.getNgayBDSD(),
+                us.getNgayKTSD(),
+                us.getDonGia(),
+                us.getTongTien()
+            });
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -169,7 +269,13 @@ public class DashboardClient extends javax.swing.JFrame {
         lblHoTen = new javax.swing.JLabel();
         pnlCard = new javax.swing.JPanel();
         CardMyRooms = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tabUserRooms = new javax.swing.JTable();
+        Title2 = new javax.swing.JLabel();
         CardMyServices = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tabUserServices = new javax.swing.JTable();
+        Title4 = new javax.swing.JLabel();
         CardBookRooms = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         Title = new javax.swing.JLabel();
@@ -336,9 +442,9 @@ public class DashboardClient extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/client_icon.png"))); // NOI18N
 
-        lblHoTen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHoTen.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblHoTen.setForeground(new java.awt.Color(255, 255, 255));
+        lblHoTen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout pnlButtonLayout = new javax.swing.GroupLayout(pnlButton);
         pnlButton.setLayout(pnlButtonLayout);
@@ -374,30 +480,154 @@ public class DashboardClient extends javax.swing.JFrame {
 
         CardMyRooms.setBackground(new java.awt.Color(255, 255, 255));
 
+        tabUserRooms.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "MADVP", "TYPE", "DESCRIPTION", "NGAYBD", "NGAYKT", "PRICE / DAY", "TOTAL"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(tabUserRooms);
+
+        Title2.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        Title2.setText("My Room");
+
         javax.swing.GroupLayout CardMyRoomsLayout = new javax.swing.GroupLayout(CardMyRooms);
         CardMyRooms.setLayout(CardMyRoomsLayout);
         CardMyRoomsLayout.setHorizontalGroup(
             CardMyRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 895, Short.MAX_VALUE)
+            .addGroup(CardMyRoomsLayout.createSequentialGroup()
+                .addContainerGap(120, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 970, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(124, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CardMyRoomsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Title2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         CardMyRoomsLayout.setVerticalGroup(
             CardMyRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 589, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CardMyRoomsLayout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addComponent(Title2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         pnlCard.add(CardMyRooms, "card2");
 
         CardMyServices.setBackground(new java.awt.Color(255, 255, 255));
 
+        tabUserServices.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "MADVTI", "TENDVTI", "DESCRIPTION", "NGAYBD", "NGAYKT", "PRICE / DAY", "TOTAL"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(tabUserServices);
+
+        Title4.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        Title4.setText("My Service");
+
         javax.swing.GroupLayout CardMyServicesLayout = new javax.swing.GroupLayout(CardMyServices);
         CardMyServices.setLayout(CardMyServicesLayout);
         CardMyServicesLayout.setHorizontalGroup(
             CardMyServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 895, Short.MAX_VALUE)
+            .addGroup(CardMyServicesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Title4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(CardMyServicesLayout.createSequentialGroup()
+                .addContainerGap(114, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 970, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(130, Short.MAX_VALUE))
         );
         CardMyServicesLayout.setVerticalGroup(
             CardMyServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 589, Short.MAX_VALUE)
+            .addGroup(CardMyServicesLayout.createSequentialGroup()
+                .addContainerGap(36, Short.MAX_VALUE)
+                .addComponent(Title4)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         pnlCard.add(CardMyServices, "card3");
@@ -407,17 +637,17 @@ public class DashboardClient extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        Title.setText("BOOK ROOM");
         Title.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        Title.setText("BOOK ROOM");
 
-        labCheckindate.setText("Checkin Date:");
         labCheckindate.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        labCheckindate.setText("Checkin Date:");
 
-        labCheckoutdate.setText("Checkout Date:");
         labCheckoutdate.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        labCheckoutdate.setText("Checkout Date:");
 
-        labCheckoutdate1.setText("Pick available rooms:");
         labCheckoutdate1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        labCheckoutdate1.setText("Pick available rooms:");
 
         tabRooms.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -440,8 +670,8 @@ public class DashboardClient extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tabRooms);
 
-        btnBookR.setText("Book");
         btnBookR.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnBookR.setText("Book");
         btnBookR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBookRActionPerformed(evt);
@@ -591,7 +821,7 @@ public class DashboardClient extends javax.swing.JFrame {
                             .addGroup(labTotalUsageLayout.createSequentialGroup()
                                 .addGap(393, 393, 393)
                                 .addComponent(btnBookS, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 70, Short.MAX_VALUE))
+                        .addGap(0, 74, Short.MAX_VALUE))
                     .addGroup(labTotalUsageLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Title1)))
@@ -638,11 +868,11 @@ public class DashboardClient extends javax.swing.JFrame {
 
         CardPayCheckout.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setText("PAY & CHECKOUT");
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel2.setText("PAY & CHECKOUT");
 
-        jLabel3.setText("SDT:");
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel3.setText("SDT:");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -681,8 +911,8 @@ public class DashboardClient extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel4.setText("Thành Tiền: ");
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        jLabel4.setText("Thành Tiền: ");
 
         thanhtien_txt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -690,19 +920,19 @@ public class DashboardClient extends javax.swing.JFrame {
             }
         });
 
-        btnThanhtoan.setText("Thanh toán");
         btnThanhtoan.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnThanhtoan.setText("Thanh toán");
 
-        btnGiahan.setText("Gia hạn");
         btnGiahan.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnGiahan.setText("Gia hạn");
         btnGiahan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGiahanActionPerformed(evt);
             }
         });
 
-        timkiem_btn.setText("Tìm kiếm");
         timkiem_btn.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        timkiem_btn.setText("Tìm kiếm");
         timkiem_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 timkiem_btnActionPerformed(evt);
@@ -766,7 +996,7 @@ public class DashboardClient extends javax.swing.JFrame {
         CardWriteFeedbacks.setLayout(CardWriteFeedbacksLayout);
         CardWriteFeedbacksLayout.setHorizontalGroup(
             CardWriteFeedbacksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 895, Short.MAX_VALUE)
+            .addGap(0, 1214, Short.MAX_VALUE)
         );
         CardWriteFeedbacksLayout.setVerticalGroup(
             CardWriteFeedbacksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -808,11 +1038,13 @@ public class DashboardClient extends javax.swing.JFrame {
     private void btnMyRoomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyRoomsActionPerformed
         CardLayout layout = (CardLayout) pnlCard.getLayout();
         layout.show(pnlCard, "MyRooms");
+        Load_Table_UserRooms();
     }//GEN-LAST:event_btnMyRoomsActionPerformed
 
     private void btnMyServicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyServicesActionPerformed
         CardLayout layout = (CardLayout) pnlCard.getLayout();
         layout.show(pnlCard, "MyServices");
+        Load_Table_UserServices();
     }//GEN-LAST:event_btnMyServicesActionPerformed
 
     private void btnBookRoomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookRoomsActionPerformed
@@ -1013,6 +1245,8 @@ public class DashboardClient extends javax.swing.JFrame {
     private javax.swing.JPanel CardWriteFeedbacks;
     private javax.swing.JLabel Title;
     private javax.swing.JLabel Title1;
+    private javax.swing.JLabel Title2;
+    private javax.swing.JLabel Title4;
     private javax.swing.JButton btnBookR;
     private javax.swing.JButton btnBookRooms;
     private javax.swing.JButton btnBookS;
@@ -1035,6 +1269,8 @@ public class DashboardClient extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel labCheckindate;
     private javax.swing.JLabel labCheckoutdate;
@@ -1055,6 +1291,8 @@ public class DashboardClient extends javax.swing.JFrame {
     private javax.swing.JSpinner spinTotalUsage;
     private javax.swing.JTable tabRooms;
     private javax.swing.JTable tabServices;
+    private javax.swing.JTable tabUserRooms;
+    private javax.swing.JTable tabUserServices;
     private javax.swing.JTextField thanhtien_txt;
     private javax.swing.JButton timkiem_btn;
     // End of variables declaration//GEN-END:variables
