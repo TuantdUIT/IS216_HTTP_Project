@@ -10,4 +10,6 @@ package hotelmanagement.entity;
  */
 public class Current_User {
     public static String phonenumber;
+    public static String MaKH;
+    public static String HoTen;
 }

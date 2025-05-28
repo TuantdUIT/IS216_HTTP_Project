@@ -5,6 +5,7 @@
 package hotelmanagement.dashboard_main;
 
 import hotelmanagement.entity.Room;
+import hotelmanagement.entity.Service;
 import hotelmanagement.entity.dba_connection;
 import hotelmanagement.entity.Current_User;
 import java.sql.PreparedStatement;
@@ -19,6 +20,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.time.LocalDate;
+import java.sql.Date;
 
 /**
  *
@@ -53,6 +56,9 @@ public class DashboardClient extends javax.swing.JFrame {
             while (rs.next()) {
                 String hoTen = rs.getString("HOTEN");
                 lblHoTen.setText("Hi, " + hoTen + "!");
+                Current_User.HoTen = hoTen;
+                String MaKH = rs.getString("MAKH");
+                Current_User.MaKH = MaKH;
             }
             
         } catch (SQLException | ClassNotFoundException ex) {
@@ -61,7 +67,7 @@ public class DashboardClient extends javax.swing.JFrame {
         }
         //Hiển thị thông tin vô bảng phòng trống
         Reload_Table_Rooms();
-        
+        Reload_Table_Services();
         
     }
     
@@ -102,7 +108,43 @@ public class DashboardClient extends javax.swing.JFrame {
             });
         }
     }
+    private void Reload_Table_Services()
+    {
+        dba_connection connect = new dba_connection();
+        ArrayList<Service> services = new ArrayList<>();
+        services.clear();
+        
+        String sql = "SELECT * FROM DVTIENICH";
+        try {
+            Class.forName(connect.driver);
+            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Service srv = new Service();
+                srv.setMaDV(rs.getString("MADVTI"));
+                srv.setTenDV(rs.getString("TENDVTI"));
+                srv.setMoTa(rs.getString("MOTA")); 
+                srv.setDonGia(rs.getInt("DONGIA"));
+                services.add(srv);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            
+            JOptionPane.showMessageDialog(null, "Cannot load Services infomation " + ex.getMessage());
+        }
+        
+        DefaultTableModel model = (DefaultTableModel) tabServices.getModel();
+        model.setRowCount(0); 
 
+        for (Service r : services) {
+            model.addRow(new Object[] {
+            r.getMaDV(),
+            r.getTenDV(),
+            r.getMoTa(),
+            r.getDonGia()
+            });
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -138,8 +180,20 @@ public class DashboardClient extends javax.swing.JFrame {
         labCheckoutdate1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabRooms = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnBookR = new javax.swing.JButton();
         CardBookServices = new javax.swing.JPanel();
+        labTotalUsage = new javax.swing.JPanel();
+        Title1 = new javax.swing.JLabel();
+        labStartDate = new javax.swing.JLabel();
+        labEndDate = new javax.swing.JLabel();
+        datePickerStartDate = new com.github.lgooddatepicker.components.DatePicker();
+        datePickerEndDate = new com.github.lgooddatepicker.components.DatePicker();
+        labTotal = new javax.swing.JLabel();
+        labChooseSer = new javax.swing.JLabel();
+        spinTotalUsage = new javax.swing.JSpinner();
+        scrlServices = new javax.swing.JScrollPane();
+        tabServices = new javax.swing.JTable();
+        btnBookS = new javax.swing.JButton();
         CardPayCheckout = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         sdt_txt = new javax.swing.JTextField();
@@ -282,9 +336,9 @@ public class DashboardClient extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/client_icon.png"))); // NOI18N
 
+        lblHoTen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHoTen.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblHoTen.setForeground(new java.awt.Color(255, 255, 255));
-        lblHoTen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout pnlButtonLayout = new javax.swing.GroupLayout(pnlButton);
         pnlButton.setLayout(pnlButtonLayout);
@@ -386,11 +440,11 @@ public class DashboardClient extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tabRooms);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("Book");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBookR.setText("Book");
+        btnBookR.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnBookR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnBookRActionPerformed(evt);
             }
         });
 
@@ -423,7 +477,7 @@ public class DashboardClient extends javax.swing.JFrame {
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(385, 385, 385)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnBookR, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -444,7 +498,7 @@ public class DashboardClient extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBookR, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36))
         );
 
@@ -465,15 +519,119 @@ public class DashboardClient extends javax.swing.JFrame {
 
         CardBookServices.setBackground(new java.awt.Color(255, 255, 255));
 
+        Title1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        Title1.setText("BOOK SERVICE");
+
+        labStartDate.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        labStartDate.setText("Start date:");
+
+        labEndDate.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        labEndDate.setText("End date:");
+
+        labTotal.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        labTotal.setText("Total of usage: (DELETED)");
+
+        labChooseSer.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        labChooseSer.setText("Choose service:");
+
+        spinTotalUsage.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+
+        tabServices.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ServiceID", "Service Name", "Description", "Price"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        scrlServices.setViewportView(tabServices);
+
+        btnBookS.setText("Book");
+        btnBookS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBookSActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout labTotalUsageLayout = new javax.swing.GroupLayout(labTotalUsage);
+        labTotalUsage.setLayout(labTotalUsageLayout);
+        labTotalUsageLayout.setHorizontalGroup(
+            labTotalUsageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, labTotalUsageLayout.createSequentialGroup()
+                .addGroup(labTotalUsageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(labTotalUsageLayout.createSequentialGroup()
+                        .addGroup(labTotalUsageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(labTotalUsageLayout.createSequentialGroup()
+                                .addGap(66, 66, 66)
+                                .addGroup(labTotalUsageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(scrlServices, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(labChooseSer)
+                                    .addGroup(labTotalUsageLayout.createSequentialGroup()
+                                        .addGroup(labTotalUsageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(labEndDate)
+                                            .addComponent(labStartDate)
+                                            .addComponent(labTotal))
+                                        .addGap(27, 27, 27)
+                                        .addGroup(labTotalUsageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(labTotalUsageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(datePickerStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(datePickerEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(spinTotalUsage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(labTotalUsageLayout.createSequentialGroup()
+                                .addGap(393, 393, 393)
+                                .addComponent(btnBookS, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 70, Short.MAX_VALUE))
+                    .addGroup(labTotalUsageLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Title1)))
+                .addGap(317, 317, 317))
+        );
+        labTotalUsageLayout.setVerticalGroup(
+            labTotalUsageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(labTotalUsageLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Title1)
+                .addGap(18, 18, 18)
+                .addGroup(labTotalUsageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labStartDate)
+                    .addComponent(datePickerStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(labTotalUsageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labEndDate)
+                    .addComponent(datePickerEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(labTotalUsageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labTotal)
+                    .addComponent(spinTotalUsage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(labChooseSer)
+                .addGap(18, 18, 18)
+                .addComponent(scrlServices, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addComponent(btnBookS, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout CardBookServicesLayout = new javax.swing.GroupLayout(CardBookServices);
         CardBookServices.setLayout(CardBookServicesLayout);
         CardBookServicesLayout.setHorizontalGroup(
             CardBookServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 895, Short.MAX_VALUE)
+            .addComponent(labTotalUsage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         CardBookServicesLayout.setVerticalGroup(
             CardBookServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 589, Short.MAX_VALUE)
+            .addComponent(labTotalUsage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pnlCard.add(CardBookServices, "card5");
@@ -689,7 +847,7 @@ public class DashboardClient extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_thanhtien_txtActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnBookRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookRActionPerformed
         if(datePickerCheckin.getDate() == null || datePickerCheckout.getDate() == null)
         {
             JOptionPane.showMessageDialog(this, "Please enter checkin and checkout date!");
@@ -709,21 +867,39 @@ public class DashboardClient extends javax.swing.JFrame {
                 
                 int selectedRow = tabRooms.getSelectedRow();
                 if (selectedRow != -1) {
-                String sql2 = "UPDATE DVPHONG SET TINHTRANG = ? WHERE MADVP = ?";
-                PreparedStatement pst = con.prepareStatement(sql2);
+//                String sql2 = "UPDATE DVPHONG SET TINHTRANG = ? WHERE MADVP = ?";
+//                PreparedStatement pst = con.prepareStatement(sql2);
                 //Lay cot MADVP tu` dong duoc chon trong bang
                 String MaDVP = tabRooms.getValueAt(selectedRow, 0).toString();
                 
-                pst.setString(1, "Occupied");
-                pst.setString(2, MaDVP);
-                pst.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Your booking was successful!");
+//                pst.setString(1, "Occupied");
+//                pst.setString(2, MaDVP);
+//                pst.executeUpdate();
+                
+                
+                
+                
+                //Them 1 hoa don moi
+                String sql = "INSERT INTO HOADON (MAKH, MADVP, MADVTI, MAFB, NGUOIXACNHAN, NGAYBD, NGAYKT, NGAYTHANHTOAN, TINHTRANGTT) "
+                        + "VALUES ('" + Current_User.MaKH + "', trim(?), NULL, NULL, NUll, ?, ?, NULL, NUll)";
+                PreparedStatement pst1 = con.prepareStatement(sql);
+                
+                //Lay cot MADVTI tu` dong duoc chon trong bang
+                pst1.setString(1, MaDVP);
+                
+                LocalDate ngayBD = datePickerCheckin.getDate();
+                Date ngayBDsql = Date.valueOf(ngayBD);
+                pst1.setDate(2, ngayBDsql);
+                
+                LocalDate ngayKT = datePickerCheckout.getDate();
+                Date ngayKTsql = Date.valueOf(ngayKT);
+                pst1.setDate(3, ngayKTsql);
+                
+                pst1.executeUpdate();
                 
                 //Reload lai bang rooms available
                 Reload_Table_Rooms();
-                
-                //Them 1 hoa don moi
-                
+                JOptionPane.showMessageDialog(null, "Your booking was successful!");
                 } 
                 else {
                 JOptionPane.showMessageDialog(null, "Please choose a room to book!");
@@ -734,7 +910,64 @@ public class DashboardClient extends javax.swing.JFrame {
         }
         
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnBookRActionPerformed
+
+    private void btnBookSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookSActionPerformed
+        // TODO add your handling code here:
+        if(datePickerStartDate.getDate() == null || datePickerEndDate.getDate() == null)
+        {
+            JOptionPane.showMessageDialog(this, "Please enter checkin and checkout date!");
+                datePickerStartDate.requestFocus();
+                datePickerEndDate.requestFocus();
+        }
+        else
+        if(datePickerStartDate.getDate().compareTo(datePickerEndDate.getDate())>=0) {
+            JOptionPane.showMessageDialog(this, "The checkin date must before the checkout date!");
+        }
+        else
+        {
+            dba_connection connect = new dba_connection();
+            Connection con;
+            try {
+                con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+                
+                //Them 1 hoa don moi
+                int selectedRow = tabServices.getSelectedRow();
+                if (selectedRow != -1) {
+                String sql = "INSERT INTO HOADON (MAKH, MADVP, MADVTI, MAFB, NGUOIXACNHAN, NGAYBD, NGAYKT, NGAYTHANHTOAN, TINHTRANGTT) "
+                        + "VALUES ('" + Current_User.MaKH + "', NULL, trim(?), NULL, NUll, ?, ?, NULL, NUll)";
+                PreparedStatement pst = con.prepareStatement(sql);
+                
+                //Lay cot MADVTI tu` dong duoc chon trong bang
+                String MaDVTI = tabServices.getValueAt(selectedRow, 0).toString();
+                pst.setString(1, MaDVTI);
+                
+                LocalDate ngayBD = datePickerStartDate.getDate();
+                Date ngayBDsql = Date.valueOf(ngayBD);
+                pst.setDate(2, ngayBDsql);
+                
+                LocalDate ngayKT = datePickerEndDate.getDate();
+                Date ngayKTsql = Date.valueOf(ngayKT);
+                pst.setDate(3, ngayKTsql);
+                
+//              int slsd = (int) spinTotalUsage.getValue();
+//              pst.setInt(4, slsd);
+                pst.executeUpdate();
+                
+                JOptionPane.showMessageDialog(null, "Your booking was successful!");
+                
+                //Reload lai bang rooms available
+                Reload_Table_Services();
+ 
+                } 
+                else {
+                JOptionPane.showMessageDialog(null, "Please choose a service to book!");
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Cannot connect to INVOICE database " + ex.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btnBookSActionPerformed
 
     /**
      * @param args the command line arguments
@@ -779,7 +1012,10 @@ public class DashboardClient extends javax.swing.JFrame {
     private javax.swing.JPanel CardPayCheckout;
     private javax.swing.JPanel CardWriteFeedbacks;
     private javax.swing.JLabel Title;
+    private javax.swing.JLabel Title1;
+    private javax.swing.JButton btnBookR;
     private javax.swing.JButton btnBookRooms;
+    private javax.swing.JButton btnBookS;
     private javax.swing.JButton btnBookServices;
     private javax.swing.JButton btnGiahan;
     private javax.swing.JButton btnMyRooms;
@@ -789,7 +1025,8 @@ public class DashboardClient extends javax.swing.JFrame {
     private javax.swing.JButton btnWriteFeedBacks1;
     private com.github.lgooddatepicker.components.DatePicker datePickerCheckin;
     private com.github.lgooddatepicker.components.DatePicker datePickerCheckout;
-    private javax.swing.JButton jButton1;
+    private com.github.lgooddatepicker.components.DatePicker datePickerEndDate;
+    private com.github.lgooddatepicker.components.DatePicker datePickerStartDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -802,14 +1039,22 @@ public class DashboardClient extends javax.swing.JFrame {
     private javax.swing.JLabel labCheckindate;
     private javax.swing.JLabel labCheckoutdate;
     private javax.swing.JLabel labCheckoutdate1;
+    private javax.swing.JLabel labChooseSer;
+    private javax.swing.JLabel labEndDate;
+    private javax.swing.JLabel labStartDate;
+    private javax.swing.JLabel labTotal;
+    private javax.swing.JPanel labTotalUsage;
     private javax.swing.JLabel lblHoTen;
     private javax.swing.JPanel panelBook;
     private javax.swing.JPanel panelFeedback;
     private javax.swing.JPanel panelMyInfo;
     private javax.swing.JPanel pnlButton;
     private javax.swing.JPanel pnlCard;
+    private javax.swing.JScrollPane scrlServices;
     private javax.swing.JTextField sdt_txt;
+    private javax.swing.JSpinner spinTotalUsage;
     private javax.swing.JTable tabRooms;
+    private javax.swing.JTable tabServices;
     private javax.swing.JTextField thanhtien_txt;
     private javax.swing.JButton timkiem_btn;
     // End of variables declaration//GEN-END:variables
