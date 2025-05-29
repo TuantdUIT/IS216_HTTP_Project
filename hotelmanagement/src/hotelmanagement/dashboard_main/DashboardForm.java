@@ -7,10 +7,12 @@ package hotelmanagement.dashboard_main;
 import hotelmanagement.add.AddInvoiceForm;
 import hotelmanagement.add.AddRoomForm;
 import hotelmanagement.add.AddServiceForm;
+import hotelmanagement.entity.Current_User;
 import hotelmanagement.entity.Invoice;
 import hotelmanagement.entity.Room;
 import hotelmanagement.entity.Service;
 import hotelmanagement.entity.Customer;
+import hotelmanagement.entity.Payout;
 import hotelmanagement.entity.dba_connection;
 import hotelmanagement.update.UpdateInvoiceForm;
 import hotelmanagement.update.UpdateRoomForm;
@@ -19,17 +21,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.*;
 
 
 public class DashboardForm extends javax.swing.JFrame {
 
-    ArrayList<Room> rooms = new ArrayList<>();
-    ArrayList<Service> services = new ArrayList<>();
-    ArrayList<Invoice> invoices = new ArrayList<>();
-    ArrayList<Customer> customers = new ArrayList<>();
-    public DashboardForm() {
-        
+    public ArrayList<Room> rooms = new ArrayList<>();
+    public ArrayList<Service> services = new ArrayList<>();
+    public ArrayList<Invoice> invoices = new ArrayList<>();
+    public ArrayList<Customer> customers = new ArrayList<>();
+    public ArrayList<Payout> list = new ArrayList<>();
+    public DashboardForm() {       
         initComponents();
         setLocationRelativeTo(null);
         autoReloadRoom();
@@ -56,27 +60,24 @@ public class DashboardForm extends javax.swing.JFrame {
         btnServiceManagement = new javax.swing.JButton();
         btnInvoiceManagement = new javax.swing.JButton();
         btnCustomerManagement = new javax.swing.JButton();
+        btnPayCheckout = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         CardLayout_Management = new javax.swing.JPanel();
-        Customers = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        btnReloadCustomer = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tblCustomers = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
-        btnAddCustomer = new javax.swing.JButton();
-        btnUpdateCustomer = new javax.swing.JButton();
-        btnDeleteCustomer = new javax.swing.JButton();
-        btnBackCustomer = new javax.swing.JButton();
-        jSeparator7 = new javax.swing.JSeparator();
-        jSeparator8 = new javax.swing.JSeparator();
+        CardPayCheckout = new javax.swing.JPanel();
+        btnThanhtoan = new javax.swing.JButton();
+        btnGiahan = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        pay_table = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        Sdt_txt = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
         Rooms = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRooms = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         LbRoomManage = new javax.swing.JLabel();
-        btnReloadRoom = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JSeparator();
         roomBtnPanel = new javax.swing.JPanel();
         btnAddRoom = new javax.swing.JButton();
@@ -88,25 +89,41 @@ public class DashboardForm extends javax.swing.JFrame {
         tblServices = new javax.swing.JTable();
         jSeparator2 = new javax.swing.JSeparator();
         LbRoomManage1 = new javax.swing.JLabel();
-        btnReloadService = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JSeparator();
         serviceBtnPanel = new javax.swing.JPanel();
         btnAddService = new javax.swing.JButton();
         btnDeleteService = new javax.swing.JButton();
         btnBackService = new javax.swing.JButton();
         btnUpdateService = new javax.swing.JButton();
+        Service_invoice = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         Invoices = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblInvoices = new javax.swing.JTable();
         jSeparator3 = new javax.swing.JSeparator();
         LbRoomManage2 = new javax.swing.JLabel();
-        btnReloadInVoice = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
         invoiceBtnPanel = new javax.swing.JPanel();
         btnAddInvoice = new javax.swing.JButton();
         btnBackInvoice = new javax.swing.JButton();
         btnDeleteInvoice = new javax.swing.JButton();
         btnUpdateInvoice = new javax.swing.JButton();
+        Customers = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblCustomers = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        btnAddCustomer = new javax.swing.JButton();
+        btnUpdateCustomer = new javax.swing.JButton();
+        btnDeleteCustomer = new javax.swing.JButton();
+        btnBackCustomer = new javax.swing.JButton();
+        jSeparator7 = new javax.swing.JSeparator();
+        jSeparator8 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -149,6 +166,14 @@ public class DashboardForm extends javax.swing.JFrame {
             }
         });
 
+        btnPayCheckout.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnPayCheckout.setText("Pay & Checkout");
+        btnPayCheckout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPayCheckoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelBtnLayout = new javax.swing.GroupLayout(panelBtn);
         panelBtn.setLayout(panelBtnLayout);
         panelBtnLayout.setHorizontalGroup(
@@ -156,11 +181,12 @@ public class DashboardForm extends javax.swing.JFrame {
             .addGroup(panelBtnLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(panelBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnPayCheckout)
                     .addComponent(btnInvoiceManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnServiceManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRoomManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCustomerManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelBtnLayout.setVerticalGroup(
             panelBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +199,9 @@ public class DashboardForm extends javax.swing.JFrame {
                 .addComponent(btnInvoiceManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(btnCustomerManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addComponent(btnPayCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -188,16 +216,17 @@ public class DashboardForm extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(panelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel2)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                        .addComponent(panelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,151 +237,134 @@ public class DashboardForm extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(30, 30, 30)
                 .addComponent(panelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(247, 247, 247))
+                .addGap(213, 213, 213))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
 
         CardLayout_Management.setLayout(new java.awt.CardLayout());
 
-        Customers.setBackground(new java.awt.Color(255, 255, 255));
-        Customers.setForeground(new java.awt.Color(255, 51, 51));
+        CardPayCheckout.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setText("Customer Management");
-
-        btnReloadCustomer.setText("Reload");
-        btnReloadCustomer.addActionListener(new java.awt.event.ActionListener() {
+        btnThanhtoan.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btnThanhtoan.setText("Checkout");
+        btnThanhtoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReloadCustomerActionPerformed(evt);
+                btnThanhtoanActionPerformed(evt);
             }
         });
 
-        tblCustomers.setModel(new javax.swing.table.DefaultTableModel(
+        btnGiahan.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btnGiahan.setText("Extension");
+        btnGiahan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGiahanActionPerformed(evt);
+            }
+        });
+
+        pay_table.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        pay_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Customer ID", "Name", "Password", "Citizen ID", "Phone number", "Date of Birth", "Sex", "Address", "Email"
+                "Invoice", "Room", "Describe", "Start Date", "End Date", "Status"
             }
-        ));
-        jScrollPane3.setViewportView(tblCustomers);
-        tblCustomers.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tblCustomers.getColumnModel().getColumn(0).setPreferredWidth(80);
-        tblCustomers.getColumnModel().getColumn(1).setPreferredWidth(150);
-        tblCustomers.getColumnModel().getColumn(2).setPreferredWidth(120);
-        tblCustomers.getColumnModel().getColumn(3).setPreferredWidth(120);
-        tblCustomers.getColumnModel().getColumn(4).setPreferredWidth(120);
-        tblCustomers.getColumnModel().getColumn(5).setPreferredWidth(120);
-        tblCustomers.getColumnModel().getColumn(6).setPreferredWidth(50);
-        tblCustomers.getColumnModel().getColumn(7).setPreferredWidth(150);
-        tblCustomers.getColumnModel().getColumn(8).setPreferredWidth(120);
-        jScrollPane3.getHorizontalScrollBar().setPreferredSize(new java.awt.Dimension(5, 5));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
-        btnAddCustomer.setText("Add(50-50)");
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(pay_table);
 
-        btnUpdateCustomer.setText("Update(50-50)");
-        btnUpdateCustomer.addActionListener(new java.awt.event.ActionListener() {
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel4.setText("PAY & CHECKOUT");
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel5.setText("SDT: ");
+
+        Sdt_txt.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        btnSearch.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateCustomerActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
 
-        btnDeleteCustomer.setText("Delete(50-50)");
-
-        btnBackCustomer.setText("Back");
-        btnBackCustomer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackCustomerActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addComponent(btnAddCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(btnUpdateCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(btnDeleteCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(btnBackCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+        javax.swing.GroupLayout CardPayCheckoutLayout = new javax.swing.GroupLayout(CardPayCheckout);
+        CardPayCheckout.setLayout(CardPayCheckoutLayout);
+        CardPayCheckoutLayout.setHorizontalGroup(
+            CardPayCheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CardPayCheckoutLayout.createSequentialGroup()
+                .addGap(320, 320, 320)
+                .addComponent(jLabel4))
+            .addGroup(CardPayCheckoutLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel5)
+                .addGap(12, 12, 12)
+                .addComponent(Sdt_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 631, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSearch))
+            .addGroup(CardPayCheckoutLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 844, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(CardPayCheckoutLayout.createSequentialGroup()
+                .addGap(256, 256, 256)
+                .addComponent(btnThanhtoan)
+                .addGap(100, 100, 100)
+                .addComponent(btnGiahan))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddCustomer)
-                    .addComponent(btnUpdateCustomer)
-                    .addComponent(btnDeleteCustomer)
-                    .addComponent(btnBackCustomer))
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout CustomersLayout = new javax.swing.GroupLayout(Customers);
-        Customers.setLayout(CustomersLayout);
-        CustomersLayout.setHorizontalGroup(
-            CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CustomersLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
-                    .addGroup(CustomersLayout.createSequentialGroup()
-                        .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(CustomersLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(CustomersLayout.createSequentialGroup()
-                        .addComponent(btnReloadCustomer)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomersLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomersLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(147, 147, 147))
-        );
-        CustomersLayout.setVerticalGroup(
-            CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CustomersLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnReloadCustomer)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(202, Short.MAX_VALUE))
+        CardPayCheckoutLayout.setVerticalGroup(
+            CardPayCheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CardPayCheckoutLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel4)
+                .addGap(48, 48, 48)
+                .addGroup(CardPayCheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(Sdt_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch))
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addGroup(CardPayCheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnThanhtoan)
+                    .addComponent(btnGiahan)))
         );
 
-        CardLayout_Management.add(Customers, "card5");
+        CardLayout_Management.add(CardPayCheckout, "card7");
 
         Rooms.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -409,15 +421,8 @@ public class DashboardForm extends javax.swing.JFrame {
         tblRooms.getColumnModel().getColumn(4).setPreferredWidth(130);
         jScrollPane1.getVerticalScrollBar().setPreferredSize(new java.awt.Dimension(5, 5));
 
-        LbRoomManage.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        LbRoomManage.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         LbRoomManage.setText("Room Management");
-
-        btnReloadRoom.setText("Reload");
-        btnReloadRoom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReloadRoomActionPerformed(evt);
-            }
-        });
 
         roomBtnPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -483,40 +488,37 @@ public class DashboardForm extends javax.swing.JFrame {
             .addGroup(RoomsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(RoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RoomsLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(LbRoomManage)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jSeparator1)
-                    .addComponent(jSeparator6)
                     .addGroup(RoomsLayout.createSequentialGroup()
-                        .addComponent(btnReloadRoom)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(RoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator6)
+                            .addGroup(RoomsLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(RoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jSeparator1)
+                                    .addComponent(jScrollPane1))))
+                        .addContainerGap())
                     .addGroup(RoomsLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(139, 139, 139)
+                        .addComponent(roomBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(183, 183, 183))))
             .addGroup(RoomsLayout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addComponent(roomBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(249, 249, 249)
+                .addComponent(LbRoomManage)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         RoomsLayout.setVerticalGroup(
             RoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RoomsLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(LbRoomManage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LbRoomManage)
+                .addGap(31, 31, 31)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnReloadRoom)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(33, 33, 33)
                 .addComponent(roomBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addGap(0, 157, Short.MAX_VALUE))
         );
 
         CardLayout_Management.add(Rooms, "card2");
@@ -549,15 +551,8 @@ public class DashboardForm extends javax.swing.JFrame {
         tblServices.getColumnModel().getColumn(3).setPreferredWidth(100);
         tblServices.getColumnModel().getColumn(4).setPreferredWidth(130);
 
-        LbRoomManage1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        LbRoomManage1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         LbRoomManage1.setText("Service Management");
-
-        btnReloadService.setText("Reload");
-        btnReloadService.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReloadServiceActionPerformed(evt);
-            }
-        });
 
         serviceBtnPanel.setBackground(new java.awt.Color(255, 255, 255));
         serviceBtnPanel.setPreferredSize(new java.awt.Dimension(484, 68));
@@ -621,44 +616,117 @@ public class DashboardForm extends javax.swing.JFrame {
         Services.setLayout(ServicesLayout);
         ServicesLayout.setHorizontalGroup(
             ServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ServicesLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(LbRoomManage1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(ServicesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(ServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator2)
-                    .addComponent(jScrollPane2)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ServicesLayout.createSequentialGroup()
-                        .addComponent(btnReloadService)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(ServicesLayout.createSequentialGroup()
-                .addGap(141, 141, 141)
-                .addComponent(serviceBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addGroup(ServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ServicesLayout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(serviceBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(191, 191, 191))
+                    .addGroup(ServicesLayout.createSequentialGroup()
+                        .addGroup(ServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator5)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ServicesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(LbRoomManage1)
+                .addGap(260, 260, 260))
         );
         ServicesLayout.setVerticalGroup(
             ServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ServicesLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(LbRoomManage1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(17, 17, 17)
+                .addComponent(LbRoomManage1)
+                .addGap(28, 28, 28)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addComponent(btnReloadService)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(serviceBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(209, Short.MAX_VALUE))
+                .addContainerGap(179, Short.MAX_VALUE))
         );
 
         CardLayout_Management.add(Services, "card3");
+
+        Service_invoice.setPreferredSize(new java.awt.Dimension(1024, 811));
+
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel6.setText("SERVICE INVOICE ");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Invoice", "Service Id", "Service name", "Price"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(jTable1);
+
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel7.setText("Total: ");
+
+        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jButton1.setText("Pay");
+
+        javax.swing.GroupLayout Service_invoiceLayout = new javax.swing.GroupLayout(Service_invoice);
+        Service_invoice.setLayout(Service_invoiceLayout);
+        Service_invoiceLayout.setHorizontalGroup(
+            Service_invoiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Service_invoiceLayout.createSequentialGroup()
+                .addGroup(Service_invoiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Service_invoiceLayout.createSequentialGroup()
+                        .addGap(268, 268, 268)
+                        .addComponent(jLabel6))
+                    .addGroup(Service_invoiceLayout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addGroup(Service_invoiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Service_invoiceLayout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(514, 514, 514)
+                                .addComponent(jButton1))
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 778, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(200, Short.MAX_VALUE))
+        );
+        Service_invoiceLayout.setVerticalGroup(
+            Service_invoiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Service_invoiceLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel6)
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(Service_invoiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addContainerGap(243, Short.MAX_VALUE))
+        );
+
+        CardLayout_Management.add(Service_invoice, "card7");
 
         Invoices.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -698,15 +766,8 @@ public class DashboardForm extends javax.swing.JFrame {
         tblInvoices.getColumnModel().getColumn(12).setPreferredWidth(120);
         jScrollPane3.getHorizontalScrollBar().setPreferredSize(new java.awt.Dimension(5, 5));
 
-        LbRoomManage2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        LbRoomManage2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         LbRoomManage2.setText("Invoice Management");
-
-        btnReloadInVoice.setText("Reload");
-        btnReloadInVoice.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReloadInVoiceActionPerformed(evt);
-            }
-        });
 
         invoiceBtnPanel.setBackground(new java.awt.Color(255, 255, 255));
         invoiceBtnPanel.setForeground(new java.awt.Color(60, 63, 65));
@@ -774,45 +835,166 @@ public class DashboardForm extends javax.swing.JFrame {
             .addGroup(InvoicesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(InvoicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InvoicesLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(LbRoomManage2)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1018, Short.MAX_VALUE)
+                    .addComponent(jSeparator4)
                     .addGroup(InvoicesLayout.createSequentialGroup()
                         .addGroup(InvoicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator3)
                             .addGroup(InvoicesLayout.createSequentialGroup()
-                                .addComponent(btnReloadInVoice)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 782, Short.MAX_VALUE)
-                            .addComponent(jSeparator4))
+                                .addGap(174, 174, 174)
+                                .addComponent(invoiceBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InvoicesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(invoiceBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(176, 176, 176))
+            .addGroup(InvoicesLayout.createSequentialGroup()
+                .addGap(254, 254, 254)
+                .addComponent(LbRoomManage2)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         InvoicesLayout.setVerticalGroup(
             InvoicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(InvoicesLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(LbRoomManage2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(57, 57, 57)
+                .addComponent(LbRoomManage2)
+                .addGap(44, 44, 44)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnReloadInVoice)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(35, 35, 35)
                 .addComponent(invoiceBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         jScrollPane4.getHorizontalScrollBar().setPreferredSize(new java.awt.Dimension(0, 5)); // 5 là chiều cao mới
 
         CardLayout_Management.add(Invoices, "card4");
+
+        Customers.setBackground(new java.awt.Color(255, 255, 255));
+        Customers.setForeground(new java.awt.Color(255, 51, 51));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel3.setText("Customer Management");
+
+        tblCustomers.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Customer ID", "Name", "Password", "Citizen ID", "Phone number", "Date of Birth", "Sex", "Address", "Email"
+            }
+        ));
+        jScrollPane3.setViewportView(tblCustomers);
+        tblCustomers.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tblCustomers.getColumnModel().getColumn(0).setPreferredWidth(80);
+        tblCustomers.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tblCustomers.getColumnModel().getColumn(2).setPreferredWidth(120);
+        tblCustomers.getColumnModel().getColumn(3).setPreferredWidth(120);
+        tblCustomers.getColumnModel().getColumn(4).setPreferredWidth(120);
+        tblCustomers.getColumnModel().getColumn(5).setPreferredWidth(120);
+        tblCustomers.getColumnModel().getColumn(6).setPreferredWidth(50);
+        tblCustomers.getColumnModel().getColumn(7).setPreferredWidth(150);
+        tblCustomers.getColumnModel().getColumn(8).setPreferredWidth(120);
+        jScrollPane3.getHorizontalScrollBar().setPreferredSize(new java.awt.Dimension(5, 5));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        btnAddCustomer.setText("Add");
+
+        btnUpdateCustomer.setText("Update");
+        btnUpdateCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateCustomerActionPerformed(evt);
+            }
+        });
+
+        btnDeleteCustomer.setText("Delete");
+
+        btnBackCustomer.setText("Back");
+        btnBackCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackCustomerActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addComponent(btnAddCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(btnUpdateCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(btnDeleteCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(btnBackCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(29, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddCustomer)
+                    .addComponent(btnUpdateCustomer)
+                    .addComponent(btnDeleteCustomer)
+                    .addComponent(btnBackCustomer))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout CustomersLayout = new javax.swing.GroupLayout(Customers);
+        Customers.setLayout(CustomersLayout);
+        CustomersLayout.setHorizontalGroup(
+            CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CustomersLayout.createSequentialGroup()
+                .addGroup(CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CustomersLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomersLayout.createSequentialGroup()
+                                .addGap(0, 197, Short.MAX_VALUE)
+                                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator7)))
+                    .addGroup(CustomersLayout.createSequentialGroup()
+                        .addGap(163, 163, 163)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(CustomersLayout.createSequentialGroup()
+                .addGap(230, 230, 230)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        CustomersLayout.setVerticalGroup(
+            CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CustomersLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(179, Short.MAX_VALUE))
+        );
+
+        CardLayout_Management.add(Customers, "card5");
 
         jSplitPane1.setRightComponent(CardLayout_Management);
         CardLayout_Management.setLayout(new CardLayout());
@@ -822,18 +1004,20 @@ public class DashboardForm extends javax.swing.JFrame {
         CardLayout_Management.add(Services, "Services");
         CardLayout_Management.add(Invoices, "Invoices");
         CardLayout_Management.add(Customers, "Customers");
+        CardLayout_Management.add(CardPayCheckout, "Pay & Checkout");
+        CardLayout_Management.add(Service_invoice,"");
 
         javax.swing.GroupLayout panelMainLayout = new javax.swing.GroupLayout(panelMain);
         panelMain.setLayout(panelMainLayout);
         panelMainLayout.setHorizontalGroup(
             panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1029, Short.MAX_VALUE)
+            .addGap(0, 1226, Short.MAX_VALUE)
             .addGroup(panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jSplitPane1))
         );
         panelMainLayout.setVerticalGroup(
             panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 818, Short.MAX_VALUE)
+            .addGap(0, 811, Short.MAX_VALUE)
             .addGroup(panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING))
         );
@@ -872,51 +1056,8 @@ public class DashboardForm extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnInvoiceManagementActionPerformed
 
-    private void btnReloadRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadRoomActionPerformed
-        // TODO add your handling code here:
-        rooms.clear(); // Xoá dữ liệu cũ trong danh sách
 
-        String sql = "SELECT * FROM DVPHONG";
-        dba_connection connect = new dba_connection();
-        try {
-            Class.forName(connect.driver);
-            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                Room room = new Room();
-                //room.roomID = rs.getString("MADVP");
-                room.setRoomID(rs.getString("MADVP"));
-                //room.loaiPhong = rs.getString("LOAIPHONG");
-                room.setLoaiPhong(rs.getString("LOAIPHONG"));
-                //room.moTa = rs.getString("MOTA");
-                room.setMoTa(rs.getString("MOTA"));
-                //room.donGia = rs.getInt("DONGIA");
-                room.setDonGia(rs.getInt("DONGIA"));
-                //room.tinhTrang = rs.getString("TINHTRANG");
-                room.setTinhTrang(rs.getString("TINHTRANG"));
-                rooms.add(room);
-            }
-        } catch (SQLException | ClassNotFoundException ex) {
-            
-            JOptionPane.showMessageDialog(null, "Lỗi khi load dữ liệu phòng: " + ex.getMessage());
-        }
-
-        // Hiển thị lại dữ liệu lên JTable
-        DefaultTableModel model = (DefaultTableModel) tblRooms.getModel();
-        model.setRowCount(0); // Xoá hết dữ liệu cũ trên bảng
-
-        for (Room r : rooms) {
-            model.addRow(new Object[] {
-                r.getRoomID(),
-                r.getLoaiPhong(),
-                r.getMoTa(),
-                r.getDonGia(),
-                r.getTinhTrang()
-            });
-        }
-    }//GEN-LAST:event_btnReloadRoomActionPerformed
-
+    
     private void autoReloadRoom(){
         rooms.clear(); // Xoá dữ liệu cũ trong danh sách
 
@@ -1036,46 +1177,6 @@ public class DashboardForm extends javax.swing.JFrame {
         updateServiceForm.setVisible(true);
 
     }//GEN-LAST:event_btnUpdateServiceActionPerformed
-
-    private void btnReloadServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadServiceActionPerformed
-        // TODO add your handling code here:
-        services.clear(); // Xoá dữ liệu cũ trong danh sách
-        String sql = "SELECT * FROM DVTIENICH";
-        dba_connection connect = new dba_connection();
-       
-        try {
-            Class.forName(connect.driver);
-            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                Service service = new Service();
-                service.setMaDV(rs.getString("MADVTI"));
-                service.setTenDV(rs.getString("TENDVTI"));               
-                service.setMoTa(rs.getString("MOTA"));               
-                service.setDonGia(rs.getInt("DONGIA"));
-                service.setTinhTrang(rs.getString("TINHTRANG"));  
-                services.add(service);
-            }
-        } catch (SQLException | ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "Lỗi khi load dữ liệu phòng: " + ex.getMessage());
-        }
-
-        // Hiển thị lại dữ liệu lên JTable
-        DefaultTableModel model = (DefaultTableModel) tblServices.getModel();
-        model.setRowCount(0); // Xoá hết dữ liệu cũ trên bảng
-
-        for (Service se : services) {
-            model.addRow(new Object[] {
-                se.getMaDV(),
-                se.getTenDV(),
-                se.getMoTa(),
-                se.getDonGia(),
-                se.getTinhTrang()
-            });
-        }
-        
-    }//GEN-LAST:event_btnReloadServiceActionPerformed
     
     private void autoReloadService(){
         //services.clear(); // Xoá dữ liệu cũ trong danh sách
@@ -1154,63 +1255,6 @@ public class DashboardForm extends javax.swing.JFrame {
         updateInvoiceForm.setVisible(true);
     }//GEN-LAST:event_btnUpdateInvoiceActionPerformed
 
-    private void btnReloadInVoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadInVoiceActionPerformed
-        // TODO add your handling code here:
-        invoices.clear(); // Xoá dữ liệu cũ trong danh sách
-        String sql = "SELECT * FROM HOADON";
-        dba_connection connect = new dba_connection();
-       
-        try {
-            Class.forName(connect.driver);
-            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                Invoice invoice = new Invoice();
-                invoice.setMaHD(rs.getString("MAHD"));
-                invoice.setMaKH(rs.getString("MAKH"));               
-                invoice.setMaDVP(rs.getString("MADVP"));
-                invoice.setMaDVTI(rs.getString("MADVTI"));
-                invoice.setMaFB(rs.getString("MAFB"));
-                invoice.setMaNV(rs.getString("NGUOIXACNHAN"));
-                invoice.setNgayTao(rs.getString("NGAYTAO"));
-                invoice.setNgayBD(rs.getString("NGAYBD"));
-                invoice.setNgayKT(rs.getString("NGAYKT"));
-                invoice.setNgayThanhToan(rs.getString("NGAYTHANHTOAN"));
-                invoice.setTongTien(rs.getInt("TONGTIEN"));
-                invoice.setTinhTrangTT(rs.getString("TINHTRANGTT"));
-                invoice.setSLSD(rs.getInt("SLSD"));
-                invoices.add(invoice);
-            }
-        } catch (SQLException | ClassNotFoundException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Lỗi khi load dữ liệu phòng: " + ex.getMessage());
-        }
-
-        // Hiển thị lại dữ liệu lên JTable
-        DefaultTableModel model = (DefaultTableModel) tblInvoices.getModel();
-        model.setRowCount(0); // Xoá hết dữ liệu cũ trên bảng
-
-        for (Invoice in : invoices) {
-            model.addRow(new Object[] {
-                in.getMaHD(),
-                in.getMaKH(),
-                in.getMaDVP(),
-                in.getMaDVTI(),
-                in.getMaFB(),
-                in.getMaNV(),
-                in.getNgayTao(),
-                in.getNgayBD(),
-                in.getNgayKT(),
-                in.getNgayThanhToan(),
-                in.getTongTien(),
-                in.getTinhTrangTT(),
-                in.getSLSD()
-            });
-        }
-        
-    }//GEN-LAST:event_btnReloadInVoiceActionPerformed
-
     private void autoReloadInvoice(){
         //invoices.clear(); // Xoá dữ liệu cũ trong danh sách
         String sql = "SELECT * FROM HOADON";
@@ -1272,55 +1316,6 @@ public class DashboardForm extends javax.swing.JFrame {
         cl.show(CardLayout_Management, "Customers");
     }//GEN-LAST:event_btnCustomerManagementActionPerformed
 
-    private void btnReloadCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadCustomerActionPerformed
-        // TODO add your handling code here:
-        customers.clear();
-        String sql = "SELECT * FROM KHACHHANG";
-        dba_connection connect = new dba_connection();
-       
-        try {
-            Class.forName(connect.driver);
-            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            while(rs.next()){
-                Customer customer = new Customer();
-                customer.setCustomerID(rs.getString("MAKH"));
-                customer.setName(rs.getString("HOTEN"));
-                customer.setPassword(rs.getString("PASSWORD"));
-                customer.setCitizenID(rs.getString("CCCD"));
-                customer.setPhoneNumber(rs.getString("SDT"));
-                customer.setDateOfBirth(rs.getDate("NGAYSINH")); // Use getDate for DATE type
-                customer.setGender(rs.getString("GIOITINH"));
-                customer.setAddress(rs.getString("DIACHI"));
-                customer.setEmail(rs.getString("EMAIL"));
-                customers.add(customer);
-            }
-        }
-        catch (SQLException | ClassNotFoundException ex){
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Lỗi khi load dữ liệu phòng: " + ex.getMessage());
-        }
-        
-        DefaultTableModel model = (DefaultTableModel) tblCustomers.getModel();
-        model.setRowCount(0); // Xoá hết dữ liệu cũ trên bảng
-
-        for (Customer cus : customers) {
-            model.addRow(new Object[] {
-                cus.getCustomerID(),
-                cus.getName(),
-                cus.getPassword(),
-                cus.getCitizenID(),
-                cus.getPhoneNumber(),
-                cus.getDateOfBirth(),
-                cus.getGender(),
-                cus.getAddress(),
-                cus.getEmail()
-            });
-        }
-        
-    }//GEN-LAST:event_btnReloadCustomerActionPerformed
-
     private void btnUpdateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCustomerActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnUpdateCustomerActionPerformed
@@ -1329,6 +1324,65 @@ public class DashboardForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnBackCustomerActionPerformed
+
+    private void btnPayCheckoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayCheckoutActionPerformed
+        CardLayout cl = (CardLayout)(CardLayout_Management.getLayout());
+        cl.show(CardLayout_Management, "Pay & Checkout");
+        
+    }//GEN-LAST:event_btnPayCheckoutActionPerformed
+
+    private void btnThanhtoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhtoanActionPerformed
+
+
+    }//GEN-LAST:event_btnThanhtoanActionPerformed
+
+    private void btnGiahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiahanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGiahanActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        dba_connection connect = new dba_connection();
+        String sql_hoadon = "select MAHD, LOAIPHONG, MOTA, NGAYBD, NGAYKT, TINHTRANGTT FROM HOADON "
+                    + "JOIN KHACHHANG ON HOADON.MAKH = KHACHHANG.MAKH "
+                    + "JOIN DVPHONG ON HOADON.MADVP = DVPHONG.MADVP "                    
+                    + "WHERE KHACHHANG.SDT = '" + Sdt_txt.getText() + "'";    
+        
+        try {
+            Class.forName(connect.driver);
+            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+            PreparedStatement pst = null;
+            pst = con.prepareStatement(sql_hoadon);
+
+            ResultSet rs2 = pst.executeQuery();
+            while(rs2.next()){
+                Payout pay = new Payout();
+                pay.setMahd(rs2.getString("MAHD"));
+                pay.setLoaiphong(rs2.getString("LOAIPHONG"));                
+                pay.setNgaybd(rs2.getString("NGAYBD"));
+                pay.setNgaykt(rs2.getString("NGAYKT"));
+                pay.setTinhtrang(rs2.getString("TINHTRANGTT"));
+                pay.setTenphong(rs2.getString("MOTA"));
+                list.add(pay);
+            }
+
+            DefaultTableModel table =  (DefaultTableModel) pay_table.getModel();
+            table.setRowCount(0);
+
+            for(Payout p: list){
+                table.addRow(new Object[]{
+                    p.mahd,
+                    p.loaiphong,
+                    p.tenphong,
+                    p.ngaybatdau,
+                    p.ngayketthuc,
+                    p.tinhtrangtt
+                });
+            }
+           
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DashboardClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     private void autoReloadCustomer(){
         String sql = "SELECT * FROM KHACHHANG";
@@ -1412,12 +1466,15 @@ public class DashboardForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CardLayout_Management;
+    private javax.swing.JPanel CardPayCheckout;
     private javax.swing.JPanel Customers;
     private javax.swing.JPanel Invoices;
     private javax.swing.JLabel LbRoomManage;
     private javax.swing.JLabel LbRoomManage1;
     private javax.swing.JLabel LbRoomManage2;
     private javax.swing.JPanel Rooms;
+    private javax.swing.JTextField Sdt_txt;
+    private javax.swing.JPanel Service_invoice;
     private javax.swing.JPanel Services;
     private javax.swing.JButton btnAddCustomer;
     private javax.swing.JButton btnAddInvoice;
@@ -1432,27 +1489,34 @@ public class DashboardForm extends javax.swing.JFrame {
     private javax.swing.JButton btnDeleteInvoice;
     private javax.swing.JButton btnDeleteRoom;
     private javax.swing.JButton btnDeleteService;
+    private javax.swing.JButton btnGiahan;
     private javax.swing.JButton btnInvoiceManagement;
-    private javax.swing.JButton btnReloadCustomer;
-    private javax.swing.JButton btnReloadInVoice;
-    private javax.swing.JButton btnReloadRoom;
-    private javax.swing.JButton btnReloadService;
+    private javax.swing.JButton btnPayCheckout;
     private javax.swing.JButton btnRoomManagement;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnServiceManagement;
+    private javax.swing.JButton btnThanhtoan;
     private javax.swing.JButton btnUpdateCustomer;
     private javax.swing.JButton btnUpdateInvoice;
     private javax.swing.JButton btnUpdateRoom;
     private javax.swing.JButton btnUpdateService;
     private javax.swing.JPanel invoiceBtnPanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
@@ -1462,8 +1526,11 @@ public class DashboardForm extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel panelBtn;
     private javax.swing.JPanel panelMain;
+    private javax.swing.JTable pay_table;
     private javax.swing.JPanel roomBtnPanel;
     private javax.swing.JPanel serviceBtnPanel;
     private javax.swing.JTable tblCustomers;
