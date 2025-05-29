@@ -90,7 +90,7 @@ public class Loading extends javax.swing.JFrame {
         Loading_Label.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         Loading_Label.setForeground(new java.awt.Color(255, 255, 255));
         Loading_Label.setText("Loading...");
-        getContentPane().add(Loading_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 530, -1, -1));
+        getContentPane().add(Loading_Label, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 530, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));

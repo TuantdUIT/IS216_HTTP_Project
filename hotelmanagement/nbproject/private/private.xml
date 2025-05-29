@@ -2,18 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group name="BTTH1">
-            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/add/AddRoomForm.java</file>
-            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/update/UpdateInvoiceForm.java</file>
-            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/update/UpdateRoomForm.java</file>
-            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/update/UpdateServiceForm.java</file>
-            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/entity/dba_connection.java</file>
-            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/DashboardForm.java</file>
-            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/entity/Customer.java</file>
-            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/entity/Current_User.java</file>
-            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/DashboardClient.java</file>
-            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/Time_Frame.java</file>
-        </group>
         <group/>
+        <group name="BTTH1"/>
     </open-files>
 </project-private>

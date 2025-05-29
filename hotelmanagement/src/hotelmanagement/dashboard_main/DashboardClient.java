@@ -287,6 +287,7 @@ public class DashboardClient extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tabRooms = new javax.swing.JTable();
         btnBookR = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         CardBookServices = new javax.swing.JPanel();
         labTotalUsage = new javax.swing.JPanel();
         Title1 = new javax.swing.JLabel();
@@ -442,9 +443,9 @@ public class DashboardClient extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/client_icon.png"))); // NOI18N
 
+        lblHoTen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHoTen.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblHoTen.setForeground(new java.awt.Color(255, 255, 255));
-        lblHoTen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout pnlButtonLayout = new javax.swing.GroupLayout(pnlButton);
         pnlButton.setLayout(pnlButtonLayout);
@@ -527,20 +528,18 @@ public class DashboardClient extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(tabUserRooms);
 
-        Title2.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         Title2.setText("My Room");
+        Title2.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
 
         javax.swing.GroupLayout CardMyRoomsLayout = new javax.swing.GroupLayout(CardMyRooms);
         CardMyRooms.setLayout(CardMyRoomsLayout);
         CardMyRoomsLayout.setHorizontalGroup(
             CardMyRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CardMyRoomsLayout.createSequentialGroup()
-                .addContainerGap(120, Short.MAX_VALUE)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 970, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CardMyRoomsLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Title2)
+                .addGroup(CardMyRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 970, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Title2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         CardMyRoomsLayout.setVerticalGroup(
@@ -604,8 +603,8 @@ public class DashboardClient extends javax.swing.JFrame {
         });
         jScrollPane6.setViewportView(tabUserServices);
 
-        Title4.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         Title4.setText("My Service");
+        Title4.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
 
         javax.swing.GroupLayout CardMyServicesLayout = new javax.swing.GroupLayout(CardMyServices);
         CardMyServices.setLayout(CardMyServicesLayout);
@@ -613,12 +612,10 @@ public class DashboardClient extends javax.swing.JFrame {
             CardMyServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CardMyServicesLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Title4)
+                .addGroup(CardMyServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Title4)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 970, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(CardMyServicesLayout.createSequentialGroup()
-                .addContainerGap(114, Short.MAX_VALUE)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 970, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(130, Short.MAX_VALUE))
         );
         CardMyServicesLayout.setVerticalGroup(
             CardMyServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -637,17 +634,17 @@ public class DashboardClient extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        Title.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         Title.setText("BOOK ROOM");
+        Title.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
 
-        labCheckindate.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         labCheckindate.setText("Checkin Date:");
+        labCheckindate.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
-        labCheckoutdate.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         labCheckoutdate.setText("Checkout Date:");
+        labCheckoutdate.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
-        labCheckoutdate1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         labCheckoutdate1.setText("Pick available rooms:");
+        labCheckoutdate1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
         tabRooms.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -670,11 +667,18 @@ public class DashboardClient extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tabRooms);
 
-        btnBookR.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnBookR.setText("Book");
+        btnBookR.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnBookR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBookRActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Check");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -706,7 +710,9 @@ public class DashboardClient extends javax.swing.JFrame {
                                     .addGap(272, 272, 272))
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(385, 385, 385)
+                        .addGap(313, 313, 313)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54)
                         .addComponent(btnBookR, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
@@ -715,21 +721,26 @@ public class DashboardClient extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(Title)
-                .addGap(36, 36, 36)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labCheckindate)
-                    .addComponent(datePickerCheckin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labCheckoutdate)
-                    .addComponent(datePickerCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(labCheckoutdate1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(btnBookR, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labCheckindate)
+                            .addComponent(datePickerCheckin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labCheckoutdate)
+                            .addComponent(datePickerCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(labCheckoutdate1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBookR, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(74, 74, 74))
         );
 
         javax.swing.GroupLayout CardBookRoomsLayout = new javax.swing.GroupLayout(CardBookRooms);
@@ -749,20 +760,20 @@ public class DashboardClient extends javax.swing.JFrame {
 
         CardBookServices.setBackground(new java.awt.Color(255, 255, 255));
 
-        Title1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         Title1.setText("BOOK SERVICE");
+        Title1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
 
-        labStartDate.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         labStartDate.setText("Start date:");
+        labStartDate.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
-        labEndDate.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         labEndDate.setText("End date:");
+        labEndDate.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
-        labTotal.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         labTotal.setText("Total of usage: (DELETED)");
+        labTotal.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
-        labChooseSer.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         labChooseSer.setText("Choose service:");
+        labChooseSer.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
 
         spinTotalUsage.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
@@ -868,11 +879,11 @@ public class DashboardClient extends javax.swing.JFrame {
 
         CardPayCheckout.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel2.setText("PAY & CHECKOUT");
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel3.setText("SDT:");
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -911,8 +922,8 @@ public class DashboardClient extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel4.setText("Thành Tiền: ");
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
         thanhtien_txt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -920,19 +931,19 @@ public class DashboardClient extends javax.swing.JFrame {
             }
         });
 
-        btnThanhtoan.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnThanhtoan.setText("Thanh toán");
+        btnThanhtoan.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
-        btnGiahan.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnGiahan.setText("Gia hạn");
+        btnGiahan.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnGiahan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGiahanActionPerformed(evt);
             }
         });
 
-        timkiem_btn.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         timkiem_btn.setText("Tìm kiếm");
+        timkiem_btn.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         timkiem_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 timkiem_btnActionPerformed(evt);
@@ -1078,7 +1089,24 @@ public class DashboardClient extends javax.swing.JFrame {
     private void thanhtien_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thanhtien_txtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_thanhtien_txtActionPerformed
+    
+    public boolean isRoomAvailable(Connection conn, String maPhong, LocalDate ngayCheckin, LocalDate ngayCheckout) throws SQLException {
+    String sql = "SELECT 1 FROM HOADON WHERE MADVP = ? AND ((? >= NGAYBD AND ? <= NGAYKT) OR (? >= NGAYBD AND ? <= NGAYKT))";
+    
+    try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        pstmt.setString(1, maPhong);
+        pstmt.setDate(2, java.sql.Date.valueOf(ngayCheckout));
+        pstmt.setDate(3, java.sql.Date.valueOf(ngayCheckout));
+        pstmt.setDate(4, java.sql.Date.valueOf(ngayCheckin));
+        pstmt.setDate(5, java.sql.Date.valueOf(ngayCheckin));
+        
+        try (ResultSet rs = pstmt.executeQuery()) {
+            return !rs.next(); 
+        }
+    }
+}
 
+    
     private void btnBookRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookRActionPerformed
         if(datePickerCheckin.getDate() == null || datePickerCheckout.getDate() == null)
         {
@@ -1099,40 +1127,36 @@ public class DashboardClient extends javax.swing.JFrame {
                 
                 int selectedRow = tabRooms.getSelectedRow();
                 if (selectedRow != -1) {
-//                String sql2 = "UPDATE DVPHONG SET TINHTRANG = ? WHERE MADVP = ?";
-//                PreparedStatement pst = con.prepareStatement(sql2);
-                //Lay cot MADVP tu` dong duoc chon trong bang
-                String MaDVP = tabRooms.getValueAt(selectedRow, 0).toString();
+                String MaDVP = tabRooms.getValueAt(selectedRow, 0).toString();              
                 
-//                pst.setString(1, "Occupied");
-//                pst.setString(2, MaDVP);
-//                pst.executeUpdate();
-                
-                
-                
-                
+                if(!isRoomAvailable(con,MaDVP,datePickerCheckin.getDate(),datePickerCheckout.getDate()))
+                {
+                    JOptionPane.showMessageDialog(null, "Sorry, this room is already booked during your selected dates. Please try another date range!");
+                }
+                else {
                 //Them 1 hoa don moi
-                String sql = "INSERT INTO HOADON (MAKH, MADVP, MADVTI, MAFB, NGUOIXACNHAN, NGAYBD, NGAYKT, NGAYTHANHTOAN, TINHTRANGTT) "
-                        + "VALUES ('" + Current_User.MaKH + "', trim(?), NULL, NULL, NUll, ?, ?, NULL, NUll)";
-                PreparedStatement pst1 = con.prepareStatement(sql);
-                
-                //Lay cot MADVTI tu` dong duoc chon trong bang
-                pst1.setString(1, MaDVP);
-                
-                LocalDate ngayBD = datePickerCheckin.getDate();
-                Date ngayBDsql = Date.valueOf(ngayBD);
-                pst1.setDate(2, ngayBDsql);
-                
-                LocalDate ngayKT = datePickerCheckout.getDate();
-                Date ngayKTsql = Date.valueOf(ngayKT);
-                pst1.setDate(3, ngayKTsql);
-                
-                pst1.executeUpdate();
-                
-                //Reload lai bang rooms available
-                Reload_Table_Rooms();
-                JOptionPane.showMessageDialog(null, "Your booking was successful!");
-                } 
+                    String sql = "INSERT INTO HOADON (MAKH, MADVP, MADVTI, MAFB, NGUOIXACNHAN, NGAYBD, NGAYKT, NGAYTHANHTOAN, TINHTRANGTT) "
+                            + "VALUES ('" + Current_User.MaKH + "', trim(?), NULL, NULL, NUll, ?, ?, NULL, NUll)";
+                    PreparedStatement pst1 = con.prepareStatement(sql);
+
+                    //Lay cot MADVTI tu` dong duoc chon trong bang
+                    pst1.setString(1, MaDVP);
+
+                    LocalDate ngayBD = datePickerCheckin.getDate();
+                    Date ngayBDsql = Date.valueOf(ngayBD);
+                    pst1.setDate(2, ngayBDsql);
+
+                    LocalDate ngayKT = datePickerCheckout.getDate();
+                    Date ngayKTsql = Date.valueOf(ngayKT);
+                    pst1.setDate(3, ngayKTsql);
+
+                    pst1.executeUpdate();
+
+                    //Reload lai bang rooms available
+                    Reload_Table_Rooms();
+                    JOptionPane.showMessageDialog(null, "Your booking was successful!");
+                    }
+                }
                 else {
                 JOptionPane.showMessageDialog(null, "Please choose a room to book!");
                 }
@@ -1201,6 +1225,18 @@ public class DashboardClient extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBookSActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int selectedRow = tabRooms.getSelectedRow();
+        if (selectedRow != -1) {
+            String MaDVP = tabRooms.getValueAt(selectedRow, 0).toString();
+            CheckRoomAvailable frame = new CheckRoomAvailable(MaDVP);
+            frame.setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Please choose a room to check!");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1261,6 +1297,7 @@ public class DashboardClient extends javax.swing.JFrame {
     private com.github.lgooddatepicker.components.DatePicker datePickerCheckout;
     private com.github.lgooddatepicker.components.DatePicker datePickerEndDate;
     private com.github.lgooddatepicker.components.DatePicker datePickerStartDate;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
