@@ -6,20 +6,38 @@ package hotelmanagement.entity;
 
 
 public class Payout {
-    public String makh, mahd, madvp, madvti, ngaybatdau, ngayketthuc;
-    public double gia;
-
+    public String mahd, loaiphong, tenphong, ngaybatdau, ngayketthuc;
+    public String tinhtrangtt;
+    
     public Payout() {
     }
     
-    public Payout(String kh, String hd, String dvp, String dvti, String bd, String kt, double g){
-        makh = kh;
-        mahd = hd;
-        madvp = dvp;
-        madvti = dvti;
+    public Payout(String hd, String dvp, String dvti, String bd, String kt, String tt){      
+        loaiphong = dvp;
+        tenphong = dvti;
         ngaybatdau = bd;
         ngayketthuc = kt;
-        gia = g;
+        mahd = hd;
+        tinhtrangtt = tt;
+    }
+    public void setLoaiphong(String dvp){
+        loaiphong = dvp;
+    }
+    public void setMahd(String hd){
+        mahd = hd;
+    }
+    public void setNgaybd(String bd){
+        ngaybatdau = bd;
+    }
+    public void setNgaykt(String kt){
+        ngayketthuc = kt;
+    }
+    
+    public void setTenphong(String tpString){
+        tenphong = tpString;
+    }
+    public void setTinhtrang(String tt){
+        tinhtrangtt = tt;
     }
     
 //    @Override
