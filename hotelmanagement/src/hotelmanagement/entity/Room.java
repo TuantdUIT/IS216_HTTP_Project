@@ -1,8 +1,11 @@
 
 package hotelmanagement.entity;
 
+import java.util.ArrayList;
+
 
 public class Room {
+    
     private String roomID;
     private String loaiPhong;
     private String moTa;

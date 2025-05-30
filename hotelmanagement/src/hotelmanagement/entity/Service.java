@@ -1,11 +1,14 @@
 
 package hotelmanagement.entity;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author dell
  */
 public class Service {
+    
     private String maDV;
     private String tenDV;
     private String moTa;

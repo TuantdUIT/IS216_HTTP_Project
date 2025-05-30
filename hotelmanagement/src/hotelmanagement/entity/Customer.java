@@ -4,6 +4,7 @@
  */
 package hotelmanagement.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -11,6 +12,7 @@ import java.util.Date;
  * @author dell
  */
 public class Customer {
+    
     private String customerID;    // MAKH
     private String name;      // HOTEN
     private String password;      // PASSWORD

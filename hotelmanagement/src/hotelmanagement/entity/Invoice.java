@@ -1,8 +1,11 @@
 
 package hotelmanagement.entity;
 
+import java.util.ArrayList;
+
 
 public class Invoice {
+    
     private String maHD;
     private String maKH;
     private String maDVP;

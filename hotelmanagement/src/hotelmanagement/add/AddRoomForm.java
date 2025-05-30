@@ -4,6 +4,8 @@
  */
 package hotelmanagement.add;
 
+import hotelmanagement.dashboard_main.DashboardStaff;
+import hotelmanagement.entity.Room;
 import hotelmanagement.entity.dba_connection;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -13,21 +15,25 @@ import javax.swing.*;
 import java.sql.*;
 import javax.swing.text.MaskFormatter;
 import java.text.SimpleDateFormat;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author dell
  */
 public class AddRoomForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AddRoomForm
-     */
+    private DashboardStaff parent;
     public AddRoomForm() {
         setVisible(true);
         initComponents();
-        setLocationRelativeTo(null);
     }
 
+    public AddRoomForm(DashboardStaff parent){
+        setVisible(true);
+        initComponents();
+        setLocationRelativeTo(null);
+        this.parent = parent;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -175,30 +181,32 @@ public class AddRoomForm extends javax.swing.JFrame {
     
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         // TODO add your handling code here:
-        dba_connection connect = new dba_connection();        
+        dba_connection connect = new dba_connection();  
+        String sql = "INSERT INTO DVPHONG(LOAIPHONG, MOTA, DONGIA, TINHTRANG) VALUES (?, ?, ?, ?)";
+        
         String type = txtType.getText();
         String describe = txtDescribe.getText();
         int price = Integer.parseInt(txtPrice.getText());
         //String status = (String) cbxStatus.getSelectedItem();
-         
-        try {
-            
+        try {            
             Class.forName(connect.driver);
-            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);           
+            PreparedStatement pst = null;
+            pst = con.prepareStatement(sql);           
+            pst.setString(1, type);
+            pst.setString(2, describe);
+            pst.setInt(3, price);
+            pst.setString(4, "Available");
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Add room sucessfully!");
+            pst.close();
+            
 
-            // Chèn dữ liệu vào cơ sở dữ liệu
-            String sql = "INSERT INTO DVPHONG(LOAIPHONG, MOTA, DONGIA, TINHTRANG) VALUES (?, ?, ?, ?)";
-            PreparedStatement pst = con.prepareStatement(sql);
-                pst.setString(1, type);
-                pst.setString(2, describe);
-                pst.setInt(3, price);
-                pst.setString(4, "Available");
-                pst.executeUpdate();
-                JOptionPane.showMessageDialog(this, "Add room sucessfully!");
-                
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
         }
+        if(this.parent != null)parent.autoReloadRoom();        
+               
         this.dispose();
     }//GEN-LAST:event_btnCreateActionPerformed
 

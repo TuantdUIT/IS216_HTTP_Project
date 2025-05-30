@@ -36,7 +36,7 @@ public class DashboardClient extends javax.swing.JFrame {
     /**
      * Creates new form DashboardClient
      */
-    public ArrayList<Payout> list = new ArrayList<>();
+    
     
     public DashboardClient() {
         initComponents();
@@ -304,17 +304,6 @@ public class DashboardClient extends javax.swing.JFrame {
         scrlServices = new javax.swing.JScrollPane();
         tabServices = new javax.swing.JTable();
         btnBookS = new javax.swing.JButton();
-        CardPayCheckout = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        sdt_txt = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
-        thanhtien_txt = new javax.swing.JTextField();
-        btnThanhtoan = new javax.swing.JButton();
-        btnGiahan = new javax.swing.JButton();
-        timkiem_btn = new javax.swing.JButton();
         CardWriteFeedbacks = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -851,130 +840,6 @@ public class DashboardClient extends javax.swing.JFrame {
 
         pnlCard.add(CardBookServices, "card5");
 
-        CardPayCheckout.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel2.setText("PAY & CHECKOUT");
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
-
-        jLabel3.setText("SDT:");
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "MAKH", "MAHD", "MADVP", "MADVTI", "NGAYBATDAU", "NGAYKETTHUC", "GIA"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
-
-        jLabel4.setText("Thành Tiền: ");
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-
-        thanhtien_txt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                thanhtien_txtActionPerformed(evt);
-            }
-        });
-
-        btnThanhtoan.setText("Thanh toán");
-        btnThanhtoan.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-
-        btnGiahan.setText("Gia hạn");
-        btnGiahan.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnGiahan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGiahanActionPerformed(evt);
-            }
-        });
-
-        timkiem_btn.setText("Tìm kiếm");
-        timkiem_btn.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        timkiem_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                timkiem_btnActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout CardPayCheckoutLayout = new javax.swing.GroupLayout(CardPayCheckout);
-        CardPayCheckout.setLayout(CardPayCheckoutLayout);
-        CardPayCheckoutLayout.setHorizontalGroup(
-            CardPayCheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CardPayCheckoutLayout.createSequentialGroup()
-                .addGap(247, 247, 247)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(CardPayCheckoutLayout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addGroup(CardPayCheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(CardPayCheckoutLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(thanhtien_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnThanhtoan)
-                        .addGap(30, 30, 30)
-                        .addComponent(btnGiahan))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CardPayCheckoutLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(sdt_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(timkiem_btn)))
-                .addGap(53, 53, 53))
-        );
-        CardPayCheckoutLayout.setVerticalGroup(
-            CardPayCheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CardPayCheckoutLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(CardPayCheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sdt_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(timkiem_btn))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(CardPayCheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(thanhtien_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnThanhtoan)
-                    .addComponent(btnGiahan))
-                .addContainerGap(62, Short.MAX_VALUE))
-        );
-
-        pnlCard.add(CardPayCheckout, "card7");
-
         CardWriteFeedbacks.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout CardWriteFeedbacksLayout = new javax.swing.GroupLayout(CardWriteFeedbacks);
@@ -1046,18 +911,6 @@ public class DashboardClient extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_btnWriteFeedBacks1ActionPerformed
-
-    private void btnGiahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiahanActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGiahanActionPerformed
-
-    private void timkiem_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timkiem_btnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_timkiem_btnActionPerformed
-
-    private void thanhtien_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thanhtien_txtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_thanhtien_txtActionPerformed
     
     public boolean isRoomAvailable(Connection conn, String maPhong, LocalDate ngayCheckin, LocalDate ngayCheckout) throws SQLException {
     String sql = "SELECT 1 FROM HOADON WHERE MADVP = ? AND ((? >= NGAYBD AND ? <= NGAYKT) OR (? >= NGAYBD AND ? <= NGAYKT))";
@@ -1244,7 +1097,6 @@ public class DashboardClient extends javax.swing.JFrame {
     private javax.swing.JPanel CardBookServices;
     private javax.swing.JPanel CardMyRooms;
     private javax.swing.JPanel CardMyServices;
-    private javax.swing.JPanel CardPayCheckout;
     private javax.swing.JPanel CardWriteFeedbacks;
     private javax.swing.JLabel Title;
     private javax.swing.JLabel Title1;
@@ -1254,10 +1106,8 @@ public class DashboardClient extends javax.swing.JFrame {
     private javax.swing.JButton btnBookRooms;
     private javax.swing.JButton btnBookS;
     private javax.swing.JButton btnBookServices;
-    private javax.swing.JButton btnGiahan;
     private javax.swing.JButton btnMyRooms;
     private javax.swing.JButton btnMyServices;
-    private javax.swing.JButton btnThanhtoan;
     private javax.swing.JButton btnWriteFeedBacks1;
     private com.github.lgooddatepicker.components.DatePicker datePickerCheckin;
     private com.github.lgooddatepicker.components.DatePicker datePickerCheckout;
@@ -1265,16 +1115,11 @@ public class DashboardClient extends javax.swing.JFrame {
     private com.github.lgooddatepicker.components.DatePicker datePickerStartDate;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel labCheckindate;
     private javax.swing.JLabel labCheckoutdate;
     private javax.swing.JLabel labCheckoutdate1;
@@ -1289,12 +1134,9 @@ public class DashboardClient extends javax.swing.JFrame {
     private javax.swing.JPanel pnlButton;
     private javax.swing.JPanel pnlCard;
     private javax.swing.JScrollPane scrlServices;
-    private javax.swing.JTextField sdt_txt;
     private javax.swing.JTable tabRooms;
     private javax.swing.JTable tabServices;
     private javax.swing.JTable tabUserRooms;
     private javax.swing.JTable tabUserServices;
-    private javax.swing.JTextField thanhtien_txt;
-    private javax.swing.JButton timkiem_btn;
     // End of variables declaration//GEN-END:variables
 }

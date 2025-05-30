@@ -209,6 +209,7 @@ public class Client_Login extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();
             
             if(rs.next()){
+                JOptionPane.showMessageDialog(this, "Login successfully");
                 new DashboardClient().setVisible(true);
                 this.setVisible(false);
                 

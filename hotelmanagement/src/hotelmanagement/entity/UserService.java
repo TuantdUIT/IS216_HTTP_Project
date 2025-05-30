@@ -9,6 +9,7 @@ package hotelmanagement.entity;
  * @author takar
  */
 public class UserService {
+    
     private String MADVTI;
     private String TenDVTI;
     private String MoTa;
