@@ -121,10 +121,12 @@ public class DashboardStaff extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblCustomers = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
-        btnBackCustomer = new javax.swing.JButton();
         jSeparator7 = new javax.swing.JSeparator();
         jSeparator8 = new javax.swing.JSeparator();
+        btnBackCustomer = new javax.swing.JButton();
+        btnSearchCustomer = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        sdt_txt_search = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -852,15 +854,16 @@ public class DashboardStaff extends javax.swing.JFrame {
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 970, Short.MAX_VALUE)
                     .addComponent(jSeparator4)
                     .addGroup(InvoicesLayout.createSequentialGroup()
-                        .addGroup(InvoicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator3)
-                            .addGroup(InvoicesLayout.createSequentialGroup()
-                                .addGap(174, 174, 174)
-                                .addComponent(invoiceBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jSeparator3)
                         .addContainerGap())))
             .addGroup(InvoicesLayout.createSequentialGroup()
-                .addGap(254, 254, 254)
-                .addComponent(LbRoomManage2)
+                .addGroup(InvoicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(InvoicesLayout.createSequentialGroup()
+                        .addGap(254, 254, 254)
+                        .addComponent(LbRoomManage2))
+                    .addGroup(InvoicesLayout.createSequentialGroup()
+                        .addGap(192, 192, 192)
+                        .addComponent(invoiceBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         InvoicesLayout.setVerticalGroup(
@@ -874,9 +877,9 @@ public class DashboardStaff extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(30, 30, 30)
                 .addComponent(invoiceBtnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
 
         jScrollPane4.getHorizontalScrollBar().setPreferredSize(new java.awt.Dimension(0, 5)); // 5 là chiều cao mới
@@ -921,8 +924,6 @@ public class DashboardStaff extends javax.swing.JFrame {
         tblCustomers.getColumnModel().getColumn(8).setPreferredWidth(120);
         jScrollPane3.getHorizontalScrollBar().setPreferredSize(new java.awt.Dimension(5, 5));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-
         btnBackCustomer.setText("Back");
         btnBackCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -930,60 +931,67 @@ public class DashboardStaff extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(410, Short.MAX_VALUE)
-                .addComponent(btnBackCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnBackCustomer)
-                .addContainerGap(48, Short.MAX_VALUE))
-        );
+        btnSearchCustomer.setText("Search");
+        btnSearchCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchCustomerActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel8.setText("SĐT: ");
+
+        sdt_txt_search.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout CustomersLayout = new javax.swing.GroupLayout(Customers);
         Customers.setLayout(CustomersLayout);
         CustomersLayout.setHorizontalGroup(
             CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CustomersLayout.createSequentialGroup()
-                .addGroup(CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(237, 237, 237)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(CustomersLayout.createSequentialGroup()
+                .addGroup(CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(CustomersLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3)
+                            .addComponent(jSeparator7)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomersLayout.createSequentialGroup()
                                 .addGap(0, 149, Short.MAX_VALUE)
-                                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jSeparator7)))
+                                .addGroup(CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jSeparator8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnBackCustomer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(CustomersLayout.createSequentialGroup()
-                        .addGap(230, 230, 230)
-                        .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomersLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(sdt_txt_search)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSearchCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)))
                 .addContainerGap())
         );
         CustomersLayout.setVerticalGroup(
             CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CustomersLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
+                .addGap(51, 51, 51)
+                .addGroup(CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSearchCustomer)
+                    .addComponent(jLabel8)
+                    .addComponent(sdt_txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnBackCustomer)
+                .addContainerGap(176, Short.MAX_VALUE))
         );
 
         CardLayout_Management.add(Customers, "card5");
@@ -1451,6 +1459,57 @@ public class DashboardStaff extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
+    private void btnSearchCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchCustomerActionPerformed
+
+        dba_connection connect = new dba_connection();
+//        String sql_search_khachhang = "SELECT * FROM KHACHHANG WHERE SDT = '" + sdt_txt_search.getText() + "'";
+        String sql_search_khachhang = "SELECT * FROM KHACHHANG WHERE trim(SDT) = trim(?)";
+        try {
+            Class.forName(connect.driver);
+            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+            PreparedStatement pst = null;
+            pst = con.prepareStatement(sql_search_khachhang);
+            model =  (DefaultTableModel) tblCustomers.getModel();
+            model.setRowCount(0);            
+            
+            pst.setString(1, sdt_txt_search.getText());
+            ResultSet rs = pst.executeQuery();
+            
+
+            while(rs.next()){
+//                System.out.println("Tìm thấy: " + rs.getString("HOTEN"));
+                Customer customer = new Customer();
+                customer.setCustomerID(rs.getString("MAKH"));
+                customer.setName(rs.getString("HOTEN"));
+                customer.setPassword(rs.getString("PASSWORD"));
+                customer.setCitizenID(rs.getString("CCCD"));
+                customer.setPhoneNumber(rs.getString("SDT"));
+                customer.setDateOfBirth(rs.getDate("NGAYSINH")); // Use getDate for DATE type
+                customer.setGender(rs.getString("GIOITINH"));
+                customer.setAddress(rs.getString("DIACHI"));
+                customer.setEmail(rs.getString("EMAIL"));
+                
+                model.addRow(new Object[] {
+                    customer.getCustomerID(),
+                    customer.getName(),
+                    customer.getPassword(),
+                    customer.getCitizenID(),
+                    customer.getPhoneNumber(),
+                    customer.getDateOfBirth(),
+                    customer.getGender(),
+                    customer.getAddress(),
+                    customer.getEmail()
+                });                
+            }
+            
+            
+
+                
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DashboardClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSearchCustomerActionPerformed
+
     private void autoReloadCustomer(){
         Customer c = new Customer();
         String sql = "SELECT * FROM KHACHHANG";
@@ -1480,7 +1539,7 @@ public class DashboardStaff extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Lỗi khi load dữ liệu phòng: " + ex.getMessage());
         }
         
-        DefaultTableModel model = (DefaultTableModel) tblCustomers.getModel();
+        model = (DefaultTableModel) tblCustomers.getModel();
         model.setRowCount(0); // Xoá hết dữ liệu cũ trên bảng
 
         for (Customer cus : customers) {
@@ -1495,7 +1554,7 @@ public class DashboardStaff extends javax.swing.JFrame {
                 cus.getAddress(),
                 cus.getEmail()
             });
-    }
+        }
     /**
      * @param args the command line arguments
      */
@@ -1562,6 +1621,7 @@ public class DashboardStaff extends javax.swing.JFrame {
     private javax.swing.JButton btnPayCheckout;
     private javax.swing.JButton btnRoomManagement;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnSearchCustomer;
     private javax.swing.JButton btnServiceManagement;
     private javax.swing.JButton btnUpdateInvoice;
     private javax.swing.JButton btnUpdateRoom;
@@ -1575,8 +1635,8 @@ public class DashboardStaff extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1596,6 +1656,7 @@ public class DashboardStaff extends javax.swing.JFrame {
     private javax.swing.JPanel panelMain;
     private javax.swing.JTable pay_table;
     private javax.swing.JPanel roomBtnPanel;
+    private javax.swing.JTextField sdt_txt_search;
     private javax.swing.JTable ser_table;
     private javax.swing.JPanel serviceBtnPanel;
     private javax.swing.JTable tblCustomers;
