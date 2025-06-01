@@ -4,6 +4,7 @@
  */
 package hotelmanagement.dashboard_main;
 
+import hotelmanagement.Payment.Bank_BookRoom;
 import hotelmanagement.entity.UserService;
 import hotelmanagement.entity.UserRoom;
 import hotelmanagement.entity.Room;
@@ -44,7 +45,7 @@ public class DashboardClient extends javax.swing.JFrame {
         pnlCard.add(CardMyServices, "MyServices");
         pnlCard.add(CardBookRooms, "BookRooms");
         pnlCard.add(CardBookServices, "BookServices");
-        pnlCard.add(CardWriteFeedbacks, "WriteFeedbacks");
+        
         
         
         //Lấy thông tin khách hàng để hiển thị
@@ -85,7 +86,7 @@ public class DashboardClient extends javax.swing.JFrame {
         ArrayList<Room> rooms = new ArrayList<>();
         rooms.clear();
         
-        String sql = "SELECT * FROM DVPHONG WHERE trim(TINHTRANG) = 'Available'";
+        String sql = "SELECT * FROM DVPHONG ORDER BY MADVP ASC";
         try {
             Class.forName(connect.driver);
             Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
@@ -268,8 +269,6 @@ public class DashboardClient extends javax.swing.JFrame {
         panelBook = new javax.swing.JPanel();
         btnBookRooms = new javax.swing.JButton();
         btnBookServices = new javax.swing.JButton();
-        panelFeedback = new javax.swing.JPanel();
-        btnWriteFeedBacks1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lblHoTen = new javax.swing.JLabel();
         pnlCard = new javax.swing.JPanel();
@@ -304,7 +303,6 @@ public class DashboardClient extends javax.swing.JFrame {
         scrlServices = new javax.swing.JScrollPane();
         tabServices = new javax.swing.JTable();
         btnBookS = new javax.swing.JButton();
-        CardWriteFeedbacks = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -388,33 +386,6 @@ public class DashboardClient extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelFeedback.setBackground(new java.awt.Color(46, 121, 130));
-        panelFeedback.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-
-        btnWriteFeedBacks1.setText("Write Feedbacks");
-        btnWriteFeedBacks1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnWriteFeedBacks1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelFeedbackLayout = new javax.swing.GroupLayout(panelFeedback);
-        panelFeedback.setLayout(panelFeedbackLayout);
-        panelFeedbackLayout.setHorizontalGroup(
-            panelFeedbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelFeedbackLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnWriteFeedBacks1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panelFeedbackLayout.setVerticalGroup(
-            panelFeedbackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFeedbackLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnWriteFeedBacks1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/client_icon.png"))); // NOI18N
 
@@ -429,7 +400,6 @@ public class DashboardClient extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlButtonLayout.createSequentialGroup()
                 .addContainerGap(36, Short.MAX_VALUE)
                 .addGroup(pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(panelFeedback, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelMyInfo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelBook, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -443,12 +413,10 @@ public class DashboardClient extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(30, 30, 30)
                 .addComponent(panelMyInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(78, 78, 78)
                 .addComponent(panelBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(panelFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -840,21 +808,6 @@ public class DashboardClient extends javax.swing.JFrame {
 
         pnlCard.add(CardBookServices, "card5");
 
-        CardWriteFeedbacks.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout CardWriteFeedbacksLayout = new javax.swing.GroupLayout(CardWriteFeedbacks);
-        CardWriteFeedbacks.setLayout(CardWriteFeedbacksLayout);
-        CardWriteFeedbacksLayout.setHorizontalGroup(
-            CardWriteFeedbacksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1214, Short.MAX_VALUE)
-        );
-        CardWriteFeedbacksLayout.setVerticalGroup(
-            CardWriteFeedbacksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 589, Short.MAX_VALUE)
-        );
-
-        pnlCard.add(CardWriteFeedbacks, "card6");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -906,11 +859,6 @@ public class DashboardClient extends javax.swing.JFrame {
         CardLayout layout = (CardLayout) pnlCard.getLayout();
         layout.show(pnlCard, "BookServices");
     }//GEN-LAST:event_btnBookServicesActionPerformed
-
-    private void btnWriteFeedBacks1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWriteFeedBacks1ActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_btnWriteFeedBacks1ActionPerformed
     
     public boolean isRoomAvailable(Connection conn, String maPhong, LocalDate ngayCheckin, LocalDate ngayCheckout) throws SQLException {
     String sql = "SELECT 1 FROM HOADON WHERE MADVP = ? AND ((? >= NGAYBD AND ? <= NGAYKT) OR (? >= NGAYBD AND ? <= NGAYKT))";
@@ -956,7 +904,7 @@ public class DashboardClient extends javax.swing.JFrame {
                 else {
                 //Them 1 hoa don moi
                     String sql = "INSERT INTO HOADON (MAKH, MADVP, MADVTI, MAFB, NGUOIXACNHAN, NGAYBD, NGAYKT, NGAYTHANHTOAN, TINHTRANGTT) "
-                            + "VALUES ('" + Current_User.MaKH + "', trim(?), NULL, NULL, NUll, ?, ?, NULL, NUll)";
+                            + "VALUES ('" + Current_User.MaKH + "', trim(?), NULL, NULL, NUll, ?, ?, NULL, 'Đã thanh toán')";
                     PreparedStatement pst1 = con.prepareStatement(sql);
 
                     //Lay cot MADVTI tu` dong duoc chon trong bang
@@ -974,7 +922,8 @@ public class DashboardClient extends javax.swing.JFrame {
 
                     //Reload lai bang rooms available
                     Reload_Table_Rooms();
-                    JOptionPane.showMessageDialog(null, "Your booking was successful!");
+                    Bank_BookRoom frame = new Bank_BookRoom();
+                    frame.setVisible(true);
                     }
                 }
                 else {
@@ -1011,7 +960,7 @@ public class DashboardClient extends javax.swing.JFrame {
                 int selectedRow = tabServices.getSelectedRow();
                 if (selectedRow != -1) {
                 String sql = "INSERT INTO HOADON (MAKH, MADVP, MADVTI, MAFB, NGUOIXACNHAN, NGAYBD, NGAYKT, NGAYTHANHTOAN, TINHTRANGTT) "
-                        + "VALUES ('" + Current_User.MaKH + "', NULL, trim(?), NULL, NUll, ?, ?, NULL, NUll)";
+                        + "VALUES ('" + Current_User.MaKH + "', NULL, trim(?), NULL, NUll, ?, ?, NULL, 'Chưa thanh toán')";
                 PreparedStatement pst = con.prepareStatement(sql);
                 
                 //Lay cot MADVTI tu` dong duoc chon trong bang
@@ -1097,7 +1046,6 @@ public class DashboardClient extends javax.swing.JFrame {
     private javax.swing.JPanel CardBookServices;
     private javax.swing.JPanel CardMyRooms;
     private javax.swing.JPanel CardMyServices;
-    private javax.swing.JPanel CardWriteFeedbacks;
     private javax.swing.JLabel Title;
     private javax.swing.JLabel Title1;
     private javax.swing.JLabel Title2;
@@ -1108,7 +1056,6 @@ public class DashboardClient extends javax.swing.JFrame {
     private javax.swing.JButton btnBookServices;
     private javax.swing.JButton btnMyRooms;
     private javax.swing.JButton btnMyServices;
-    private javax.swing.JButton btnWriteFeedBacks1;
     private com.github.lgooddatepicker.components.DatePicker datePickerCheckin;
     private com.github.lgooddatepicker.components.DatePicker datePickerCheckout;
     private com.github.lgooddatepicker.components.DatePicker datePickerEndDate;
@@ -1129,7 +1076,6 @@ public class DashboardClient extends javax.swing.JFrame {
     private javax.swing.JPanel labTotalUsage;
     private javax.swing.JLabel lblHoTen;
     private javax.swing.JPanel panelBook;
-    private javax.swing.JPanel panelFeedback;
     private javax.swing.JPanel panelMyInfo;
     private javax.swing.JPanel pnlButton;
     private javax.swing.JPanel pnlCard;

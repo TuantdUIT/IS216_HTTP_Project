@@ -286,8 +286,8 @@
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="400" max="-2" attributes="0"/>
-                                      <Component id="btnPay" min="-2" pref="125" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="387" max="-2" attributes="0"/>
+                                      <Component id="btnPay" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace pref="34" max="32767" attributes="0"/>
@@ -307,9 +307,9 @@
                               </Group>
                               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                               <Component id="jScrollPane5" min="-2" pref="424" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                               <Component id="btnPay" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="161" max="32767" attributes="0"/>
+                              <EmptySpace pref="164" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -320,7 +320,7 @@
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Times New Roman" size="18" style="1"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Pay"/>
+                        <Property name="text" type="java.lang.String" value="Pay and checkout"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPayActionPerformed"/>
@@ -380,7 +380,7 @@
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Times New Roman" size="14" style="1"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Checkout"/>
+                        <Property name="text" type="java.lang.String" value="Search"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCheckoutActionPerformed"/>
@@ -816,25 +816,24 @@
                         <Component class="javax.swing.JTable" name="tblInvoices">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="13" rowCount="12">
-                                <Column editable="true" title="Invoice ID" type="java.lang.Object"/>
-                                <Column editable="true" title="Customer ID" type="java.lang.Object"/>
-                                <Column editable="true" title="Room ID" type="java.lang.Object"/>
-                                <Column editable="true" title="Service ID" type="java.lang.Object"/>
-                                <Column editable="true" title="Feedback ID" type="java.lang.Object"/>
-                                <Column editable="true" title="Staff ID" type="java.lang.Object"/>
-                                <Column editable="true" title="Day Created" type="java.lang.Object"/>
-                                <Column editable="true" title="Day Started" type="java.lang.Object"/>
-                                <Column editable="true" title="Day Ended" type="java.lang.Object"/>
-                                <Column editable="true" title="Day Paid" type="java.lang.Object"/>
-                                <Column editable="true" title="Total" type="java.lang.Object"/>
-                                <Column editable="true" title="Payment Status" type="java.lang.Object"/>
-                                <Column editable="true" title="Amount" type="java.lang.Object"/>
+                              <Table columnCount="12" rowCount="12">
+                                <Column editable="false" title="Invoice ID" type="java.lang.Object"/>
+                                <Column editable="false" title="Customer ID" type="java.lang.Object"/>
+                                <Column editable="false" title="Room ID" type="java.lang.Object"/>
+                                <Column editable="false" title="Service ID" type="java.lang.Object"/>
+                                <Column editable="false" title="Staff ID" type="java.lang.Object"/>
+                                <Column editable="false" title="Day Created" type="java.lang.Object"/>
+                                <Column editable="false" title="Day Started" type="java.lang.Object"/>
+                                <Column editable="false" title="Day Ended" type="java.lang.Object"/>
+                                <Column editable="false" title="Day Paid" type="java.lang.Object"/>
+                                <Column editable="false" title="Total" type="java.lang.Object"/>
+                                <Column editable="false" title="Payment Status" type="java.lang.Object"/>
+                                <Column editable="false" title="Amount" type="java.lang.Object"/>
                               </Table>
                             </Property>
                           </Properties>
                           <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="tblInvoices.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);&#xa;tblInvoices.getColumnModel().getColumn(0).setPreferredWidth(80);&#xa;tblInvoices.getColumnModel().getColumn(1).setPreferredWidth(80);&#xa;tblInvoices.getColumnModel().getColumn(2).setPreferredWidth(80);&#xa;tblInvoices.getColumnModel().getColumn(3).setPreferredWidth(80);&#xa;tblInvoices.getColumnModel().getColumn(4).setPreferredWidth(80);&#xa;tblInvoices.getColumnModel().getColumn(5).setPreferredWidth(80);&#xa;tblInvoices.getColumnModel().getColumn(6).setPreferredWidth(150);&#xa;tblInvoices.getColumnModel().getColumn(7).setPreferredWidth(150);&#xa;tblInvoices.getColumnModel().getColumn(8).setPreferredWidth(150);&#xa;tblInvoices.getColumnModel().getColumn(9).setPreferredWidth(150);&#xa;tblInvoices.getColumnModel().getColumn(10).setPreferredWidth(120);&#xa;tblInvoices.getColumnModel().getColumn(11).setPreferredWidth(120);&#xa;tblInvoices.getColumnModel().getColumn(12).setPreferredWidth(120);&#xa;jScrollPane3.getHorizontalScrollBar().setPreferredSize(new java.awt.Dimension(5, 5));"/>
+                            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="tblInvoices.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);&#xa;tblInvoices.getColumnModel().getColumn(0).setPreferredWidth(80);&#xa;tblInvoices.getColumnModel().getColumn(1).setPreferredWidth(80);&#xa;tblInvoices.getColumnModel().getColumn(2).setPreferredWidth(80);&#xa;tblInvoices.getColumnModel().getColumn(3).setPreferredWidth(80);&#xa;tblInvoices.getColumnModel().getColumn(4).setPreferredWidth(80);&#xa;tblInvoices.getColumnModel().getColumn(5).setPreferredWidth(80);&#xa;tblInvoices.getColumnModel().getColumn(6).setPreferredWidth(150);&#xa;tblInvoices.getColumnModel().getColumn(7).setPreferredWidth(150);&#xa;tblInvoices.getColumnModel().getColumn(8).setPreferredWidth(150);&#xa;tblInvoices.getColumnModel().getColumn(9).setPreferredWidth(150);&#xa;tblInvoices.getColumnModel().getColumn(10).setPreferredWidth(120);&#xa;tblInvoices.getColumnModel().getColumn(11).setPreferredWidth(120);&#xa;//tblInvoices.getColumnModel().getColumn(12).setPreferredWidth(120);&#xa;jScrollPane3.getHorizontalScrollBar().setPreferredSize(new java.awt.Dimension(5, 5));"/>
                           </AuxValues>
                         </Component>
                       </SubComponents>

@@ -4,6 +4,7 @@
  */
 package hotelmanagement.update;
 
+import hotelmanagement.dashboard_main.DashboardStaff;
 import hotelmanagement.entity.dba_connection;
 import java.text.ParseException;
 import java.sql.Date;
@@ -23,6 +24,7 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
     /**
      * Creates new form AddRoomForm
      */
+    private DashboardStaff parent;
     public UpdateInvoiceForm() {
         setVisible(true);
         initComponents();
@@ -39,7 +41,23 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
-
+    public UpdateInvoiceForm(DashboardStaff parent){
+        setVisible(true);
+        initComponents();
+        setLocationRelativeTo(null);
+        MaskFormatter date;
+        try {
+            date = new MaskFormatter ("##/##/####");
+            date.setPlaceholderCharacter('_');
+            ftxtDayCreated.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(date)); 
+            ftxtDayStarted.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(date));
+            ftxtDayEnded.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(date));
+            ftxtDayPaid.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(date));
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        this.parent = parent;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,15 +75,11 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
         txtInvoiceID = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtRoomID = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtFeedbackID = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtStaffID = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        txtAmount = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -81,7 +95,7 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
         txtStatus = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         btnUpdate = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnBackInvoice = new javax.swing.JButton();
         btnCheck = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
 
@@ -96,9 +110,6 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Room ID");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("Feedback ID");
-
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Staff ID");
 
@@ -110,9 +121,6 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setText("Day ended");
-
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel10.setText("Amount");
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setText("Day paid");
@@ -149,12 +157,10 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel10)
                     .addComponent(jLabel11)
                     .addComponent(jLabel12)
                     .addComponent(jLabel13)
@@ -164,9 +170,7 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtInvoiceID, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addComponent(txtRoomID, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                    .addComponent(txtFeedbackID, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addComponent(txtStaffID, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                    .addComponent(txtAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addComponent(txtServiceID, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addComponent(txtTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addComponent(ftxtDayCreated)
@@ -195,10 +199,6 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(txtServiceID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtFeedbackID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -227,10 +227,7 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 14, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(36, 36, 36))
         );
 
         btnUpdate.setText("Update");
@@ -240,7 +237,12 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Back");
+        btnBackInvoice.setText("Back");
+        btnBackInvoice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackInvoiceActionPerformed(evt);
+            }
+        });
 
         btnCheck.setText("Check");
         btnCheck.addActionListener(new java.awt.event.ActionListener() {
@@ -259,7 +261,7 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addComponent(btnUpdate)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(btnBackInvoice)
                 .addGap(43, 43, 43))
         );
         jPanel1Layout.setVerticalGroup(
@@ -268,7 +270,7 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnUpdate)
-                    .addComponent(jButton2)
+                    .addComponent(btnBackInvoice)
                     .addComponent(btnCheck))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
@@ -309,7 +311,7 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -372,16 +374,14 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
                 
                 txtCustomerID.setText(customerID);
                 txtRoomID.setText(madvp);
-                txtServiceID.setText(madvti);
-                txtFeedbackID.setText(mafb);
+                txtServiceID.setText(madvti);              
                 txtStaffID.setText(nguoiXacNhan);
                 ftxtDayCreated.setText(ngayTao != null ? sdf.format(ngayTao) : "");
                 ftxtDayStarted.setText(ngayBD != null ? sdf.format(ngayBD) : "");
                 ftxtDayEnded.setText(ngayKT != null ? sdf.format(ngayKT) : "");
                 ftxtDayPaid.setText(ngayThanhToan != null ? sdf.format(ngayThanhToan) : "");
                 txtTotal.setText(String.valueOf(tongTien));
-                txtStatus.setText(tinhTrangTT);
-                txtAmount.setText(String.valueOf(slsd));
+                txtStatus.setText(tinhTrangTT);              
             }
             else
                 JOptionPane.showMessageDialog(null, "Invoice not found.");
@@ -413,40 +413,39 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
             Class.forName("oracle.jdbc.OracleDriver");
             Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
 
-            String query = "UPDATE HOADON SET MAKH = ?, MADVP = ?, MADVTI = ?, MAFB = ?, NGUOIXACNHAN = ?, " +
+            String query = "UPDATE HOADON SET MAKH = ?, MADVP = ?, MADVTI = ?, NGUOIXACNHAN = ?, " +
                           "NGAYTAO = TO_DATE(?, 'YYYY-MM-DD'), NGAYBD = TO_DATE(?, 'YYYY-MM-DD'), " +
                           "NGAYKT = TO_DATE(?, 'YYYY-MM-DD'), NGAYTHANHTOAN = TO_DATE(?, 'YYYY-MM-DD'), " +
-                          "TONGTIEN = ?, TINHTRANGTT = ?, SLSD = ? WHERE MAHD = ?";
+                          "TONGTIEN = ?, TINHTRANGTT = ? WHERE MAHD = ?";
 
             PreparedStatement pst = con.prepareStatement(query);
 
             // Set string parameters
             pst.setString(1, txtCustomerID.getText());
             pst.setString(2, txtRoomID.getText());
-            pst.setString(3, txtServiceID.getText());
-            pst.setString(4, txtFeedbackID.getText());
-            pst.setString(5, txtStaffID.getText());
+            pst.setString(3, txtServiceID.getText());           
+            pst.setString(4, txtStaffID.getText());
 
             
             try {
                 // NGAYTAO
                 String ngayTaoStr = ftxtDayCreated.getText();
-                pst.setString(6, ngayTaoStr.isEmpty() ? null : 
+                pst.setString(5, ngayTaoStr.isEmpty() ? null : 
                     outputFormat.format(inputFormat.parse(ngayTaoStr)));
 
                 // NGAYBD
                 String ngayBDStr = ftxtDayStarted.getText();
-                pst.setString(7, ngayBDStr.isEmpty() ? null : 
+                pst.setString(6, ngayBDStr.isEmpty() ? null : 
                     outputFormat.format(inputFormat.parse(ngayBDStr)));
 
                 // NGAYKT
                 String ngayKTStr = ftxtDayEnded.getText();
-                pst.setString(8, ngayKTStr.isEmpty() ? null : 
+                pst.setString(7, ngayKTStr.isEmpty() ? null : 
                     outputFormat.format(inputFormat.parse(ngayKTStr)));
 
                 // NGAYTHANHTOAN
                 String ngayThanhToanStr = ftxtDayPaid.getText();
-                pst.setString(9, ngayThanhToanStr.isEmpty() ? null : 
+                pst.setString(8, ngayThanhToanStr.isEmpty() ? null : 
                     outputFormat.format(inputFormat.parse(ngayThanhToanStr)));
             } catch (ParseException e) {
                 JOptionPane.showMessageDialog(null, "Invalid date format. Please use dd/MM/yyyy");
@@ -455,11 +454,9 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
 
             // Set remaining parameters
             String totalStr = txtTotal.getText();
-            pst.setInt(10, totalStr.isEmpty() ? 0 : Integer.parseInt(totalStr));
-            pst.setString(11, txtStatus.getText());
-            String amountStr = txtAmount.getText();
-            pst.setInt(12, amountStr.isEmpty() ? 0 : Integer.parseInt(amountStr));
-            pst.setString(13, invoiceID);
+            pst.setInt(9, totalStr.isEmpty() ? 0 : Integer.parseInt(totalStr));
+            pst.setString(10, txtStatus.getText());
+            pst.setString(11, invoiceID);
 
             int rowsAffected = pst.executeUpdate();
 
@@ -476,6 +473,11 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnBackInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackInvoiceActionPerformed
+        parent.autoReloadInvoice();
+        this.dispose();
+    }//GEN-LAST:event_btnBackInvoiceActionPerformed
     
     /**
      * @param args the command line arguments
@@ -513,15 +515,14 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBackInvoice;
     private javax.swing.JButton btnCheck;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JFormattedTextField ftxtDayCreated;
     private javax.swing.JFormattedTextField ftxtDayEnded;
     private javax.swing.JFormattedTextField ftxtDayPaid;
     private javax.swing.JFormattedTextField ftxtDayStarted;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -529,7 +530,6 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -539,9 +539,7 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextField txtAmount;
     private javax.swing.JTextField txtCustomerID;
-    private javax.swing.JTextField txtFeedbackID;
     private javax.swing.JTextField txtInvoiceID;
     private javax.swing.JTextField txtRoomID;
     private javax.swing.JTextField txtServiceID;

@@ -14,6 +14,7 @@ import javax.swing.*;
 import java.sql.*;
 import javax.swing.text.MaskFormatter;
 import java.text.SimpleDateFormat;
+import hotelmanagement.dashboard_main.DashboardStaff;
 /**
  *
  * @author dell
@@ -23,12 +24,19 @@ public class UpdateServiceForm extends javax.swing.JFrame {
     /**
      * Creates new form AddRoomForm
      */
+    
+    private DashboardStaff parent;
     public UpdateServiceForm() {
         setVisible(true);
         initComponents();
         setLocationRelativeTo(null);
     }
-
+    public UpdateServiceForm(DashboardStaff parent){
+        setVisible(true);
+        initComponents();
+        setLocationRelativeTo(null);
+        this.parent = parent;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -332,7 +340,7 @@ public class UpdateServiceForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCheckActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+        parent.autoReloadService();
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
 

@@ -51,11 +51,13 @@ public class Banking_service_qr extends javax.swing.JFrame {
         String sql_room = "select MAHD, HOADON.MADVP, SLSD, TONGTIEN FROM HOADON "
                     + "JOIN KHACHHANG ON HOADON.MAKH = KHACHHANG.MAKH "
                     + "JOIN DVPHONG ON HOADON.MADVP = DVPHONG.MADVP "                    
-                    + "WHERE KHACHHANG.SDT = '" + Current_User.phonenumber + "'"; 
-        String sql_service = "select MAHD, HOADON.MADVTI, TENDVTI, TONGTIEN FROM HOADON "
+                    + "WHERE KHACHHANG.SDT = '" + Current_User.phonenumber + "' AND TINHTRANGTT IN ('Chưa thanh toán', 'Đã thanh toán')"; 
+        
+        String sql_service = "select MAHD, HOADON.MADVTI, HOADON.MADVP, TENDVTI, TONGTIEN FROM HOADON "
                     + "JOIN KHACHHANG ON HOADON.MAKH = KHACHHANG.MAKH "
-                    + "JOIN DVTIENICH ON HOADON.MADVTI = DVTIENICH.MADVTI "                    
-                    + "WHERE KHACHHANG.SDT = '" + Current_User.phonenumber + "'";
+                    + "LEFT JOIN DVTIENICH ON HOADON.MADVTI = DVTIENICH.MADVTI "                    
+                    + "WHERE KHACHHANG.SDT = '" + Current_User.phonenumber + "' AND TINHTRANGTT = 'Chưa thanh toán'";
+        
         DecimalFormat df = new DecimalFormat("#");
         df.setMaximumFractionDigits(0);
         df.setGroupingUsed(false);
@@ -64,9 +66,9 @@ public class Banking_service_qr extends javax.swing.JFrame {
             Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
             PreparedStatement pst = null;
             ResultSet rs = null;
-
+            
             pst = con.prepareStatement(sql_khachhang);
-    //            pst.setString(1, Current_User.phonenumber);
+//            pst.setString(1, Current_User.phonenumber);
             rs = pst.executeQuery();
             if(rs.next()){
                 Name.setText(rs.getString("HOTEN"));
@@ -76,10 +78,10 @@ public class Banking_service_qr extends javax.swing.JFrame {
                 Phone.setEditable(false);
                 Address.setEditable(false);
             }
-
+            
             pst.close();
             rs.close();
-
+            
             pst = con.prepareStatement(sql_room);
             rs = pst.executeQuery();
             while(rs.next()){
@@ -88,7 +90,7 @@ public class Banking_service_qr extends javax.swing.JFrame {
                 r.setMadvp(rs.getString("MADVP"));
                 r.setSongay(rs.getInt("SLSD"));
                 r.setGia(rs.getDouble("TONGTIEN"));
-
+                
                 room_list.add(r);
             }
             model =  (DefaultTableModel) room_tab.getModel();
@@ -101,19 +103,20 @@ public class Banking_service_qr extends javax.swing.JFrame {
                     r.tongtien
                 });
             }
-
+             
             pst.close();
             rs.close();
-
+            
             pst = con.prepareStatement(sql_service);
             rs = pst.executeQuery();
             while(rs.next()){
                 Service_pay s = new Service_pay();
                 s.setMahd(rs.getString("MAHD"));
                 s.setMadvti(rs.getString("MADVTI"));
+                s.setMadvp(rs.getString("MADVP"));
                 s.setName(rs.getString("TENDVTI"));
                 s.setGia(rs.getDouble("TONGTIEN"));
-
+                
                 service_list.add(s);
             }
             model =  (DefaultTableModel) service_tab.getModel();
@@ -122,20 +125,21 @@ public class Banking_service_qr extends javax.swing.JFrame {
                 model.addRow(new Object[]{
                     s.mahd,
                     s.madvti,
+                    s.madvp,
                     s.name,
                     s.tongtien
                 });
             }
-
+            
             double service_sum = 0;
             for(Service_pay s : service_list){
                 service_sum += s.tongtien;
             }
             String sum_service_Str = df.format(service_sum);
-
+            
             service_total.setText(sum_service_Str);
-
-
+            
+            
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(Invoice_print.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -231,15 +235,15 @@ public class Banking_service_qr extends javax.swing.JFrame {
 
         service_tab.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Invoice id", "Service id", "Service name", "Amount"
+                "Invoice id", "Service id", "Room id", "Service name", "Amount"
             }
         ));
         jScrollPane2.setViewportView(service_tab);
@@ -282,7 +286,6 @@ public class Banking_service_qr extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Phone))
                             .addComponent(jLabel6))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -385,9 +388,22 @@ public class Banking_service_qr extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JOptionPane.showMessageDialog(this, "Pay successfully!");
-        this.dispose();
-        parent.dispose();
+        String sql_update = "UPDATE HOADON SET TINHTRANGTT = 'Vô hiệu hoá' "
+                + "WHERE MAHD IN (SELECT MAHD FROM HOADON "
+                + "JOIN KHACHHANG ON KHACHHANG.MAKH = HOADON.MAKH "
+                + "WHERE TINHTRANGTT IN('Đã thanh toán', 'Chưa thanh toán') AND SDT = '" + Phone.getText() + "')";
+        dba_connection connect = new dba_connection();
+        try {
+            Class.forName(connect.driver);
+            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+            PreparedStatement pst = con.prepareStatement(sql_update);
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Pay successfully!");
+            this.dispose();
+            parent.dispose();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Invoice_print.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

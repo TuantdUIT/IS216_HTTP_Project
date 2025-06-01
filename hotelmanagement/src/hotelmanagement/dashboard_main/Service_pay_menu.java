@@ -164,7 +164,7 @@ public class Service_pay_menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cash_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cash_buttonActionPerformed
-        System.out.println(Current_User.phonenumber);
+//        System.out.println(Current_User.phonenumber);
         new Invoice_print(this).setVisible(true);
         
     }//GEN-LAST:event_cash_buttonActionPerformed

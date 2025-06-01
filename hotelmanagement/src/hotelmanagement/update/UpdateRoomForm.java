@@ -4,6 +4,7 @@
  */
 package hotelmanagement.update;
 
+import hotelmanagement.dashboard_main.DashboardStaff;
 import hotelmanagement.entity.dba_connection;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -18,11 +19,16 @@ public class UpdateRoomForm extends javax.swing.JFrame {
     /**
      * Creates new form UpdateRoomForm
      */
+    private DashboardStaff parent;
     public UpdateRoomForm() {
         initComponents();
         setLocationRelativeTo(null);
     }
-
+    public UpdateRoomForm(DashboardStaff parent){
+        initComponents();
+        setLocationRelativeTo(null);
+        this.parent = parent;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -228,23 +234,23 @@ public class UpdateRoomForm extends javax.swing.JFrame {
             // Chèn dữ liệu vào cơ sở dữ liệu
             String sql = "UPDATE DVPHONG SET LOAIPHONG = ?, MOTA = ?, DONGIA = ?, TINHTRANG = ? WHERE MADVP = ?";
             PreparedStatement pst = con.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
+//            ResultSet rs = pst.executeQuery();
                 pst.setString(1, type);
                 pst.setString(2, describe);
-                pst.setString(3, price);    
+                pst.setDouble(3, Double.parseDouble(price));   
                 pst.setString(4, status); 
                 pst.setString(5, roomID);
                 int rowsUpdated = pst.executeUpdate();
             if (rowsUpdated > 0) {
-                JOptionPane.showMessageDialog(null, "Cập nhật thông tin thành công!");
+                JOptionPane.showMessageDialog(null, "Update successfully!");
             } 
             else {
-                JOptionPane.showMessageDialog(null, "Không tìm thấy bản ghi để cập nhật.");
+                JOptionPane.showMessageDialog(null, "Not found data!");
             }
 
         // Đóng kết nối
             con.close();
-            rs.close();
+//            rs.close();
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(null, "Lỗi khi cập nhật dữ liệu: " + ex.getMessage());
         }
@@ -312,7 +318,7 @@ public class UpdateRoomForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCheckActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+        parent.autoReloadRoom();
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
 

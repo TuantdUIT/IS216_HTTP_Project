@@ -243,7 +243,7 @@ public class DashboardStaff extends javax.swing.JFrame {
         CardPayCheckout.setBackground(new java.awt.Color(255, 255, 255));
 
         btnPay.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btnPay.setText("Pay");
+        btnPay.setText("Pay and checkout");
         btnPay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPayActionPerformed(evt);
@@ -304,7 +304,7 @@ public class DashboardStaff extends javax.swing.JFrame {
         Sdt_txt.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         btnCheckout.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnCheckout.setText("Checkout");
+        btnCheckout.setText("Search");
         btnCheckout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCheckoutActionPerformed(evt);
@@ -333,8 +333,8 @@ public class DashboardStaff extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addGap(247, 247, 247))))
                     .addGroup(CardPayCheckoutLayout.createSequentialGroup()
-                        .addGap(400, 400, 400)
-                        .addComponent(btnPay, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(387, 387, 387)
+                        .addComponent(btnPay)))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         CardPayCheckoutLayout.setVerticalGroup(
@@ -349,9 +349,9 @@ public class DashboardStaff extends javax.swing.JFrame {
                     .addComponent(btnCheckout))
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(26, 26, 26)
                 .addComponent(btnPay)
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
 
         CardLayout_Management.add(CardPayCheckout, "card7");
@@ -646,23 +646,31 @@ public class DashboardStaff extends javax.swing.JFrame {
 
         tblInvoices.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Invoice ID", "Customer ID", "Room ID", "Service ID", "Feedback ID", "Staff ID", "Day Created", "Day Started", "Day Ended", "Day Paid", "Total", "Payment Status", "Amount"
+                "Invoice ID", "Customer ID", "Room ID", "Service ID", "Staff ID", "Day Created", "Day Started", "Day Ended", "Day Paid", "Total", "Payment Status", "Amount"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane4.setViewportView(tblInvoices);
         tblInvoices.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tblInvoices.getColumnModel().getColumn(0).setPreferredWidth(80);
@@ -677,7 +685,7 @@ public class DashboardStaff extends javax.swing.JFrame {
         tblInvoices.getColumnModel().getColumn(9).setPreferredWidth(150);
         tblInvoices.getColumnModel().getColumn(10).setPreferredWidth(120);
         tblInvoices.getColumnModel().getColumn(11).setPreferredWidth(120);
-        tblInvoices.getColumnModel().getColumn(12).setPreferredWidth(120);
+        //tblInvoices.getColumnModel().getColumn(12).setPreferredWidth(120);
         jScrollPane3.getHorizontalScrollBar().setPreferredSize(new java.awt.Dimension(5, 5));
 
         LbRoomManage2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -1002,8 +1010,9 @@ public class DashboardStaff extends javax.swing.JFrame {
     }
     private void btnUpdateRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateRoomActionPerformed
         // TODO add your handling code here:
-        UpdateRoomForm updateRoomForm = new UpdateRoomForm();
+        UpdateRoomForm updateRoomForm = new UpdateRoomForm(this);
         updateRoomForm.setVisible(true);
+        
     }//GEN-LAST:event_btnUpdateRoomActionPerformed
 
     private void btnBackRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackRoomActionPerformed
@@ -1073,7 +1082,7 @@ public class DashboardStaff extends javax.swing.JFrame {
 
     private void btnUpdateServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateServiceActionPerformed
         // TODO add your handling code here:
-        UpdateServiceForm updateServiceForm = new UpdateServiceForm();
+        UpdateServiceForm updateServiceForm = new UpdateServiceForm(this);
         updateServiceForm.setVisible(true);
 
     }//GEN-LAST:event_btnUpdateServiceActionPerformed
@@ -1120,7 +1129,7 @@ public class DashboardStaff extends javax.swing.JFrame {
     
     private void btnAddInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddInvoiceActionPerformed
         // TODO add your handling code here:
-        AddInvoiceForm addInvoiceForm = new AddInvoiceForm();
+        AddInvoiceForm addInvoiceForm = new AddInvoiceForm(this);
         addInvoiceForm.setVisible(true);
     }//GEN-LAST:event_btnAddInvoiceActionPerformed
 
@@ -1152,14 +1161,13 @@ public class DashboardStaff extends javax.swing.JFrame {
 
     private void btnUpdateInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateInvoiceActionPerformed
         // TODO add your handling code here:
-        UpdateInvoiceForm updateInvoiceForm = new UpdateInvoiceForm();
+        UpdateInvoiceForm updateInvoiceForm = new UpdateInvoiceForm(this);
         updateInvoiceForm.setVisible(true);
     }//GEN-LAST:event_btnUpdateInvoiceActionPerformed
 
-    private void autoReloadInvoice(){
-        //invoices.clear(); // Xoá dữ liệu cũ trong danh sách
-        
-        String sql = "SELECT * FROM HOADON";
+    public void autoReloadInvoice(){
+        //invoices.clear(); // Xoá dữ liệu cũ trong danh sách     
+        String sql = "SELECT * FROM HOADON ORDER BY MAHD ASC";
         dba_connection connect = new dba_connection();
        
         try {
@@ -1172,8 +1180,7 @@ public class DashboardStaff extends javax.swing.JFrame {
                 invoice.setMaHD(rs.getString("MAHD"));
                 invoice.setMaKH(rs.getString("MAKH"));               
                 invoice.setMaDVP(rs.getString("MADVP"));
-                invoice.setMaDVTI(rs.getString("MADVTI"));
-                invoice.setMaFB(rs.getString("MAFB"));
+                invoice.setMaDVTI(rs.getString("MADVTI"));                
                 invoice.setMaNV(rs.getString("NGUOIXACNHAN"));
                 invoice.setNgayTao(rs.getString("NGAYTAO"));
                 invoice.setNgayBD(rs.getString("NGAYBD"));
@@ -1198,8 +1205,7 @@ public class DashboardStaff extends javax.swing.JFrame {
                 in.getMaHD(),
                 in.getMaKH(),
                 in.getMaDVP(),
-                in.getMaDVTI(),
-                in.getMaFB(),
+                in.getMaDVTI(),            
                 in.getMaNV(),
                 in.getNgayTao(),
                 in.getNgayBD(),
@@ -1329,7 +1335,7 @@ public class DashboardStaff extends javax.swing.JFrame {
         String sql_hoadon = "select MAHD, LOAIPHONG, MOTA, NGAYBD, NGAYKT, TINHTRANGTT FROM HOADON "
         + "JOIN KHACHHANG ON HOADON.MAKH = KHACHHANG.MAKH "
         + "JOIN DVPHONG ON HOADON.MADVP = DVPHONG.MADVP "
-        + "WHERE KHACHHANG.SDT = '" + Sdt_txt.getText() + "'";
+        + "WHERE KHACHHANG.SDT = '" + Sdt_txt.getText() + "' AND TINHTRANGTT IN ('Chưa thanh toán', 'Đã thanh toán')";
 
         try {
             Class.forName(connect.driver);

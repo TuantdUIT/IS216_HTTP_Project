@@ -9,17 +9,18 @@ package hotelmanagement.entity;
  * @author 84352
  */
 public class Service_pay {
-    public String mahd, madvti, name;
+    public String mahd, madvti, madvp, name;
     public double tongtien;
 
     public Service_pay() {
     }
     
-    public Service_pay(String hd, String dvti, String n, double t){
+    public Service_pay(String hd, String dvti, String dvp, String n, double t){
         mahd = hd;
         madvti = dvti;
         name = n;
         tongtien = t;
+        madvp = dvp;
     }
     
     public void setMahd(String hd){
@@ -34,4 +35,7 @@ public class Service_pay {
     public void setGia(double g){
         tongtien = g;
     } 
+    public void setMadvp(String dvp){
+        madvp = dvp;
+    }
 }

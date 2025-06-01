@@ -65,7 +65,7 @@
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="8" max="-2" attributes="0"/>
-              <EmptySpace pref="8" max="32767" attributes="0"/>
+              <EmptySpace pref="42" max="32767" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -103,12 +103,10 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -119,9 +117,7 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="txtInvoiceID" pref="250" max="32767" attributes="0"/>
                       <Component id="txtRoomID" pref="250" max="32767" attributes="0"/>
-                      <Component id="txtFeedbackID" pref="250" max="32767" attributes="0"/>
                       <Component id="txtStaffID" pref="250" max="32767" attributes="0"/>
-                      <Component id="txtAmount" pref="250" max="32767" attributes="0"/>
                       <Component id="txtServiceID" pref="250" max="32767" attributes="0"/>
                       <Component id="txtTotal" pref="250" max="32767" attributes="0"/>
                       <Component id="ftxtDayCreated" alignment="0" max="32767" attributes="0"/>
@@ -156,11 +152,6 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtServiceID" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtFeedbackID" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -197,11 +188,7 @@
                       <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtStatus" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" pref="14" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtAmount" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -226,16 +213,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtRoomID">
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Feedback ID"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtFeedbackID">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
@@ -270,16 +247,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Day ended"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel10">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="14" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Amount"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtAmount">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
@@ -356,7 +323,7 @@
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="btnUpdate" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="30" max="32767" attributes="0"/>
-                  <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnBackInvoice" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -367,7 +334,7 @@
                   <EmptySpace pref="22" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnBackInvoice" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnCheck" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="19" max="32767" attributes="0"/>
@@ -384,10 +351,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="btnBackInvoice">
           <Properties>
             <Property name="text" type="java.lang.String" value="Back"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackInvoiceActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCheck">
           <Properties>

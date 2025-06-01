@@ -45,11 +45,13 @@ public class Invoice_print extends javax.swing.JFrame {
         String sql_room = "select MAHD, HOADON.MADVP, SLSD, TONGTIEN FROM HOADON "
                     + "JOIN KHACHHANG ON HOADON.MAKH = KHACHHANG.MAKH "
                     + "JOIN DVPHONG ON HOADON.MADVP = DVPHONG.MADVP "                    
-                    + "WHERE KHACHHANG.SDT = '" + Current_User.phonenumber + "'"; 
-        String sql_service = "select MAHD, HOADON.MADVTI, TENDVTI, TONGTIEN FROM HOADON "
+                    + "WHERE KHACHHANG.SDT = '" + Current_User.phonenumber + "' AND TINHTRANGTT IN ('Chưa thanh toán', 'Đã thanh toán')"; 
+        
+        String sql_service = "select MAHD, HOADON.MADVTI, HOADON.MADVP, TENDVTI, TONGTIEN FROM HOADON "
                     + "JOIN KHACHHANG ON HOADON.MAKH = KHACHHANG.MAKH "
-                    + "JOIN DVTIENICH ON HOADON.MADVTI = DVTIENICH.MADVTI "                    
-                    + "WHERE KHACHHANG.SDT = '" + Current_User.phonenumber + "'";
+                    + "LEFT JOIN DVTIENICH ON HOADON.MADVTI = DVTIENICH.MADVTI "                    
+                    + "WHERE KHACHHANG.SDT = '" + Current_User.phonenumber + "' AND TINHTRANGTT = 'Chưa thanh toán'";
+        
         DecimalFormat df = new DecimalFormat("#");
         df.setMaximumFractionDigits(0);
         df.setGroupingUsed(false);
@@ -105,6 +107,7 @@ public class Invoice_print extends javax.swing.JFrame {
                 Service_pay s = new Service_pay();
                 s.setMahd(rs.getString("MAHD"));
                 s.setMadvti(rs.getString("MADVTI"));
+                s.setMadvp(rs.getString("MADVP"));
                 s.setName(rs.getString("TENDVTI"));
                 s.setGia(rs.getDouble("TONGTIEN"));
                 
@@ -116,6 +119,7 @@ public class Invoice_print extends javax.swing.JFrame {
                 model.addRow(new Object[]{
                     s.mahd,
                     s.madvti,
+                    s.madvp,
                     s.name,
                     s.tongtien
                 });
@@ -217,26 +221,26 @@ public class Invoice_print extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Service");
+        jLabel7.setText("Need to purchase");
 
         service_tab.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Invoice id", "Service id", "Service name", "Amount"
+                "Invoice id", "Service id", "Room id", "Service name", "Amount"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -346,9 +350,22 @@ public class Invoice_print extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btninPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninPayActionPerformed
-        JOptionPane.showMessageDialog(this, "Pay successfully!");
-        this.dispose();
-        parent.dispose();
+        String sql_update = "UPDATE HOADON SET TINHTRANGTT = 'Vô hiệu hoá' "
+                + "WHERE MAHD IN (SELECT MAHD FROM HOADON "
+                + "JOIN KHACHHANG ON KHACHHANG.MAKH = HOADON.MAKH "
+                + "WHERE TINHTRANGTT IN('Đã thanh toán', 'Chưa thanh toán') AND SDT = '" + Phone.getText() + "')";
+        dba_connection connect = new dba_connection();
+        try {
+            Class.forName(connect.driver);
+            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+            PreparedStatement pst = con.prepareStatement(sql_update);
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Pay successfully!");
+            this.dispose();
+            parent.dispose();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Invoice_print.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btninPayActionPerformed
 
     /**

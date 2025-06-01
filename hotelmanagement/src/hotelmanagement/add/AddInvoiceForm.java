@@ -4,6 +4,7 @@
  */
 package hotelmanagement.add;
 
+import hotelmanagement.dashboard_main.DashboardStaff;
 import hotelmanagement.entity.dba_connection;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -22,6 +23,7 @@ public class AddInvoiceForm extends javax.swing.JFrame {
     /**
      * Creates new form AddRoomForm
      */
+    private DashboardStaff parent;
     public AddInvoiceForm() {
         setVisible(true);
         initComponents();
@@ -39,6 +41,12 @@ public class AddInvoiceForm extends javax.swing.JFrame {
 //        }
     }
 
+    public AddInvoiceForm(DashboardStaff parent){
+        setVisible(true);
+        initComponents();
+        setLocationRelativeTo(null);
+        this.parent = parent;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,14 +64,10 @@ public class AddInvoiceForm extends javax.swing.JFrame {
         txtCustomerID = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtRoomID = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtFeedbackID = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtStaffID = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        txtAmount = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -79,38 +83,32 @@ public class AddInvoiceForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Add new Invoice");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Customer ID");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Room ID");
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("Feedback ID");
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Staff ID");
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setText("Day started");
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setText("Day ended");
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel10.setText("Amount");
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setText("Day paid");
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel12.setText("Payment status");
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel13.setText("Service ID");
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         cbxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Paid", "Unpaid" }));
 
@@ -122,11 +120,9 @@ public class AddInvoiceForm extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5)
                     .addComponent(jLabel6)
                     .addComponent(jLabel8)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel10)
                     .addComponent(jLabel11)
                     .addComponent(jLabel12)
                     .addComponent(jLabel13))
@@ -134,9 +130,7 @@ public class AddInvoiceForm extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtCustomerID, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addComponent(txtRoomID, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                    .addComponent(txtFeedbackID, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addComponent(txtStaffID, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                    .addComponent(txtAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addComponent(txtServiceID, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addComponent(cbxStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(dpStart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -159,10 +153,6 @@ public class AddInvoiceForm extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(txtServiceID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtFeedbackID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -179,19 +169,15 @@ public class AddInvoiceForm extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(dpPaid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(cbxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(53, 53, 53))
         );
 
-        btnCreate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnCreate.setText("Create");
+        btnCreate.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreateActionPerformed(evt);
@@ -265,7 +251,7 @@ public class AddInvoiceForm extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(29, 29, 29)
                         .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -292,7 +278,7 @@ public class AddInvoiceForm extends javax.swing.JFrame {
         String customerID = txtCustomerID.getText();
         String roomID = txtRoomID.getText();
         String serviceID = txtServiceID.getText();
-        String feedbackID = txtFeedbackID.getText();
+        
         String staffID = txtStaffID.getText();
         LocalDate dayStarted = dpStart.getDate();
         LocalDate dayEnded = dpEnd.getDate();
@@ -309,7 +295,7 @@ public class AddInvoiceForm extends javax.swing.JFrame {
             
         //int total = Integer.parseInt(txtTotal.getText());
         String paymentStatus = (String) cbxStatus.getSelectedItem();
-        int amount = Integer.parseInt(txtAmount.getText());
+        
         
         try {
             Class.forName(connect.driver);
@@ -317,9 +303,9 @@ public class AddInvoiceForm extends javax.swing.JFrame {
             
             
             // Chèn thông tin vào CSDL
-            String sql = "INSERT INTO HOADON (MAKH, MADVP, MADVTI, MAFB, NGUOIXACNHAN, " +
-             " NGAYBD, NGAYKT, NGAYTHANHTOAN, TINHTRANGTT, SLSD) " +
-             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO HOADON (MAKH, MADVP, MADVTI, NGUOIXACNHAN, " +
+             " NGAYBD, NGAYKT, NGAYTHANHTOAN, TINHTRANGTT) " +
+             "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             
             //java.util.Date dayCreated = sdf.parse(ftxtDayCreated.getText());
             
@@ -332,17 +318,17 @@ public class AddInvoiceForm extends javax.swing.JFrame {
             pst.setString(1, customerID); // MAKH
             pst.setString(2, roomID);     // MADVP
             pst.setString(3, serviceID);  // MADVTI
-            pst.setString(4, feedbackID); // MAFB
-            pst.setString(5, staffID);    // NGUOIXACNHAN
+           
+            pst.setString(4, staffID);    // NGUOIXACNHAN
 
             //pst.setDate(6, sqlDate1);
-            pst.setDate(6, sqlDate2);
-            pst.setDate(7, sqlDate3);
-            pst.setDate(8, sqlDate4);
+            pst.setDate(5, sqlDate2);
+            pst.setDate(6, sqlDate3);
+            pst.setDate(7, sqlDate4);
 
             //pst.setInt(9, total);        // TONGTIEN
-            pst.setString(9, paymentStatus); // TINHTRANGTT
-            pst.setInt(10, amount);     // SLSD (số lần sử dụng)
+            pst.setString(8, paymentStatus); // TINHTRANGTT
+       
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Add invoice sucessfully!");
             
@@ -354,7 +340,7 @@ public class AddInvoiceForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+        parent.autoReloadInvoice();
         this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
     
@@ -402,13 +388,11 @@ public class AddInvoiceForm extends javax.swing.JFrame {
     private com.github.lgooddatepicker.components.DatePicker dpPaid;
     private com.github.lgooddatepicker.components.DatePicker dpStart;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -417,9 +401,7 @@ public class AddInvoiceForm extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextField txtAmount;
     private javax.swing.JTextField txtCustomerID;
-    private javax.swing.JTextField txtFeedbackID;
     private javax.swing.JTextField txtRoomID;
     private javax.swing.JTextField txtServiceID;
     private javax.swing.JTextField txtStaffID;
