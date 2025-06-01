@@ -7,6 +7,7 @@ package hotelmanagement.dashboard_main;
 import hotelmanagement.add.AddInvoiceForm;
 import hotelmanagement.add.AddRoomForm;
 import hotelmanagement.add.AddServiceForm;
+import hotelmanagement.entity.Current_User;
 import hotelmanagement.entity.Invoice;
 import hotelmanagement.entity.Room;
 import hotelmanagement.entity.Service;
@@ -105,7 +106,7 @@ public class DashboardStaff extends javax.swing.JFrame {
         ser_table = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         total_txt = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnPay_service = new javax.swing.JButton();
         Invoices = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblInvoices = new javax.swing.JTable();
@@ -703,8 +704,13 @@ public class DashboardStaff extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel7.setText("Total: ");
 
-        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setText("Pay");
+        btnPay_service.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btnPay_service.setText("Pay");
+        btnPay_service.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPay_serviceActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout Service_invoiceLayout = new javax.swing.GroupLayout(Service_invoice);
         Service_invoice.setLayout(Service_invoiceLayout);
@@ -723,7 +729,7 @@ public class DashboardStaff extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(total_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(514, 514, 514)
-                                .addComponent(jButton1))
+                                .addComponent(btnPay_service))
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 778, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(152, Short.MAX_VALUE))
         );
@@ -738,7 +744,7 @@ public class DashboardStaff extends javax.swing.JFrame {
                 .addGroup(Service_invoiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(total_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btnPay_service))
                 .addContainerGap(243, Short.MAX_VALUE))
         );
 
@@ -1384,27 +1390,29 @@ public class DashboardStaff extends javax.swing.JFrame {
     private void btnCheckoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckoutActionPerformed
         int yes = JOptionPane.showConfirmDialog(this, "Complete checkout?", "exit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(yes == JOptionPane.YES_OPTION){
-            dba_connection connect = new dba_connection();
-            String sql_delete = "DELETE FROM HOADON "
-                    + "WHERE MADVTI IS NULL AND EXISTS( "
-                    + "SELECT 1 FROM KHACHHANG, DVPHONG "
-                    + "WHERE KHACHHANG.MAKH = HOADON.MAKH " 
-                    + "AND HOADON.MADVP = DVPHONG.MADVP AND SDT = '" + Sdt_txt.getText() +"')";
-            
-            try {
-                Class.forName(connect.driver);
-                Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
-                PreparedStatement pst = null;
-                
-                pst = con.prepareStatement(sql_delete);
-                ResultSet rs = pst.executeQuery();
-                if(rs.next()){
-                    JOptionPane.showMessageDialog(this, "Checkout successfully!");
-                }
-                
-            } catch (ClassNotFoundException | SQLException ex) {
-                Logger.getLogger(DashboardStaff.class.getName()).log(Level.SEVERE, null, ex);
-            }           
+//            dba_connection connect = new dba_connection();
+//            String sql_delete = "DELETE FROM HOADON "
+//                    + "WHERE MADVTI IS NULL AND EXISTS( "
+//                    + "SELECT 1 FROM KHACHHANG, DVPHONG "
+//                    + "WHERE KHACHHANG.MAKH = HOADON.MAKH " 
+//                    + "AND HOADON.MADVP = DVPHONG.MADVP AND SDT = '" + Sdt_txt.getText() +"')";
+//            
+//            try {
+//                Class.forName(connect.driver);
+//                Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+//                PreparedStatement pst = null;
+//                
+//                pst = con.prepareStatement(sql_delete);
+//                ResultSet rs = pst.executeQuery();
+//                if(rs.next()){
+//                    JOptionPane.showMessageDialog(this, "Checkout successfully!");                  
+//                }
+//                
+//            } catch (ClassNotFoundException | SQLException ex) {
+//                Logger.getLogger(DashboardStaff.class.getName()).log(Level.SEVERE, null, ex);
+//            }       
+            model =  (DefaultTableModel) pay_table.getModel();
+            model.setRowCount(0);
             CardLayout cl = (CardLayout)(CardLayout_Management.getLayout());
             cl.show(CardLayout_Management, "");
             PrintServiceInvoice();
@@ -1417,6 +1425,7 @@ public class DashboardStaff extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         dba_connection connect = new dba_connection();
+         
         String sql_hoadon = "select MAHD, LOAIPHONG, MOTA, NGAYBD, NGAYKT, TINHTRANGTT FROM HOADON "
                     + "JOIN KHACHHANG ON HOADON.MAKH = KHACHHANG.MAKH "
                     + "JOIN DVPHONG ON HOADON.MADVP = DVPHONG.MADVP "                    
@@ -1427,7 +1436,8 @@ public class DashboardStaff extends javax.swing.JFrame {
             Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
             PreparedStatement pst = null;
             pst = con.prepareStatement(sql_hoadon);
-
+             
+  
             ResultSet rs2 = pst.executeQuery();
             while(rs2.next()){
                 Payout pay = new Payout();
@@ -1439,10 +1449,10 @@ public class DashboardStaff extends javax.swing.JFrame {
                 pay.setTenphong(rs2.getString("MOTA"));
                 list.add(pay);
             }
-
+            
             model =  (DefaultTableModel) pay_table.getModel();
             model.setRowCount(0);
-
+            
             for(Payout p: list){
                 model.addRow(new Object[]{
                     p.mahd,
@@ -1460,7 +1470,7 @@ public class DashboardStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnSearchCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchCustomerActionPerformed
-
+        
         dba_connection connect = new dba_connection();
 //        String sql_search_khachhang = "SELECT * FROM KHACHHANG WHERE SDT = '" + sdt_txt_search.getText() + "'";
         String sql_search_khachhang = "SELECT * FROM KHACHHANG WHERE trim(SDT) = trim(?)";
@@ -1502,13 +1512,16 @@ public class DashboardStaff extends javax.swing.JFrame {
                 });                
             }
             
-            
-
-                
+                       
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DashboardClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSearchCustomerActionPerformed
+
+    private void btnPay_serviceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPay_serviceActionPerformed
+        Current_User.phonenumber = Sdt_txt.getText(); 
+        new Service_pay_menu().setVisible(true);
+    }//GEN-LAST:event_btnPay_serviceActionPerformed
 
     private void autoReloadCustomer(){
         Customer c = new Customer();
@@ -1619,6 +1632,7 @@ public class DashboardStaff extends javax.swing.JFrame {
     private javax.swing.JButton btnGiahan;
     private javax.swing.JButton btnInvoiceManagement;
     private javax.swing.JButton btnPayCheckout;
+    private javax.swing.JButton btnPay_service;
     private javax.swing.JButton btnRoomManagement;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSearchCustomer;
@@ -1627,7 +1641,6 @@ public class DashboardStaff extends javax.swing.JFrame {
     private javax.swing.JButton btnUpdateRoom;
     private javax.swing.JButton btnUpdateService;
     private javax.swing.JPanel invoiceBtnPanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

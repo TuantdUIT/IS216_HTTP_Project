@@ -791,7 +791,7 @@
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Component id="total_txt" min="-2" pref="121" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="514" max="-2" attributes="0"/>
-                                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="btnPay_service" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="jScrollPane6" min="-2" pref="778" max="-2" attributes="0"/>
                                       </Group>
@@ -812,7 +812,7 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="total_txt" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnPay_service" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="243" max="32767" attributes="0"/>
                           </Group>
@@ -859,13 +859,16 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="total_txt">
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton1">
+                    <Component class="javax.swing.JButton" name="btnPay_service">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Times New Roman" size="18" style="1"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Pay"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPay_serviceActionPerformed"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
