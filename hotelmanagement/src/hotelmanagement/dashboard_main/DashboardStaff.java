@@ -320,7 +320,7 @@ public class DashboardStaff extends javax.swing.JFrame {
         Sdt_txt.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         btnSearch.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnSearch.setText("Search");
+        btnSearch.setText("Search Rooms");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
@@ -1092,7 +1092,7 @@ public class DashboardStaff extends javax.swing.JFrame {
 //            System.out.println(rooms.size());                        
         } catch (SQLException | ClassNotFoundException ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Lỗi khi load dữ liệu phòng: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Cannot load ROOM data: " + ex.getMessage());
         }
 
         // Hiển thị lại dữ liệu lên JTable
@@ -1125,12 +1125,12 @@ public class DashboardStaff extends javax.swing.JFrame {
         int selectedRow = tblRooms.getSelectedRow(); // lấy dòng được chọn
 
         if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng để xóa!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please choose a row to delete!", "Notification", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         // Xác nhận xóa
-        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa phòng này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure to delete this room", "Confirm", JOptionPane.YES_NO_OPTION);
         if (confirm != JOptionPane.YES_OPTION) {
             return;
         }
@@ -1158,12 +1158,12 @@ public class DashboardStaff extends javax.swing.JFrame {
         int selectedRow = tblServices.getSelectedRow(); // lấy dòng được chọn
 
         if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng để xóa!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please choose a row to delete!", "Notification", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         // Xác nhận xóa
-        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa phòng này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure to delete this service", "Confirm", JOptionPane.YES_NO_OPTION);
         if (confirm != JOptionPane.YES_OPTION) {
             return;
         }
@@ -1209,7 +1209,7 @@ public class DashboardStaff extends javax.swing.JFrame {
             }
         } catch (SQLException | ClassNotFoundException ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Lỗi khi load dữ liệu phòng: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Cannot load Service data: " + ex.getMessage());
         }
 
         // Hiển thị lại dữ liệu lên JTable
@@ -1238,12 +1238,12 @@ public class DashboardStaff extends javax.swing.JFrame {
         int selectedRow = tblInvoices.getSelectedRow(); // lấy dòng được chọn
 
         if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng để xóa!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please choose a row to delete!", "Notification", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         // Xác nhận xóa
-        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa phòng này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure to delete this invoice", "Confirm", JOptionPane.YES_NO_OPTION);
         if (confirm != JOptionPane.YES_OPTION) {
             return;
         }
@@ -1295,7 +1295,7 @@ public class DashboardStaff extends javax.swing.JFrame {
             }
         } catch (SQLException | ClassNotFoundException ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Lỗi khi load dữ liệu phòng: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Cannot load INVOICE data " + ex.getMessage());
         }
 
         // Hiển thị lại dữ liệu lên JTable
@@ -1354,7 +1354,6 @@ public class DashboardStaff extends javax.swing.JFrame {
                 pay_s.setGia(rs2.getDouble("TONGTIEN"));
                 ser_list.add(pay_s);
             }
-
             model =  (DefaultTableModel) ser_table.getModel();
             model.setRowCount(0);
 
@@ -1390,32 +1389,41 @@ public class DashboardStaff extends javax.swing.JFrame {
     private void btnCheckoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckoutActionPerformed
         int yes = JOptionPane.showConfirmDialog(this, "Complete checkout?", "exit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(yes == JOptionPane.YES_OPTION){
-//            dba_connection connect = new dba_connection();
-//            String sql_delete = "DELETE FROM HOADON "
-//                    + "WHERE MADVTI IS NULL AND EXISTS( "
-//                    + "SELECT 1 FROM KHACHHANG, DVPHONG "
-//                    + "WHERE KHACHHANG.MAKH = HOADON.MAKH " 
-//                    + "AND HOADON.MADVP = DVPHONG.MADVP AND SDT = '" + Sdt_txt.getText() +"')";
-//            
-//            try {
-//                Class.forName(connect.driver);
-//                Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
-//                PreparedStatement pst = null;
-//                
-//                pst = con.prepareStatement(sql_delete);
-//                ResultSet rs = pst.executeQuery();
-//                if(rs.next()){
-//                    JOptionPane.showMessageDialog(this, "Checkout successfully!");                  
-//                }
-//                
-//            } catch (ClassNotFoundException | SQLException ex) {
-//                Logger.getLogger(DashboardStaff.class.getName()).log(Level.SEVERE, null, ex);
-//            }       
-            model =  (DefaultTableModel) pay_table.getModel();
-            model.setRowCount(0);
-            CardLayout cl = (CardLayout)(CardLayout_Management.getLayout());
-            cl.show(CardLayout_Management, "");
-            PrintServiceInvoice();
+           dba_connection connect = new dba_connection();
+            String sql_hoadon = "select MAHD, HOADON.MADVTI, TENDVTI, TONGTIEN FROM HOADON "
+                    + "JOIN KHACHHANG ON HOADON.MAKH = KHACHHANG.MAKH "
+                    + "JOIN DVTIENICH ON HOADON.MADVTI = DVTIENICH.MADVTI "                    
+                    + "WHERE KHACHHANG.SDT = '" + Sdt_txt.getText() + "'";    
+        
+        try {
+            Class.forName(connect.driver);
+            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+            PreparedStatement pst = null;
+            pst = con.prepareStatement(sql_hoadon);
+
+            ResultSet rs2 = pst.executeQuery();
+            while(rs2.next()){
+                Service_payout pay_s = new Service_payout();
+                pay_s.setMahd(rs2.getString("MAHD"));
+                pay_s.setMati(rs2.getString("MADVTI"));                
+                pay_s.setTenti(rs2.getString("TENDVTI"));
+                pay_s.setGia(rs2.getDouble("TONGTIEN"));
+                ser_list.add(pay_s);
+            }   
+            if(!ser_list.isEmpty())
+            {
+                CardLayout cl = (CardLayout)(CardLayout_Management.getLayout());
+                cl.show(CardLayout_Management, "");
+                PrintServiceInvoice();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "No invoice found for this phone number!");
+            }
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DashboardClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
         }
     }//GEN-LAST:event_btnCheckoutActionPerformed
 
@@ -1424,6 +1432,7 @@ public class DashboardStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGiahanActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+
         dba_connection connect = new dba_connection();
          
         String sql_hoadon = "select MAHD, LOAIPHONG, MOTA, NGAYBD, NGAYKT, TINHTRANGTT FROM HOADON "
@@ -1437,8 +1446,10 @@ public class DashboardStaff extends javax.swing.JFrame {
             PreparedStatement pst = null;
             pst = con.prepareStatement(sql_hoadon);
              
-  
+            
             ResultSet rs2 = pst.executeQuery();
+            list.clear();
+            
             while(rs2.next()){
                 Payout pay = new Payout();
                 pay.setMahd(rs2.getString("MAHD"));
@@ -1450,7 +1461,15 @@ public class DashboardStaff extends javax.swing.JFrame {
                 list.add(pay);
             }
             
-            model =  (DefaultTableModel) pay_table.getModel();
+            if(list.isEmpty())
+            {
+                JOptionPane.showMessageDialog(null, "No invoice found for this phone number!");
+                DefaultTableModel model = (DefaultTableModel) pay_table.getModel();
+                model.setRowCount(0);
+            }
+            else
+            {
+            DefaultTableModel model = (DefaultTableModel) pay_table.getModel();
             model.setRowCount(0);
             
             for(Payout p: list){
@@ -1463,7 +1482,7 @@ public class DashboardStaff extends javax.swing.JFrame {
                     p.tinhtrangtt
                 });
             }
-           
+            }
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DashboardClient.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1549,7 +1568,7 @@ public class DashboardStaff extends javax.swing.JFrame {
         }
         catch (SQLException | ClassNotFoundException ex){
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Lỗi khi load dữ liệu phòng: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Cannot load Customer data " + ex.getMessage());
         }
         
         model = (DefaultTableModel) tblCustomers.getModel();

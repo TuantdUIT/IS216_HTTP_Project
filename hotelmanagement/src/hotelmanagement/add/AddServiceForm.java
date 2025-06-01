@@ -5,7 +5,7 @@
 
 package hotelmanagement.add;
 
-import hotelmanagement.dashboard_main.DashboardForm;
+import hotelmanagement.dashboard_main.DashboardClient;
 import hotelmanagement.dashboard_main.DashboardStaff;
 import hotelmanagement.entity.dba_connection;
 import javax.swing.*;
