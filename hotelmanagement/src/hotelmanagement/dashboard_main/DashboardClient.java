@@ -47,7 +47,6 @@ public class DashboardClient extends javax.swing.JFrame {
         pnlCard.add(CardBookServices, "BookServices");
         
         
-        
         //Lấy thông tin khách hàng để hiển thị
         
         String sql1 = "SELECT * FROM KHACHHANG WHERE trim(SDT) = trim(?)";
@@ -73,9 +72,9 @@ public class DashboardClient extends javax.swing.JFrame {
         }
         //Hiển thị thông tin vô bảng phòng trống
         Reload_Table_Rooms();
-        
         Reload_Table_Services();
-        
+        Load_Table_UserRooms();
+        Load_Table_UserServices();
     }
     
 
@@ -123,7 +122,7 @@ public class DashboardClient extends javax.swing.JFrame {
         ArrayList<Service> services = new ArrayList<>();
         services.clear();
         
-        String sql = "SELECT * FROM DVTIENICH";
+        String sql = "SELECT * FROM DVTIENICH ORDER BY MADVTI ASC";
         try {
             Class.forName(connect.driver);
             Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
@@ -155,7 +154,7 @@ public class DashboardClient extends javax.swing.JFrame {
         }
     }
     
-    private void Load_Table_UserRooms()
+    public void Load_Table_UserRooms()
     {
         dba_connection connect = new dba_connection();
         ArrayList<UserRoom> UserRooms = new ArrayList<>();
@@ -164,7 +163,8 @@ public class DashboardClient extends javax.swing.JFrame {
         String sql = "select P.MADVP, P.LOAIPHONG, P.MOTA, HD.NGAYBD, HD.NGAYKT, P.DONGIA, HD.TONGTIEN "
                     + "from DVPHONG P join HOADON HD on P.MADVP = HD.MADVP "
                     + "join KHACHHANG KH on KH.MAKH = HD.MAKH "
-                    + "where (HD.TINHTRANGTT = N'Chưa thanh toán' or HD.NGAYKT > SYSDATE) and KH.SDT = " + Current_User.phonenumber;
+                    + "where (HD.TINHTRANGTT = N'Chưa thanh toán' or HD.NGAYKT > SYSDATE) and KH.SDT = " + Current_User.phonenumber 
+                    + " order by P.MADVP ASC, HD.NGAYKT ASC";
         
         Connection con;
         try{
@@ -213,7 +213,8 @@ public class DashboardClient extends javax.swing.JFrame {
         String sql = "select TI.MADVTI, TI.TENDVTI, TI.MOTA, HD.NGAYBD, HD.NGAYKT, TI.DONGIA, HD.TONGTIEN "
                     + "from DVTIENICH TI join HOADON HD on TI.MADVTI = HD.MADVTI "
                     + "join KHACHHANG KH on KH.MAKH = HD.MAKH "
-                    + "where (HD.TINHTRANGTT = N'Chưa thanh toán' or HD.NGAYKT > SYSDATE) and KH.SDT = " + Current_User.phonenumber;
+                    + "where (HD.TINHTRANGTT = N'Chưa thanh toán' or HD.NGAYKT > SYSDATE) and trim(KH.SDT) = " + Current_User.phonenumber
+                    + " order by TI.MADVTI ASC";
         
         Connection con;
         try{
@@ -276,6 +277,8 @@ public class DashboardClient extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         tabUserRooms = new javax.swing.JTable();
         Title2 = new javax.swing.JLabel();
+        btnExtendR = new javax.swing.JButton();
+        btnReloadURs = new javax.swing.JButton();
         CardMyServices = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tabUserServices = new javax.swing.JTable();
@@ -305,8 +308,10 @@ public class DashboardClient extends javax.swing.JFrame {
         btnBookS = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(46, 121, 130));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1142, 665));
 
         pnlButton.setBackground(new java.awt.Color(46, 121, 130));
 
@@ -398,13 +403,17 @@ public class DashboardClient extends javax.swing.JFrame {
         pnlButtonLayout.setHorizontalGroup(
             pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlButtonLayout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
-                .addGroup(pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelMyInfo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelBook, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblHoTen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addGroup(pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlButtonLayout.createSequentialGroup()
+                            .addComponent(lblHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap())
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlButtonLayout.createSequentialGroup()
+                            .addComponent(panelMyInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(17, 17, 17)))
+                    .addComponent(panelBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         pnlButtonLayout.setVerticalGroup(
             pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -415,7 +424,7 @@ public class DashboardClient extends javax.swing.JFrame {
                 .addComponent(lblHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(panelMyInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(78, 78, 78)
+                .addGap(48, 48, 48)
                 .addComponent(panelBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -471,28 +480,56 @@ public class DashboardClient extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(tabUserRooms);
 
-        Title2.setText("My Room");
+        Title2.setText("MY ROOMS");
         Title2.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+
+        btnExtendR.setText("Extend room");
+        btnExtendR.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnExtendR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExtendRActionPerformed(evt);
+            }
+        });
+
+        btnReloadURs.setText("Reload rooms");
+        btnReloadURs.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnReloadURs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReloadURsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout CardMyRoomsLayout = new javax.swing.GroupLayout(CardMyRooms);
         CardMyRooms.setLayout(CardMyRoomsLayout);
         CardMyRoomsLayout.setHorizontalGroup(
             CardMyRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CardMyRoomsLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(CardMyRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 970, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Title2))
+                    .addGroup(CardMyRoomsLayout.createSequentialGroup()
+                        .addGap(348, 348, 348)
+                        .addComponent(btnExtendR, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnReloadURs, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(CardMyRoomsLayout.createSequentialGroup()
+                        .addGap(350, 350, 350)
+                        .addComponent(Title2))
+                    .addGroup(CardMyRoomsLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 921, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         CardMyRoomsLayout.setVerticalGroup(
             CardMyRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CardMyRoomsLayout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
+                .addGap(22, 22, 22)
                 .addComponent(Title2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGroup(CardMyRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnReloadURs, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExtendR, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pnlCard.add(CardMyRooms, "card2");
@@ -546,7 +583,7 @@ public class DashboardClient extends javax.swing.JFrame {
         });
         jScrollPane6.setViewportView(tabUserServices);
 
-        Title4.setText("My Service");
+        Title4.setText("MY SERVICES");
         Title4.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
 
         javax.swing.GroupLayout CardMyServicesLayout = new javax.swing.GroupLayout(CardMyServices);
@@ -554,20 +591,23 @@ public class DashboardClient extends javax.swing.JFrame {
         CardMyServicesLayout.setHorizontalGroup(
             CardMyServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CardMyServicesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(CardMyServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Title4)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 970, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(CardMyServicesLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 898, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(CardMyServicesLayout.createSequentialGroup()
+                        .addGap(343, 343, 343)
+                        .addComponent(Title4)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         CardMyServicesLayout.setVerticalGroup(
             CardMyServicesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CardMyServicesLayout.createSequentialGroup()
-                .addContainerGap(36, Short.MAX_VALUE)
+                .addGap(17, 17, 17)
                 .addComponent(Title4)
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pnlCard.add(CardMyServices, "card3");
@@ -630,60 +670,56 @@ public class DashboardClient extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labCheckoutdate1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labCheckoutdate1)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addComponent(labCheckoutdate)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(datePickerCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addComponent(labCheckindate)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(datePickerCheckin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addGap(264, 264, 264)
-                                            .addComponent(Title)))
-                                    .addGap(272, 272, 272))
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 789, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(313, 313, 313)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(labCheckoutdate)
+                                .addGap(18, 18, 18)
+                                .addComponent(datePickerCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(labCheckindate)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(datePickerCheckin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 887, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(Title)
+                        .addGap(335, 335, 335))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54)
-                        .addComponent(btnBookR, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                        .addComponent(btnBookR, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(324, 324, 324))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(15, 15, 15)
                 .addComponent(Title)
+                .addGap(35, 35, 35)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labCheckindate)
+                    .addComponent(datePickerCheckin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labCheckoutdate)
+                    .addComponent(datePickerCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(labCheckoutdate1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labCheckindate)
-                            .addComponent(datePickerCheckin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labCheckoutdate)
-                            .addComponent(datePickerCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(labCheckoutdate1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnBookR, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(74, 74, 74))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBookR, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42))
         );
 
         javax.swing.GroupLayout CardBookRoomsLayout = new javax.swing.GroupLayout(CardBookRooms);
@@ -747,38 +783,35 @@ public class DashboardClient extends javax.swing.JFrame {
         labTotalUsage.setLayout(labTotalUsageLayout);
         labTotalUsageLayout.setHorizontalGroup(
             labTotalUsageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, labTotalUsageLayout.createSequentialGroup()
-                .addGroup(labTotalUsageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(labTotalUsageLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(labTotalUsageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labChooseSer)
                     .addGroup(labTotalUsageLayout.createSequentialGroup()
                         .addGroup(labTotalUsageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(labTotalUsageLayout.createSequentialGroup()
-                                .addGap(66, 66, 66)
-                                .addGroup(labTotalUsageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(scrlServices, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(labChooseSer)
-                                    .addGroup(labTotalUsageLayout.createSequentialGroup()
-                                        .addGroup(labTotalUsageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(labEndDate)
-                                            .addComponent(labStartDate))
-                                        .addGap(164, 164, 164)
-                                        .addGroup(labTotalUsageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(datePickerStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(datePickerEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(labTotalUsageLayout.createSequentialGroup()
-                                .addGap(393, 393, 393)
-                                .addComponent(btnBookS, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 74, Short.MAX_VALUE))
-                    .addGroup(labTotalUsageLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Title1)))
-                .addGap(317, 317, 317))
+                            .addComponent(labEndDate)
+                            .addComponent(labStartDate))
+                        .addGap(164, 164, 164)
+                        .addGroup(labTotalUsageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(datePickerStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(datePickerEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(scrlServices, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, labTotalUsageLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Title1)
+                .addGap(311, 311, 311))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, labTotalUsageLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnBookS, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(410, 410, 410))
         );
         labTotalUsageLayout.setVerticalGroup(
             labTotalUsageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(labTotalUsageLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(Title1)
-                .addGap(18, 18, 18)
+                .addGap(42, 42, 42)
                 .addGroup(labTotalUsageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labStartDate)
                     .addComponent(datePickerStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -786,13 +819,13 @@ public class DashboardClient extends javax.swing.JFrame {
                 .addGroup(labTotalUsageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labEndDate)
                     .addComponent(datePickerEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58)
+                .addGap(28, 28, 28)
                 .addComponent(labChooseSer)
                 .addGap(18, 18, 18)
-                .addComponent(scrlServices, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addComponent(scrlServices, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
                 .addComponent(btnBookS, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout CardBookServicesLayout = new javax.swing.GroupLayout(CardBookServices);
@@ -814,7 +847,7 @@ public class DashboardClient extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(pnlButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlCard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -827,11 +860,11 @@ public class DashboardClient extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -922,6 +955,7 @@ public class DashboardClient extends javax.swing.JFrame {
 
                     //Reload lai bang rooms available
                     Reload_Table_Rooms();
+                    Load_Table_UserRooms();
                     Bank_BookRoom frame = new Bank_BookRoom();
                     frame.setVisible(true);
                     }
@@ -983,7 +1017,7 @@ public class DashboardClient extends javax.swing.JFrame {
                 
                 //Reload lai bang rooms available
                 Reload_Table_Services();
- 
+                Load_Table_UserServices();
                 } 
                 else {
                 JOptionPane.showMessageDialog(null, "Please choose a service to book!");
@@ -1005,6 +1039,24 @@ public class DashboardClient extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please choose a room to check!");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnExtendRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExtendRActionPerformed
+        int selectedRow = tabUserRooms.getSelectedRow();
+        if (selectedRow != -1) {
+            String MaDVP = tabUserRooms.getValueAt(selectedRow, 0).toString();
+            String NgayBD = tabUserRooms.getValueAt(selectedRow, 4).toString(); //NGAYKT CUA HD CU LA NGAYBD CUA HDON MOI
+            ExtendRoom frame = new ExtendRoom(MaDVP, NgayBD);
+            frame.setVisible(true);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Please choose a room to extend!");
+        }
+    }//GEN-LAST:event_btnExtendRActionPerformed
+
+    private void btnReloadURsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReloadURsActionPerformed
+        // TODO add your handling code here:
+        Load_Table_UserRooms();
+    }//GEN-LAST:event_btnReloadURsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1054,8 +1106,10 @@ public class DashboardClient extends javax.swing.JFrame {
     private javax.swing.JButton btnBookRooms;
     private javax.swing.JButton btnBookS;
     private javax.swing.JButton btnBookServices;
+    private javax.swing.JButton btnExtendR;
     private javax.swing.JButton btnMyRooms;
     private javax.swing.JButton btnMyServices;
+    private javax.swing.JButton btnReloadURs;
     private com.github.lgooddatepicker.components.DatePicker datePickerCheckin;
     private com.github.lgooddatepicker.components.DatePicker datePickerCheckout;
     private com.github.lgooddatepicker.components.DatePicker datePickerEndDate;

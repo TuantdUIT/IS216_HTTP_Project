@@ -193,7 +193,7 @@ public class Staff_Login extends javax.swing.JFrame {
 
             ResultSet rs = pst.executeQuery();
             if(rs.next()){
-                JOptionPane.showMessageDialog(this, "Logined!");
+                JOptionPane.showMessageDialog(this, "Login Successfully!");
                 DashboardStaff dbf = new DashboardStaff();
                 dbf.setVisible(true);
                 this.dispose();

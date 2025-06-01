@@ -278,17 +278,17 @@ public class UpdateServiceForm extends javax.swing.JFrame {
                 pst.setString(5, serviceID);
                 int rowsUpdated = pst.executeUpdate();
             if (rowsUpdated > 0) {
-                JOptionPane.showMessageDialog(null, "Cập nhật thông tin thành công!");
+                JOptionPane.showMessageDialog(null, "Update failed!");
             } 
             else {
-                JOptionPane.showMessageDialog(null, "Không tìm thấy bản ghi để cập nhật.");
+                JOptionPane.showMessageDialog(null, "Record not found.");
             }
 
         // Đóng kết nối
             con.close();
             
         } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Lỗi khi cập nhật dữ liệu: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Cannot update data: " + ex.getMessage());
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 

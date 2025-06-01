@@ -204,12 +204,12 @@ public class RoomManagement extends javax.swing.JFrame {
         int selectedRow = tblRooms.getSelectedRow(); // lấy dòng được chọn
 
         if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng để xóa!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please choose a room to delete!", "Notification", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         // Xác nhận xóa
-        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa phòng này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this room?", "Confirm", JOptionPane.YES_NO_OPTION);
         if (confirm != JOptionPane.YES_OPTION) {
             return;
         }
@@ -262,7 +262,7 @@ public class RoomManagement extends javax.swing.JFrame {
             }
         } catch (SQLException | ClassNotFoundException ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Lỗi khi load dữ liệu phòng: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Cannot load Rooms data " + ex.getMessage());
         }
 
         // Hiển thị lại dữ liệu lên JTable

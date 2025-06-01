@@ -203,12 +203,12 @@ public class ServiceManagement extends javax.swing.JFrame {
         int selectedRow = tblServices.getSelectedRow(); // lấy dòng được chọn
 
         if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng để xóa!", "Thông báo", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please choose a service to delete!", "Notification", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         // Xác nhận xóa
-        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa phòng này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this service?", "Confirm", JOptionPane.YES_NO_OPTION);
         if (confirm != JOptionPane.YES_OPTION) {
             return;
         }

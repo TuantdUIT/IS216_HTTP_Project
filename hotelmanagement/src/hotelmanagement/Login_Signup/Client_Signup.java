@@ -296,18 +296,18 @@ public class Client_Signup extends javax.swing.JFrame {
 
     //CCCD và SDT phải là số
             else if(!CCCD_txt.getText().matches("\\d+")){
-                JOptionPane.showMessageDialog(this, "CCCD phai la so");
+                JOptionPane.showMessageDialog(this, "ID must be number");
             }
 
             else if(!Sdt_txt.getText().matches("\\d+")){
-                JOptionPane.showMessageDialog(this, "SDT phai la so");
+                JOptionPane.showMessageDialog(this, "Phone number must be number");
             }
     // CCCD phải là 12 sô và SDT từ 10 đến 11 số
             else if(CCCD_txt.getText().length() != 12){
-                JOptionPane.showMessageDialog(this, "CCCD phai 12 so");
+                JOptionPane.showMessageDialog(this, "ID must have 12 characters");
             }     
             else if(Sdt_txt.getText().length() < 10 || Sdt_txt.getText().length() > 11){           
-                JOptionPane.showMessageDialog(this, "SDT phai tu 10 den 11");
+                JOptionPane.showMessageDialog(this, "Phone number must have 10-12 characters");
             }
             else{
                 Class.forName(connect.driver);
@@ -319,7 +319,7 @@ public class Client_Signup extends javax.swing.JFrame {
 
                 ResultSet rs = pst.executeQuery();
                 if(rs.next()){
-                    JOptionPane.showConfirmDialog(this, "So dien thoai da co tai khoan dang ky roi! Vui long thu so khac");
+                    JOptionPane.showConfirmDialog(this, "This phone number is already exists");
                 }else{
                     String gender = (String) GenderBox.getSelectedItem();
                         
@@ -341,7 +341,7 @@ public class Client_Signup extends javax.swing.JFrame {
                     pst.setString(8, Email_txt.getText());
 
                     pst.executeUpdate();
-                    JOptionPane.showMessageDialog(this, "Sign up successful!");
+                    JOptionPane.showMessageDialog(this, "Sign up successfully!");
                     new Client_Login().setVisible(true);
                     Client_Signup.this.setVisible(false);    
                 }

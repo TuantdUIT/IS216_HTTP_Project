@@ -252,7 +252,7 @@ public class UpdateRoomForm extends javax.swing.JFrame {
             con.close();
 //            rs.close();
         } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Lỗi khi cập nhật dữ liệu: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Cannot update data: " + ex.getMessage());
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
