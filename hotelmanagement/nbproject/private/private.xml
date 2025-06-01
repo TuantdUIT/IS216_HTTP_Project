@@ -2,20 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/84352/OneDrive/Documents/NetBeansProjects/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/DashboardStaff.java</file>
-            <file>file:/C:/Users/84352/OneDrive/Documents/NetBeansProjects/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/Payment/Invoice_print.java</file>
-            <file>file:/C:/Users/84352/OneDrive/Documents/NetBeansProjects/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/entity/Service_pay.java</file>
-            <file>file:/C:/Users/84352/OneDrive/Documents/NetBeansProjects/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/Payment/Banking_service_qr.java</file>
-            <file>file:/C:/Users/84352/OneDrive/Documents/NetBeansProjects/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/entity/Room_pay.java</file>
-            <file>file:/C:/Users/84352/OneDrive/Documents/NetBeansProjects/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/Service_pay_menu.java</file>
-            <file>file:/C:/Users/84352/OneDrive/Documents/NetBeansProjects/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/entity/Current_User.java</file>
-        </group>
         <group name="BTTH1">
             <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/DashboardClient.java</file>
             <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/DashboardStaff.java</file>
             <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/add/AddServiceForm.java</file>
             <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/entity/dba_connection.java</file>
+        </group>
+        <group>
+            <file>file:/C:/Users/84352/OneDrive/Documents/NetBeansProjects/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/DashboardStaff.java</file>
+            <file>file:/C:/Users/84352/OneDrive/Documents/NetBeansProjects/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/Payment/Invoice_print.java</file>
+            <file>file:/C:/Users/84352/OneDrive/Documents/NetBeansProjects/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/Payment/Banking_service_qr.java</file>
         </group>
     </open-files>
 </project-private>

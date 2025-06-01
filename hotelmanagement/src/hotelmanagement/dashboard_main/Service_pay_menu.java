@@ -165,12 +165,12 @@ public class Service_pay_menu extends javax.swing.JFrame {
 
     private void cash_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cash_buttonActionPerformed
         System.out.println(Current_User.phonenumber);
-        new Invoice_print().setVisible(true);
+        new Invoice_print(this).setVisible(true);
         
     }//GEN-LAST:event_cash_buttonActionPerformed
 
     private void bank_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bank_buttonActionPerformed
-        new Banking_service_qr().setVisible(true);
+        new Banking_service_qr(this).setVisible(true);
         
     }//GEN-LAST:event_bank_buttonActionPerformed
 
