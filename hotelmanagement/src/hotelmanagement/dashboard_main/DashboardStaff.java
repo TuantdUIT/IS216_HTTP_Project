@@ -1032,21 +1032,45 @@ public class DashboardStaff extends javax.swing.JFrame {
     private void btnDeleteRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteRoomActionPerformed
         // TODO add your handling code here:
         int selectedRow = tblRooms.getSelectedRow(); // lấy dòng được chọn
-
+ 
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(this, "Please choose a row to delete!", "Notification", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
+ 
         // Xác nhận xóa
         int confirm = JOptionPane.showConfirmDialog(this, "Are you sure to delete this room", "Confirm", JOptionPane.YES_NO_OPTION);
         if (confirm != JOptionPane.YES_OPTION) {
             return;
         }
-
+ 
         // Xoá dòng khỏi bảng
-        model = (DefaultTableModel) tblRooms.getModel();
-        model.removeRow(selectedRow);
+        String roomID = tblRooms.getValueAt(selectedRow, 0).toString();
+        try {
+            dba_connection connect = new dba_connection();
+            Class.forName(connect.driver);
+            try (Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password)) {
+                String sql = "DELETE FROM DVPHONG WHERE MADVP = ?";
+                PreparedStatement pst = con.prepareStatement(sql);
+                pst.setString(1, roomID);
+                
+                int rowsDeleted = pst.executeUpdate();
+                
+                if (rowsDeleted > 0) {
+                    // Xóa khỏi bảng hiển thị nếu xóa thành công trong DB
+                    model = (DefaultTableModel) tblRooms.getModel();
+                    model.removeRow(selectedRow);
+                    
+                    JOptionPane.showMessageDialog(this, "Room deleted successfully.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed to delete room from database.");
+                }
+                
+                pst.close();
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error deleting room: " + ex.getMessage());
+        }
     }//GEN-LAST:event_btnDeleteRoomActionPerformed
 
     private void btnAddRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddRoomActionPerformed
@@ -1065,22 +1089,45 @@ public class DashboardStaff extends javax.swing.JFrame {
     private void btnDeleteServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteServiceActionPerformed
         // TODO add your handling code here:
         int selectedRow = tblServices.getSelectedRow(); // lấy dòng được chọn
-
+ 
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(this, "Please choose a row to delete!", "Notification", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
+ 
         // Xác nhận xóa
         int confirm = JOptionPane.showConfirmDialog(this, "Are you sure to delete this service", "Confirm", JOptionPane.YES_NO_OPTION);
         if (confirm != JOptionPane.YES_OPTION) {
             return;
         }
-
+ 
+        String serviceID = tblServices.getValueAt(selectedRow, 0).toString();
         // Xoá dòng khỏi bảng
-        model = (DefaultTableModel) tblServices.getModel();
-        model.removeRow(selectedRow);
-
+        try {
+            dba_connection connect = new dba_connection();
+            Class.forName(connect.driver);
+            try (Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password)) {
+                String sql = "DELETE FROM DVTIENICH WHERE MADVTI = ?";
+                PreparedStatement pst = con.prepareStatement(sql);
+                pst.setString(1, serviceID);
+                
+                int rowsDeleted = pst.executeUpdate();
+                
+                if (rowsDeleted > 0) {
+                    // Xóa khỏi bảng hiển thị nếu xóa thành công trong DB
+                    model = (DefaultTableModel) tblServices.getModel();
+                    model.removeRow(selectedRow);
+                    
+                    JOptionPane.showMessageDialog(this, "Service deleted successfully.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed to delete service from database.");
+                }
+                
+                pst.close();
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error deleting room: " + ex.getMessage());
+        }  
     }//GEN-LAST:event_btnDeleteServiceActionPerformed
 
     private void btnBackServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackServiceActionPerformed
@@ -1145,21 +1192,45 @@ public class DashboardStaff extends javax.swing.JFrame {
     private void btnDeleteInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteInvoiceActionPerformed
         // TODO add your handling code here:
         int selectedRow = tblInvoices.getSelectedRow(); // lấy dòng được chọn
-
+ 
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(this, "Please choose a row to delete!", "Notification", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
+ 
         // Xác nhận xóa
         int confirm = JOptionPane.showConfirmDialog(this, "Are you sure to delete this invoice", "Confirm", JOptionPane.YES_NO_OPTION);
         if (confirm != JOptionPane.YES_OPTION) {
             return;
         }
-
-        // Xoá dòng khỏi bảng
-        model = (DefaultTableModel) tblInvoices.getModel();
-        model.removeRow(selectedRow);
+ 
+        
+        String invoiceID = tblInvoices.getValueAt(selectedRow, 0).toString();
+        try {
+            dba_connection connect = new dba_connection();
+            Class.forName(connect.driver);
+            try (Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password)) {
+                String sql = "DELETE FROM HOADON WHERE MAHD = ?";
+                PreparedStatement pst = con.prepareStatement(sql);
+                pst.setString(1, invoiceID);
+                
+                int rowsDeleted = pst.executeUpdate();
+                
+                if (rowsDeleted > 0) {
+                    // Xóa khỏi bảng hiển thị nếu xóa thành công trong DB
+                    model = (DefaultTableModel) tblInvoices.getModel();
+                    model.removeRow(selectedRow);
+                    
+                    JOptionPane.showMessageDialog(this, "Invoice deleted successfully.");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed to delete invoice from database.");
+                }
+                
+                pst.close();
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error deleting room: " + ex.getMessage());
+        }
 
     }//GEN-LAST:event_btnDeleteInvoiceActionPerformed
 

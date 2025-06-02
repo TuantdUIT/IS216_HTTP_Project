@@ -351,7 +351,7 @@ public class Invoice_print extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btninPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninPayActionPerformed
-        String sql_update = "UPDATE HOADON SET TINHTRANGTT = 'Vô hiệu hoá' "
+        String sql_update = "UPDATE HOADON SET TINHTRANGTT = 'Vô hiệu hoá', NGAYTHANHTOAN = SYSDATE "
                 + "WHERE MAHD IN (SELECT MAHD FROM HOADON "
                 + "JOIN KHACHHANG ON KHACHHANG.MAKH = HOADON.MAKH "
                 + "WHERE TINHTRANGTT IN('Đã thanh toán', 'Chưa thanh toán') AND SDT = '" + Phone.getText() + "')";

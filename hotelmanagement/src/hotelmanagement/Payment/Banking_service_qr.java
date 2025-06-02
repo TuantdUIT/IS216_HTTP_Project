@@ -389,7 +389,7 @@ public class Banking_service_qr extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String sql_update = "UPDATE HOADON SET TINHTRANGTT = 'Vô hiệu hoá' "
+        String sql_update = "UPDATE HOADON SET TINHTRANGTT = 'Vô hiệu hoá', NGAYTHANHTOAN = SYSDATE "
                 + "WHERE MAHD IN (SELECT MAHD FROM HOADON "
                 + "JOIN KHACHHANG ON KHACHHANG.MAKH = HOADON.MAKH "
                 + "WHERE TINHTRANGTT IN('Đã thanh toán', 'Chưa thanh toán') AND SDT = '" + Phone.getText() + "')";

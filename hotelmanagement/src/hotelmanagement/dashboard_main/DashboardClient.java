@@ -952,11 +952,25 @@ public class DashboardClient extends javax.swing.JFrame {
                     pst1.setDate(3, ngayKTsql);
 
                     pst1.executeUpdate();
-
+                    
+                    
+                    String sql1 = "SELECT MAHD FROM HOADON WHERE MAKH='" + Current_User.MaKH + "' AND MADVP='" + MaDVP + "' AND NGAYBD = ? AND NGAYKT = ?";
+                    PreparedStatement pst2 = con.prepareStatement(sql1);
+                    pst2.setDate(1, ngayBDsql);
+                    pst2.setDate(2, ngayKTsql);
+                    
+                    
+                    String MaHD = "";
+                    ResultSet rs = pst2.executeQuery();
+                    if(rs.next())
+                    {
+                         MaHD = rs.getString("MAHD");
+                    }
+                    
                     //Reload lai bang rooms available
                     Reload_Table_Rooms();
                     Load_Table_UserRooms();
-                    Bank_BookRoom frame = new Bank_BookRoom();
+                    Bank_BookRoom frame = new Bank_BookRoom(MaHD);
                     frame.setVisible(true);
                     }
                 }

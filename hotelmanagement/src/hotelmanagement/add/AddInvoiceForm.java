@@ -285,58 +285,64 @@ public class AddInvoiceForm extends javax.swing.JFrame {
         LocalDate dayPaid = dpPaid.getDate();
         //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         
-        if (dayStarted == null || dayEnded == null || dayPaid == null){
+        if (dayStarted == null || dayEnded == null){
             JOptionPane.showMessageDialog(this, "Please enter checkin and checkout date!");
         }
-        
+        else
         if (dayStarted.compareTo(dayEnded) >= 0){
             JOptionPane.showMessageDialog(this, "The checkin date must before the checkout date!");
         }   
-            
-        //int total = Integer.parseInt(txtTotal.getText());
-        String paymentStatus = (String) cbxStatus.getSelectedItem();
-        
-        
-        try {
-            Class.forName(connect.driver);
-            Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
-            
-            
-            // Chèn thông tin vào CSDL
-            String sql = "INSERT INTO HOADON (MAKH, MADVP, MADVTI, NGUOIXACNHAN, " +
-             " NGAYBD, NGAYKT, NGAYTHANHTOAN, TINHTRANGTT) " +
-             "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            
-            //java.util.Date dayCreated = sdf.parse(ftxtDayCreated.getText());
-            
-            
-            //java.sql.Date sqlDate1 = new java.sql.Date(dayCreated.getTime());
-            java.sql.Date sqlDate2 = dayStarted != null ? Date.valueOf(dayStarted) : null;
-            java.sql.Date sqlDate3 = dayEnded != null ? Date.valueOf(dayEnded) : null;
-            java.sql.Date sqlDate4 = dayPaid != null ? Date.valueOf(dayPaid) : null;
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, customerID); // MAKH
-            pst.setString(2, roomID);     // MADVP
-            pst.setString(3, serviceID);  // MADVTI
-           
-            pst.setString(4, staffID);    // NGUOIXACNHAN
-
-            //pst.setDate(6, sqlDate1);
-            pst.setDate(5, sqlDate2);
-            pst.setDate(6, sqlDate3);
-            pst.setDate(7, sqlDate4);
-
-            //pst.setInt(9, total);        // TONGTIEN
-            pst.setString(8, paymentStatus); // TINHTRANGTT
-       
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Add invoice sucessfully!");
-            
-        } catch (SQLException | ClassNotFoundException ex){
-            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
-        }catch (DateTimeParseException e){
-            JOptionPane.showMessageDialog(this, "Invalid date");
+        else
+        if((!txtRoomID.getText().isEmpty() && !txtServiceID.getText().isEmpty()) || (txtRoomID.getText().isEmpty() && txtServiceID.getText().isEmpty()))
+        {
+            JOptionPane.showMessageDialog(this, "Please choose 1 of 2 (RoomID, ServiceID) to enter!");
         }
+        else{
+                String paymentStatus = (String) cbxStatus.getSelectedItem();
+
+            try {
+                Class.forName(connect.driver);
+                Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
+
+
+                // Chèn thông tin vào CSDL
+                String sql = "INSERT INTO HOADON (MAKH, MADVP, MADVTI, NGUOIXACNHAN, " +
+                 " NGAYBD, NGAYKT, NGAYTHANHTOAN, TINHTRANGTT) " +
+                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+                //java.util.Date dayCreated = sdf.parse(ftxtDayCreated.getText());
+
+
+                //java.sql.Date sqlDate1 = new java.sql.Date(dayCreated.getTime());
+                java.sql.Date sqlDate2 = dayStarted != null ? Date.valueOf(dayStarted) : null;
+                java.sql.Date sqlDate3 = dayEnded != null ? Date.valueOf(dayEnded) : null;
+                java.sql.Date sqlDate4 = dayPaid != null ? Date.valueOf(dayPaid) : null;
+                PreparedStatement pst = con.prepareStatement(sql);
+                pst.setString(1, customerID); // MAKH
+                pst.setString(2, roomID);     // MADVP
+                pst.setString(3, serviceID);  // MADVTI
+
+                pst.setString(4, staffID);    // NGUOIXACNHAN
+
+                //pst.setDate(6, sqlDate1);
+                pst.setDate(5, sqlDate2);
+                pst.setDate(6, sqlDate3);
+                pst.setDate(7, sqlDate4);
+
+                //pst.setInt(9, total);        // TONGTIEN
+                pst.setString(8, paymentStatus); // TINHTRANGTT
+
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(this, "Add invoice sucessfully!");
+
+            } catch (SQLException | ClassNotFoundException ex){
+                JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+            }catch (DateTimeParseException e){
+                JOptionPane.showMessageDialog(this, "Invalid date");
+            }
+        }
+        //int total = Integer.parseInt(txtTotal.getText());
+        
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
