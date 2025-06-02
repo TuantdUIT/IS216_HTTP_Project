@@ -950,6 +950,7 @@ public class DashboardStaff extends javax.swing.JFrame {
 
     private void btnRoomManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRoomManagementActionPerformed
         // TODO add your handling code here:
+        autoReloadRoom();
         CardLayout cl = (CardLayout)(CardLayout_Management.getLayout());
         cl.show(CardLayout_Management, "Rooms");
 //        autoReloadRoom();
@@ -957,12 +958,14 @@ public class DashboardStaff extends javax.swing.JFrame {
 
     private void btnServiceManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnServiceManagementActionPerformed
         // TODO add your handling code here:
+        autoReloadService();
         CardLayout cl = (CardLayout)(CardLayout_Management.getLayout());
         cl.show(CardLayout_Management, "Services");
     }//GEN-LAST:event_btnServiceManagementActionPerformed
 
     private void btnInvoiceManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvoiceManagementActionPerformed
         // TODO add your handling code here:
+        autoReloadInvoice();
         CardLayout cl = (CardLayout)(CardLayout_Management.getLayout());
         cl.show(CardLayout_Management, "Invoices");
         
@@ -1172,7 +1175,7 @@ public class DashboardStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateInvoiceActionPerformed
 
     public void autoReloadInvoice(){
-        //invoices.clear(); // Xoá dữ liệu cũ trong danh sách     
+        invoices.clear(); // Xoá dữ liệu cũ trong danh sách     
         String sql = "SELECT * FROM HOADON ORDER BY MAHD ASC";
         dba_connection connect = new dba_connection();
        

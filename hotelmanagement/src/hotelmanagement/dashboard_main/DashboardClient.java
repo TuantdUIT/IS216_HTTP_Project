@@ -163,7 +163,7 @@ public class DashboardClient extends javax.swing.JFrame {
         String sql = "select P.MADVP, P.LOAIPHONG, P.MOTA, HD.NGAYBD, HD.NGAYKT, P.DONGIA, HD.TONGTIEN "
                     + "from DVPHONG P join HOADON HD on P.MADVP = HD.MADVP "
                     + "join KHACHHANG KH on KH.MAKH = HD.MAKH "
-                    + "where (HD.TINHTRANGTT = N'Chưa thanh toán' or HD.NGAYKT > SYSDATE) and KH.SDT = " + Current_User.phonenumber 
+                    + "where HD.TINHTRANGTT IN (N'Chưa thanh toán', N'Đã thanh toán' ) and KH.SDT = " + Current_User.phonenumber 
                     + " order by P.MADVP ASC, HD.NGAYKT ASC";
         
         Connection con;
