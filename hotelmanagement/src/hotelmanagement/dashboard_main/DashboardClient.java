@@ -272,6 +272,7 @@ public class DashboardClient extends javax.swing.JFrame {
         btnBookServices = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         lblHoTen = new javax.swing.JLabel();
+        btnExit = new javax.swing.JButton();
         pnlCard = new javax.swing.JPanel();
         CardMyRooms = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -398,6 +399,15 @@ public class DashboardClient extends javax.swing.JFrame {
         lblHoTen.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblHoTen.setForeground(new java.awt.Color(255, 255, 255));
 
+        btnExit.setText("Exit");
+        btnExit.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnExit.setForeground(new java.awt.Color(255, 51, 51));
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlButtonLayout = new javax.swing.GroupLayout(pnlButton);
         pnlButton.setLayout(pnlButtonLayout);
         pnlButtonLayout.setHorizontalGroup(
@@ -414,6 +424,10 @@ public class DashboardClient extends javax.swing.JFrame {
                             .addComponent(panelMyInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(17, 17, 17)))
                     .addComponent(panelBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(pnlButtonLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pnlButtonLayout.setVerticalGroup(
             pnlButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -426,7 +440,9 @@ public class DashboardClient extends javax.swing.JFrame {
                 .addComponent(panelMyInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
                 .addComponent(panelBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnExit)
+                .addGap(70, 70, 70))
         );
 
         pnlCard.setLayout(new java.awt.CardLayout());
@@ -1072,6 +1088,11 @@ public class DashboardClient extends javax.swing.JFrame {
         Load_Table_UserRooms();
     }//GEN-LAST:event_btnReloadURsActionPerformed
 
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        this.dispose();
+        new Main_Menu().setVisible(true);
+    }//GEN-LAST:event_btnExitActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1120,6 +1141,7 @@ public class DashboardClient extends javax.swing.JFrame {
     private javax.swing.JButton btnBookRooms;
     private javax.swing.JButton btnBookS;
     private javax.swing.JButton btnBookServices;
+    private javax.swing.JButton btnExit;
     private javax.swing.JButton btnExtendR;
     private javax.swing.JButton btnMyRooms;
     private javax.swing.JButton btnMyServices;

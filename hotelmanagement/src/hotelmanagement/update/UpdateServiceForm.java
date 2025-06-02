@@ -278,7 +278,7 @@ public class UpdateServiceForm extends javax.swing.JFrame {
                 pst.setString(5, serviceID);
                 int rowsUpdated = pst.executeUpdate();
             if (rowsUpdated > 0) {
-                JOptionPane.showMessageDialog(null, "Update failed!");
+                JOptionPane.showMessageDialog(null, "Update sucessfully!");
             } 
             else {
                 JOptionPane.showMessageDialog(null, "Record not found.");

@@ -41,7 +41,7 @@ public class Bank_BookRoom extends javax.swing.JFrame {
                  tongTien = rs.getDouble("TONGTIEN");
             }
             
-            lblTotal.setText(String.valueOf(tongTien));
+            lblTotal.setText(String.valueOf(tongTien) + " VND");
         } catch (SQLException ex) {
             Logger.getLogger(Bank_BookRoom.class.getName()).log(Level.SEVERE, null, ex);
         }

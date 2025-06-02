@@ -258,7 +258,7 @@ public class Invoice_print extends javax.swing.JFrame {
         jLabel8.setText("Service amount:");
 
         btninPay.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btninPay.setText("Purchased");
+        btninPay.setText("Confirm");
         btninPay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btninPayActionPerformed(evt);

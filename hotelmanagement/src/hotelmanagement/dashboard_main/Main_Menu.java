@@ -75,7 +75,7 @@ public class Main_Menu extends javax.swing.JFrame {
         });
 
         jButton2.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        jButton2.setText("MANAGER");
+        jButton2.setText("STAFF");
         jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -68,6 +68,7 @@ public class DashboardStaff extends javax.swing.JFrame {
         btnPayCheckout = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        btnExit = new javax.swing.JButton();
         CardLayout_Management = new javax.swing.JPanel();
         CardPayCheckout = new javax.swing.JPanel();
         btnPay = new javax.swing.JButton();
@@ -116,7 +117,6 @@ public class DashboardStaff extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblCustomers = new javax.swing.JTable();
         jSeparator7 = new javax.swing.JSeparator();
-        btnBackCustomer = new javax.swing.JButton();
         btnSearchCustomer = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         sdt_txt_search = new javax.swing.JTextField();
@@ -208,22 +208,36 @@ public class DashboardStaff extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("MANAGEMENT");
 
+        btnExit.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnExit.setForeground(new java.awt.Color(255, 51, 51));
+        btnExit.setText("Exit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(panelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(panelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(11, 11, 11))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,7 +248,9 @@ public class DashboardStaff extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(30, 30, 30)
                 .addComponent(panelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(213, 213, 213))
+                .addGap(64, 64, 64)
+                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(116, 116, 116))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -473,10 +489,9 @@ public class DashboardStaff extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(roomBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnUpdateRoom, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addGroup(roomBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btnBackRoom, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                        .addComponent(btnDeleteRoom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAddRoom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btnBackRoom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(btnDeleteRoom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAddRoom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -602,10 +617,9 @@ public class DashboardStaff extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(serviceBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnBackService, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                    .addGroup(serviceBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(btnDeleteService, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                        .addComponent(btnUpdateService, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAddService, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btnDeleteService, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addComponent(btnUpdateService, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAddService, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -838,13 +852,6 @@ public class DashboardStaff extends javax.swing.JFrame {
         tblCustomers.getColumnModel().getColumn(8).setPreferredWidth(120);
         jScrollPane3.getHorizontalScrollBar().setPreferredSize(new java.awt.Dimension(5, 5));
 
-        btnBackCustomer.setText("Back");
-        btnBackCustomer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackCustomerActionPerformed(evt);
-            }
-        });
-
         btnSearchCustomer.setText("Search");
         btnSearchCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -862,14 +869,11 @@ public class DashboardStaff extends javax.swing.JFrame {
         CustomersLayout.setHorizontalGroup(
             CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CustomersLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator7)
+                    .addComponent(jScrollPane3)
                     .addGroup(CustomersLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator7)
-                            .addComponent(jScrollPane3)))
-                    .addGroup(CustomersLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(sdt_txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -878,14 +882,9 @@ public class DashboardStaff extends javax.swing.JFrame {
                         .addGap(0, 58, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomersLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomersLayout.createSequentialGroup()
-                        .addComponent(btnBackCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(201, 201, 201))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CustomersLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(239, 239, 239))))
+                .addGap(0, 304, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(239, 239, 239))
         );
         CustomersLayout.setVerticalGroup(
             CustomersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -901,9 +900,7 @@ public class DashboardStaff extends javax.swing.JFrame {
                 .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addComponent(btnBackCustomer)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
 
         CardLayout_Management.add(Customers, "card5");
@@ -1296,6 +1293,30 @@ public class DashboardStaff extends javax.swing.JFrame {
                 in.getSLSD()
             });
         }
+        
+        tblInvoices.setDefaultRenderer(Object.class, new DefaultTableCellRenderer(){
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value,
+                boolean isSelected, boolean hasFocus, int row, int column) {
+
+                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+                // Ví dụ: nếu cột "Service ID" là TIxxx thì tô màu vàng
+                Object cellValue = table.getValueAt(row, 10);
+                String status = (cellValue != null) ? cellValue.toString() : "";
+                if (status.equalsIgnoreCase("Vô hiệu hoá")) {
+                    c.setBackground(new Color(255, 255, 224));
+                } else {
+                    c.setBackground(Color.WHITE); // reset màu nếu không thỏa điều kiện
+                }
+
+                if (isSelected) {
+                    c.setBackground(Color.LIGHT_GRAY); // ưu tiên màu khi selected
+                }
+
+                return c;
+            }            
+        });
     }
     
     private void btnCustomerManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerManagementActionPerformed
@@ -1303,11 +1324,6 @@ public class DashboardStaff extends javax.swing.JFrame {
         CardLayout cl = (CardLayout)(CardLayout_Management.getLayout());
         cl.show(CardLayout_Management, "Customers");
     }//GEN-LAST:event_btnCustomerManagementActionPerformed
-
-    private void btnBackCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackCustomerActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_btnBackCustomerActionPerformed
     
     
     private void btnPayCheckoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayCheckoutActionPerformed
@@ -1321,41 +1337,6 @@ public class DashboardStaff extends javax.swing.JFrame {
         if(yes == JOptionPane.YES_OPTION){
             Current_User.phonenumber = Sdt_txt.getText(); 
             new Service_pay_menu().setVisible(true);
-//            dba_connection connect = new dba_connection();
-//            String sql_hoadon = "select MAHD, HOADON.MADVTI, TENDVTI, TONGTIEN FROM HOADON "
-//                    + "JOIN KHACHHANG ON HOADON.MAKH = KHACHHANG.MAKH "
-//                    + "JOIN DVTIENICH ON HOADON.MADVTI = DVTIENICH.MADVTI "                    
-//                    + "WHERE KHACHHANG.SDT = '" + Sdt_txt.getText() + "'";    
-//        
-//            try {
-//                Class.forName(connect.driver);
-//                Connection con = DriverManager.getConnection(connect.url, connect.username, connect.password);
-//                PreparedStatement pst = null;
-//                pst = con.prepareStatement(sql_hoadon);
-//
-//                ResultSet rs2 = pst.executeQuery();
-//                while(rs2.next()){
-//                    Service_payout pay_s = new Service_payout();
-//                    pay_s.setMahd(rs2.getString("MAHD"));
-//                    pay_s.setMati(rs2.getString("MADVTI"));                
-//                    pay_s.setTenti(rs2.getString("TENDVTI"));
-//                    pay_s.setGia(rs2.getDouble("TONGTIEN"));
-//                    ser_list.add(pay_s);
-//                }   
-//                if(!ser_list.isEmpty())
-//                {
-//                    CardLayout cl = (CardLayout)(CardLayout_Management.getLayout());
-//                    cl.show(CardLayout_Management, "");
-//                    PrintServiceInvoice();
-//                }
-//                else
-//                {
-//                    JOptionPane.showMessageDialog(null, "No invoice found for this phone number!");
-//                }
-//
-//            } catch (ClassNotFoundException | SQLException ex) {
-//                Logger.getLogger(DashboardClient.class.getName()).log(Level.SEVERE, null, ex);
-//            }
         }
     }//GEN-LAST:event_btnPayActionPerformed
 
@@ -1464,6 +1445,11 @@ public class DashboardStaff extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCheckoutActionPerformed
 
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        this.dispose();
+        new Main_Menu().setVisible(true);
+    }//GEN-LAST:event_btnExitActionPerformed
+
     private void autoReloadCustomer(){
         Customer c = new Customer();
         String sql = "SELECT * FROM KHACHHANG";
@@ -1560,7 +1546,6 @@ public class DashboardStaff extends javax.swing.JFrame {
     private javax.swing.JButton btnAddInvoice;
     private javax.swing.JButton btnAddRoom;
     private javax.swing.JButton btnAddService;
-    private javax.swing.JButton btnBackCustomer;
     private javax.swing.JButton btnBackInvoice;
     private javax.swing.JButton btnBackRoom;
     private javax.swing.JButton btnBackService;
@@ -1569,6 +1554,7 @@ public class DashboardStaff extends javax.swing.JFrame {
     private javax.swing.JButton btnDeleteInvoice;
     private javax.swing.JButton btnDeleteRoom;
     private javax.swing.JButton btnDeleteService;
+    private javax.swing.JButton btnExit;
     private javax.swing.JButton btnInvoiceManagement;
     private javax.swing.JButton btnPay;
     private javax.swing.JButton btnPayCheckout;
