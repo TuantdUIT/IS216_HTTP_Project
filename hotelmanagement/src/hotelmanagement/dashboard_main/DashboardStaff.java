@@ -30,8 +30,9 @@ import javax.swing.table.*;
 
 public class DashboardStaff extends javax.swing.JFrame {
 //Khai báo các biến   
+    int flag_checkout = 0;
     public DefaultTableModel model = new DefaultTableModel();
-    public ArrayList<Payout> list = new ArrayList<>();
+    public ArrayList<Payout> list_Payout = new ArrayList<>();
     public ArrayList<Service_payout> ser_list = new ArrayList<>();
     public ArrayList<Invoice> invoices = new ArrayList<>();
     public ArrayList<Customer> customers = new ArrayList<>();
@@ -77,7 +78,7 @@ public class DashboardStaff extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         Sdt_txt = new javax.swing.JTextField();
-        btnCheckout = new javax.swing.JButton();
+        btnSearch_SDT = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         Rooms = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -320,11 +321,11 @@ public class DashboardStaff extends javax.swing.JFrame {
 
         Sdt_txt.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
-        btnCheckout.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnCheckout.setText("Search");
-        btnCheckout.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch_SDT.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btnSearch_SDT.setText("Search");
+        btnSearch_SDT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCheckoutActionPerformed(evt);
+                btnSearch_SDTActionPerformed(evt);
             }
         });
 
@@ -343,7 +344,7 @@ public class DashboardStaff extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Sdt_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnSearch_SDT, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(CardPayCheckoutLayout.createSequentialGroup()
                         .addGap(245, 245, 245)
                         .addComponent(jLabel4))
@@ -368,7 +369,7 @@ public class DashboardStaff extends javax.swing.JFrame {
                 .addGroup(CardPayCheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(Sdt_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCheckout))
+                    .addComponent(btnSearch_SDT))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1333,6 +1334,13 @@ public class DashboardStaff extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPayCheckoutActionPerformed
 
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
+        
+        if (Sdt_txt.getText() == null || Sdt_txt.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "You need phone number to check out", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        btnSearch_SDTActionPerformed(evt);
+        if (flag_checkout == 1) return;
         int yes = JOptionPane.showConfirmDialog(this, "Are you sure to Pay & Checkout?", "exit", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(yes == JOptionPane.YES_OPTION){
             Current_User.phonenumber = Sdt_txt.getText(); 
@@ -1389,7 +1397,7 @@ public class DashboardStaff extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSearchCustomerActionPerformed
 
-    private void btnCheckoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckoutActionPerformed
+    private void btnSearch_SDTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch_SDTActionPerformed
 
         dba_connection connect = new dba_connection();
 
@@ -1405,7 +1413,7 @@ public class DashboardStaff extends javax.swing.JFrame {
             pst = con.prepareStatement(sql_hoadon);
 
             ResultSet rs2 = pst.executeQuery();
-            list.clear();
+            list_Payout.clear();
 
             while(rs2.next()){
                 Payout pay = new Payout();
@@ -1415,21 +1423,23 @@ public class DashboardStaff extends javax.swing.JFrame {
                 pay.setNgaykt(rs2.getString("NGAYKT"));
                 pay.setTinhtrang(rs2.getString("TINHTRANGTT"));
                 pay.setTenphong(rs2.getString("MOTA"));
-                list.add(pay);
+                list_Payout.add(pay);
             }
 
-            if(list.isEmpty())
+            if(list_Payout.isEmpty())
             {
                 JOptionPane.showMessageDialog(null, "No invoice found for this phone number!");
                 DefaultTableModel model = (DefaultTableModel) pay_table.getModel();
                 model.setRowCount(0);
+                flag_checkout = 1;
             }
             else
             {
+                flag_checkout = 0;
                 DefaultTableModel model = (DefaultTableModel) pay_table.getModel();
                 model.setRowCount(0);
 
-                for(Payout p: list){
+                for(Payout p: list_Payout){
                     model.addRow(new Object[]{
                         p.mahd,
                         p.loaiphong,
@@ -1443,7 +1453,7 @@ public class DashboardStaff extends javax.swing.JFrame {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DashboardClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnCheckoutActionPerformed
+    }//GEN-LAST:event_btnSearch_SDTActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         this.dispose();
@@ -1549,7 +1559,6 @@ public class DashboardStaff extends javax.swing.JFrame {
     private javax.swing.JButton btnBackInvoice;
     private javax.swing.JButton btnBackRoom;
     private javax.swing.JButton btnBackService;
-    private javax.swing.JButton btnCheckout;
     private javax.swing.JButton btnCustomerManagement;
     private javax.swing.JButton btnDeleteInvoice;
     private javax.swing.JButton btnDeleteRoom;
@@ -1560,6 +1569,7 @@ public class DashboardStaff extends javax.swing.JFrame {
     private javax.swing.JButton btnPayCheckout;
     private javax.swing.JButton btnRoomManagement;
     private javax.swing.JButton btnSearchCustomer;
+    private javax.swing.JButton btnSearch_SDT;
     private javax.swing.JButton btnServiceManagement;
     private javax.swing.JButton btnUpdateInvoice;
     private javax.swing.JButton btnUpdateRoom;
