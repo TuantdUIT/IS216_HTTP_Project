@@ -41,9 +41,10 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
-    public UpdateInvoiceForm(DashboardStaff parent){
+    public UpdateInvoiceForm(DashboardStaff parent, String MaHD){
         setVisible(true);
         initComponents();
+        this.parent=parent;
         setLocationRelativeTo(null);
         MaskFormatter date;
         try {
@@ -56,7 +57,8 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
-        this.parent = parent;
+        
+        txtInvoiceID.setText(MaHD);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -106,6 +108,8 @@ public class UpdateInvoiceForm extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Invoice ID");
+
+        txtInvoiceID.setEnabled(false);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Room ID");

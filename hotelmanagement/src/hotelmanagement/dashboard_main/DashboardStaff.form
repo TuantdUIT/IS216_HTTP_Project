@@ -669,11 +669,11 @@
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="5" rowCount="12">
-                                <Column editable="true" title="Service ID" type="java.lang.Object"/>
-                                <Column editable="true" title="Type" type="java.lang.Object"/>
-                                <Column editable="true" title="Describe" type="java.lang.Object"/>
-                                <Column editable="true" title="Price" type="java.lang.Object"/>
-                                <Column editable="true" title="Status" type="java.lang.Object"/>
+                                <Column editable="false" title="Service ID" type="java.lang.Object"/>
+                                <Column editable="false" title="Type" type="java.lang.Object"/>
+                                <Column editable="false" title="Describe" type="java.lang.Object"/>
+                                <Column editable="false" title="Price" type="java.lang.Object"/>
+                                <Column editable="false" title="Status" type="java.lang.Object"/>
                               </Table>
                             </Property>
                           </Properties>
@@ -781,27 +781,27 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jSeparator3" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jScrollPane4" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jSeparator3" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jScrollPane4" alignment="1" max="32767" attributes="0"/>
+                                          <Component id="jSeparator4" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="285" max="-2" attributes="0"/>
+                                      <Component id="LbRoomManage2" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="294" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jSeparator4" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="285" max="-2" attributes="0"/>
-                              <Component id="LbRoomManage2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="300" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="313" max="-2" attributes="0"/>
+                              <Component id="invoiceBtnPanel" min="-2" pref="308" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="invoiceBtnPanel" min="-2" pref="320" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="303" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -813,12 +813,12 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane4" min="-2" pref="358" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                               <Component id="jSeparator4" min="-2" pref="9" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                              <Component id="invoiceBtnPanel" min="-2" pref="61" max="-2" attributes="0"/>
-                              <EmptySpace pref="113" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="invoiceBtnPanel" min="-2" pref="49" max="-2" attributes="0"/>
+                              <EmptySpace pref="88" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -892,9 +892,8 @@
                                   <Component id="btnAddInvoice" min="-2" pref="94" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="btnDeleteInvoice" min="-2" pref="88" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="btnUpdateInvoice" min="-2" pref="96" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -902,12 +901,12 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="btnDeleteInvoice" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="btnAddInvoice" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="btnUpdateInvoice" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" max="-2" attributes="0">
+                                      <Component id="btnAddInvoice" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="btnDeleteInvoice" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="btnUpdateInvoice" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="19" max="32767" attributes="0"/>
+                                  <EmptySpace pref="7" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -1023,15 +1022,15 @@
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                               <Table columnCount="9" rowCount="12">
-                                <Column editable="true" title="Customer ID" type="java.lang.Object"/>
-                                <Column editable="true" title="Name" type="java.lang.Object"/>
-                                <Column editable="true" title="Password" type="java.lang.Object"/>
-                                <Column editable="true" title="Citizen ID" type="java.lang.Object"/>
-                                <Column editable="true" title="Phone number" type="java.lang.Object"/>
-                                <Column editable="true" title="Date of Birth" type="java.lang.Object"/>
-                                <Column editable="true" title="Sex" type="java.lang.Object"/>
-                                <Column editable="true" title="Address" type="java.lang.Object"/>
-                                <Column editable="true" title="Email" type="java.lang.Object"/>
+                                <Column editable="false" title="Customer ID" type="java.lang.Object"/>
+                                <Column editable="false" title="Name" type="java.lang.Object"/>
+                                <Column editable="false" title="Password" type="java.lang.Object"/>
+                                <Column editable="false" title="Citizen ID" type="java.lang.Object"/>
+                                <Column editable="false" title="Phone number" type="java.lang.Object"/>
+                                <Column editable="false" title="Date of Birth" type="java.lang.Object"/>
+                                <Column editable="false" title="Sex" type="java.lang.Object"/>
+                                <Column editable="false" title="Address" type="java.lang.Object"/>
+                                <Column editable="false" title="Email" type="java.lang.Object"/>
                               </Table>
                             </Property>
                           </Properties>

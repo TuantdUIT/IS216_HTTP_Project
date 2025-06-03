@@ -24,10 +24,11 @@ public class UpdateRoomForm extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-    public UpdateRoomForm(DashboardStaff parent){
+    public UpdateRoomForm(DashboardStaff parent, String MaDVP){
         initComponents();
         setLocationRelativeTo(null);
-        this.parent = parent;
+        this.parent=parent;
+        txtRoomID.setText(MaDVP);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -101,6 +102,7 @@ public class UpdateRoomForm extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Type");
 
+        txtRoomID.setEnabled(false);
         txtRoomID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtRoomIDActionPerformed(evt);

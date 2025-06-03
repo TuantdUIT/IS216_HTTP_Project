@@ -31,11 +31,12 @@ public class UpdateServiceForm extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
-    public UpdateServiceForm(DashboardStaff parent){
+    public UpdateServiceForm(DashboardStaff parent, String MaDVTI){
         setVisible(true);
         initComponents();
         setLocationRelativeTo(null);
-        this.parent = parent;
+        this.parent=parent;
+        txtServiceID.setText(MaDVTI);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -108,6 +109,7 @@ public class UpdateServiceForm extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Service ID");
 
+        txtServiceID.setEnabled(false);
         txtServiceID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtServiceIDActionPerformed(evt);

@@ -5,11 +5,6 @@
         <group/>
         <group name="BTTH1">
             <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/DashboardClient.java</file>
-            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/entity/dba_connection.java</file>
-            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/DashboardStaff.java</file>
-            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/add/AddInvoiceForm.java</file>
-            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/entity/Payout.java</file>
-            <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/CheckRoomAvailable.java</file>
         </group>
     </open-files>
 </project-private>
