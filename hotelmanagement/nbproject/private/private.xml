@@ -12,21 +12,6 @@
             <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/Payment/Banking_service_qr.java</file>
             <file>file:/C:/Users/ADMIN/Desktop/HOC_TAP/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/Payment/Invoice_print.java</file>
         </group>
-        <group>
-            <file>file:/D:/NAM2/HKII/JAVA/Doan/Sample2/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/entity/dba_connection.java</file>
-            <file>file:/D:/NAM2/HKII/JAVA/Doan/Sample2/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/DashboardStaff.java</file>
-            <file>file:/D:/NAM2/HKII/JAVA/Doan/Sample2/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/Main_Menu.java</file>
-            <file>file:/D:/NAM2/HKII/JAVA/Doan/Sample2/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/DashboardClient.java</file>
-            <file>file:/D:/NAM2/HKII/JAVA/Doan/Sample2/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/add/AddRoomForm.java</file>
-            <file>file:/D:/NAM2/HKII/JAVA/Doan/Sample2/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/add/AddInvoiceForm.java</file>
-            <file>file:/D:/NAM2/HKII/JAVA/Doan/Sample2/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/update/UpdateRoomForm.java</file>
-            <file>file:/D:/NAM2/HKII/JAVA/Doan/Sample2/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/update/UpdateServiceForm.java</file>
-            <file>file:/D:/NAM2/HKII/JAVA/Doan/Sample2/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/CheckRoomAvailable.java</file>
-            <file>file:/D:/NAM2/HKII/JAVA/Doan/Sample2/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/Payment/Bank_BookRoom.java</file>
-            <file>file:/D:/NAM2/HKII/JAVA/Doan/Sample2/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/Payment/Banking_service_qr.java</file>
-            <file>file:/D:/NAM2/HKII/JAVA/Doan/Sample2/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/Payment/Invoice_print.java</file>
-            <file>file:/D:/NAM2/HKII/JAVA/Doan/Sample2/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/ServiceManagement.java</file>
-            <file>file:/D:/NAM2/HKII/JAVA/Doan/Sample2/IS216_HTTP_Project/hotelmanagement/src/hotelmanagement/dashboard_main/Service_pay_menu.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

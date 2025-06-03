@@ -10,9 +10,9 @@ public class dba_connection {
 
     public dba_connection() {
         driver = "oracle.jdbc.OracleDriver";
-        url = "jdbc:oracle:thin:@localhost:1521:orcltdt";
-        username = "java01";
-        password = "java01";
+        url = "jdbc:oracle:thin:@localhost:1521:XE";
+        username = "QLY_KS02";
+        password = "ABC";
     }
      
 }
