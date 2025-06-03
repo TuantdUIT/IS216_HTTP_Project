@@ -6,19 +6,20 @@ package hotelmanagement.entity;
 
 
 public class Payout {
-    public String mahd, loaiphong, tenphong, ngaybatdau, ngayketthuc;
+    public String mahd, loaiphong, tendvti, ngaybatdau, ngayketthuc, mota;
     public String tinhtrangtt;
     
     public Payout() {
     }
     
-    public Payout(String hd, String dvp, String dvti, String bd, String kt, String tt){      
+    public Payout(String hd, String dvp, String dvti, String bd, String kt, String tt, String mt){      
         loaiphong = dvp;
-        tenphong = dvti;
+        tendvti = dvti;
         ngaybatdau = bd;
         ngayketthuc = kt;
         mahd = hd;
         tinhtrangtt = tt;
+        mota = mt;
     }
     public void setLoaiphong(String dvp){
         loaiphong = dvp;
@@ -33,13 +34,15 @@ public class Payout {
         ngayketthuc = kt;
     }
     
-    public void setTenphong(String tpString){
-        tenphong = tpString;
+    public void setTendvti(String tpString){
+        tendvti = tpString;
     }
     public void setTinhtrang(String tt){
         tinhtrangtt = tt;
     }
-    
+    public void setMota(String mt){
+        mota = mt;
+    }
 //    @Override
 //    public String toString(){
 //        return 0;

@@ -48,19 +48,18 @@ public class CheckRoomAvailable extends javax.swing.JFrame {
                 inv.setNgayKT(rs.getString("NGAYKT"));
                 Invoices.add(inv);
             }
-            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Cannot load room checkin checkout date infomation!" + ex.getMessage());
         }
         DefaultTableModel model = (DefaultTableModel) tabCheckRoom.getModel();
         model.setRowCount(0); 
-
         for (Invoice i : Invoices) {
-            model.addRow(new Object[] {
-            i.getNgayBD(),
-            i.getNgayKT()
-            });
+        model.addRow(new Object[] {
+        i.getNgayBD(),
+        i.getNgayKT()
+        });
         }
+        
     }
     
     /**
